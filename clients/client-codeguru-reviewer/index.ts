@@ -4,4 +4,6 @@ export * from "./commands/AssociateRepositoryCommand";
 export * from "./commands/DescribeRepositoryAssociationCommand";
 export * from "./commands/DisassociateRepositoryCommand";
 export * from "./commands/ListRepositoryAssociationsCommand";
+export * from "./pagination/ListRepositoryAssociationsPaginator";
+export * from "./pagination/Interfaces";
 export * from "./models/index";

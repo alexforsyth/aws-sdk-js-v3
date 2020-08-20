@@ -4,5 +4,8 @@ export * from "./commands/CreateOutpostCommand";
 export * from "./commands/GetOutpostCommand";
 export * from "./commands/GetOutpostInstanceTypesCommand";
 export * from "./commands/ListOutpostsCommand";
+export * from "./pagination/ListOutpostsPaginator";
 export * from "./commands/ListSitesCommand";
+export * from "./pagination/ListSitesPaginator";
+export * from "./pagination/Interfaces";
 export * from "./models/index";

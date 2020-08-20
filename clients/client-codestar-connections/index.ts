@@ -4,4 +4,6 @@ export * from "./commands/CreateConnectionCommand";
 export * from "./commands/DeleteConnectionCommand";
 export * from "./commands/GetConnectionCommand";
 export * from "./commands/ListConnectionsCommand";
+export * from "./pagination/ListConnectionsPaginator";
+export * from "./pagination/Interfaces";
 export * from "./models/index";
