@@ -10,14 +10,14 @@ export enum IpAddressType {
  */
 export interface IpSet {
   /**
-   * <p>The array of IP addresses in the IP address set. An IP address set can have a maximum of two IP addresses.</p>
-   */
-  IpAddresses?: string[];
-
-  /**
    * <p>The types of IP addresses included in this IP set.</p>
    */
   IpFamily?: string;
+
+  /**
+   * <p>The array of IP addresses in the IP address set. An IP address set can have a maximum of two IP addresses.</p>
+   */
+  IpAddresses?: string[];
 }
 
 export namespace IpSet {
@@ -34,6 +34,34 @@ export type AcceleratorStatus = "DEPLOYED" | "IN_PROGRESS";
  */
 export interface Accelerator {
   /**
+   * <p>The Amazon Resource Name (ARN) of the accelerator.</p>
+   */
+  AcceleratorArn?: string;
+
+  /**
+   * <p>The name of the accelerator. The name must contain only alphanumeric characters or
+   * 			hyphens (-), and must not begin or end with a hyphen.</p>
+   */
+  Name?: string;
+
+  /**
+   * <p>The value for the address type must be IPv4.
+   * 			</p>
+   */
+  IpAddressType?: IpAddressType | string;
+
+  /**
+   * <p>Indicates whether the accelerator is enabled. The value is true or false. The default value is true. </p>
+   * 		       <p>If the value is set to true, the accelerator cannot be deleted. If set to false, accelerator can be deleted.</p>
+   */
+  Enabled?: boolean;
+
+  /**
+   * <p>The static IP addresses that Global Accelerator associates with the accelerator.</p>
+   */
+  IpSets?: IpSet[];
+
+  /**
    * <p>The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses. </p>
    * 		       <p>The naming convention for the DNS name is the following: A lowercase letter a,
    * 			followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example:
@@ -44,6 +72,11 @@ export interface Accelerator {
   DnsName?: string;
 
   /**
+   * <p>Describes the deployment status of the accelerator.</p>
+   */
+  Status?: AcceleratorStatus | string;
+
+  /**
    * <p>The date and time that the accelerator was created.</p>
    */
   CreatedTime?: Date;
@@ -52,39 +85,6 @@ export interface Accelerator {
    * <p>The date and time that the accelerator was last modified.</p>
    */
   LastModifiedTime?: Date;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the accelerator.</p>
-   */
-  AcceleratorArn?: string;
-
-  /**
-   * <p>The value for the address type must be IPv4.
-   * 			</p>
-   */
-  IpAddressType?: IpAddressType | string;
-
-  /**
-   * <p>The name of the accelerator. The name must contain only alphanumeric characters or
-   * 			hyphens (-), and must not begin or end with a hyphen.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The static IP addresses that Global Accelerator associates with the accelerator.</p>
-   */
-  IpSets?: IpSet[];
-
-  /**
-   * <p>Describes the deployment status of the accelerator.</p>
-   */
-  Status?: AcceleratorStatus | string;
-
-  /**
-   * <p>Indicates whether the accelerator is enabled. The value is true or false. The default value is true. </p>
-   * 		       <p>If the value is set to true, the accelerator cannot be deleted. If set to false, accelerator can be deleted.</p>
-   */
-  Enabled?: boolean;
 }
 
 export namespace Accelerator {
@@ -300,6 +300,11 @@ export enum ByoipCidrState {
  */
 export interface ByoipCidr {
   /**
+   * <p>The address range, in CIDR notation.</p>
+   */
+  Cidr?: string;
+
+  /**
    * <p>The state of the address pool.</p>
    */
   State?: ByoipCidrState | string;
@@ -309,11 +314,6 @@ export interface ByoipCidr {
    * 			through bring your own IP address (BYOIP).</p>
    */
   Events?: ByoipCidrEvent[];
-
-  /**
-   * <p>The address range, in CIDR notation.</p>
-   */
-  Cidr?: string;
 }
 
 export namespace ByoipCidr {
@@ -459,14 +459,14 @@ export type ClientAffinity = "NONE" | "SOURCE_IP";
  */
 export interface Tag {
   /**
-   * <p>A string that contains a <code>Tag</code> value.</p>
-   */
-  Value: string | undefined;
-
-  /**
    * <p>A string that contains a <code>Tag</code> key.</p>
    */
   Key: string | undefined;
+
+  /**
+   * <p>A string that contains a <code>Tag</code> value.</p>
+   */
+  Value: string | undefined;
 }
 
 export namespace Tag {
@@ -477,10 +477,16 @@ export namespace Tag {
 
 export interface CreateAcceleratorRequest {
   /**
-   * <p>Indicates whether an accelerator is enabled. The value is true or false. The default value is true. </p>
-   * 		       <p>If the value is set to true, an accelerator cannot be deleted. If set to false, the accelerator can be deleted.</p>
+   * <p>The name of an accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or
+   * 			hyphens (-), and must not begin or end with a hyphen.</p>
    */
-  Enabled?: boolean;
+  Name: string | undefined;
+
+  /**
+   * <p>The value for the address type must be IPv4.
+   * 			</p>
+   */
+  IpAddressType?: IpAddressType | string;
 
   /**
    * <p>Optionally, if you've added your own IP address pool to Global Accelerator (BYOIP), you can choose IP addresses
@@ -497,10 +503,16 @@ export interface CreateAcceleratorRequest {
   IpAddresses?: string[];
 
   /**
-   * <p>The value for the address type must be IPv4.
-   * 			</p>
+   * <p>Indicates whether an accelerator is enabled. The value is true or false. The default value is true. </p>
+   * 		       <p>If the value is set to true, an accelerator cannot be deleted. If set to false, the accelerator can be deleted.</p>
    */
-  IpAddressType?: IpAddressType | string;
+  Enabled?: boolean;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the
+   * 			uniqueness—of an accelerator.</p>
+   */
+  IdempotencyToken?: string;
 
   /**
    * <p>Create tags for an accelerator.</p>
@@ -508,18 +520,6 @@ export interface CreateAcceleratorRequest {
    * 			in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>
    */
   Tags?: Tag[];
-
-  /**
-   * <p>The name of an accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or
-   * 			hyphens (-), and must not begin or end with a hyphen.</p>
-   */
-  Name: string | undefined;
-
-  /**
-   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the
-   * 			uniqueness—of an accelerator.</p>
-   */
-  IdempotencyToken?: string;
 }
 
 export namespace CreateAcceleratorRequest {
@@ -570,6 +570,15 @@ export interface EndpointConfiguration {
   EndpointId?: string;
 
   /**
+   * <p>The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic
+   * 			based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The
+   * 			result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second
+   * 			and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the
+   * 				<i>AWS Global Accelerator Developer Guide</i>.</p>
+   */
+  Weight?: number;
+
+  /**
    * <p>Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint.
    * 			The value is true or false. The default value is true for new accelerators. </p>
    * 		       <p>If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request header as
@@ -578,15 +587,6 @@ export interface EndpointConfiguration {
    * 			Preserve Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>
    */
   ClientIPPreservationEnabled?: boolean;
-
-  /**
-   * <p>The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic
-   * 			based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The
-   * 			result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second
-   * 			and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the
-   * 				<i>AWS Global Accelerator Developer Guide</i>.</p>
-   */
-  Weight?: number;
 }
 
 export namespace EndpointConfiguration {
@@ -631,17 +631,20 @@ export namespace PortOverride {
 
 export interface CreateEndpointGroupRequest {
   /**
-   * <p>The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port
-   * 			is the listener port that this endpoint group is associated with. If listener port is a list of ports, Global Accelerator uses the
-   * 			first port in the list.</p>
+   * <p>The Amazon Resource Name (ARN) of the listener.</p>
    */
-  HealthCheckPort?: number;
+  ListenerArn: string | undefined;
 
   /**
-   * <p>The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an
-   * 			unhealthy endpoint to healthy. The default value is 3.</p>
+   * <p>The AWS Region where the endpoint group is located. A listener can have only one endpoint group in a
+   * 			specific Region.</p>
    */
-  ThresholdCount?: number;
+  EndpointGroupRegion: string | undefined;
+
+  /**
+   * <p>The list of endpoint objects.</p>
+   */
+  EndpointConfigurations?: EndpointConfiguration[];
 
   /**
    * <p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for
@@ -653,16 +656,34 @@ export interface CreateEndpointGroupRequest {
   TrafficDialPercentage?: number;
 
   /**
+   * <p>The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port
+   * 			is the listener port that this endpoint group is associated with. If listener port is a list of ports, Global Accelerator uses the
+   * 			first port in the list.</p>
+   */
+  HealthCheckPort?: number;
+
+  /**
+   * <p>The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default
+   * 			value is TCP.</p>
+   */
+  HealthCheckProtocol?: HealthCheckProtocol | string;
+
+  /**
    * <p>If the protocol is HTTP/S, then this specifies the path that is the destination for health check targets. The
    * 			default value is slash (/).</p>
    */
   HealthCheckPath?: string;
 
   /**
-   * <p>The AWS Region where the endpoint group is located. A listener can have only one endpoint group in a
-   * 			specific Region.</p>
+   * <p>The time—10 seconds or 30 seconds—between each health check for an endpoint. The default value is 30.</p>
    */
-  EndpointGroupRegion: string | undefined;
+  HealthCheckIntervalSeconds?: number;
+
+  /**
+   * <p>The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an
+   * 			unhealthy endpoint to healthy. The default value is 3.</p>
+   */
+  ThresholdCount?: number;
 
   /**
    * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the
@@ -679,27 +700,6 @@ export interface CreateEndpointGroupRequest {
    * 			Port overrides</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>
    */
   PortOverrides?: PortOverride[];
-
-  /**
-   * <p>The time—10 seconds or 30 seconds—between each health check for an endpoint. The default value is 30.</p>
-   */
-  HealthCheckIntervalSeconds?: number;
-
-  /**
-   * <p>The list of endpoint objects.</p>
-   */
-  EndpointConfigurations?: EndpointConfiguration[];
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the listener.</p>
-   */
-  ListenerArn: string | undefined;
-
-  /**
-   * <p>The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default
-   * 			value is TCP.</p>
-   */
-  HealthCheckProtocol?: HealthCheckProtocol | string;
 }
 
 export namespace CreateEndpointGroupRequest {
@@ -715,6 +715,28 @@ export type HealthState = "HEALTHY" | "INITIAL" | "UNHEALTHY";
  * 			balancers.</p>
  */
 export interface EndpointDescription {
+  /**
+   * <p>An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon
+   * 			Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address
+   * 			allocation ID. For EC2 instances, this is the EC2 instance ID. </p>
+   * 		       <p>An Application Load Balancer can be either internal or internet-facing.</p>
+   */
+  EndpointId?: string;
+
+  /**
+   * <p>The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic
+   * 			based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The
+   * 			result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second
+   * 			and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the
+   * 				<i>AWS Global Accelerator Developer Guide</i>. </p>
+   */
+  Weight?: number;
+
+  /**
+   * <p>The health status of the endpoint.</p>
+   */
+  HealthState?: HealthState | string;
+
   /**
    * <p>The reason code associated with why the endpoint is not healthy. If the endpoint state is healthy, a reason code is
    * 			not provided.</p>
@@ -750,19 +772,6 @@ export interface EndpointDescription {
   HealthReason?: string;
 
   /**
-   * <p>The health status of the endpoint.</p>
-   */
-  HealthState?: HealthState | string;
-
-  /**
-   * <p>An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon
-   * 			Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address
-   * 			allocation ID. For EC2 instances, this is the EC2 instance ID. </p>
-   * 		       <p>An Application Load Balancer can be either internal or internet-facing.</p>
-   */
-  EndpointId?: string;
-
-  /**
    * <p>Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint.
    * 			The value is true or false. The default value is true for new accelerators. </p>
    * 		       <p>If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request header as
@@ -771,15 +780,6 @@ export interface EndpointDescription {
    * 			Viewing Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>
    */
   ClientIPPreservationEnabled?: boolean;
-
-  /**
-   * <p>The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic
-   * 			based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The
-   * 			result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second
-   * 			and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the
-   * 				<i>AWS Global Accelerator Developer Guide</i>. </p>
-   */
-  Weight?: number;
 }
 
 export namespace EndpointDescription {
@@ -794,6 +794,21 @@ export namespace EndpointDescription {
  */
 export interface EndpointGroup {
   /**
+   * <p>The Amazon Resource Name (ARN) of the endpoint group.</p>
+   */
+  EndpointGroupArn?: string;
+
+  /**
+   * <p>The AWS Region where the endpoint group is located.</p>
+   */
+  EndpointGroupRegion?: string;
+
+  /**
+   * <p>The list of endpoint objects.</p>
+   */
+  EndpointDescriptions?: EndpointDescription[];
+
+  /**
    * <p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for
    * 			this listener. </p>
    * 		       <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is
@@ -801,12 +816,6 @@ export interface EndpointGroup {
    * 		       <p>The default value is 100.</p>
    */
   TrafficDialPercentage?: number;
-
-  /**
-   * <p>The protocol that Global Accelerator uses to perform health checks on endpoints that are part of this endpoint group. The default
-   * 			value is TCP.</p>
-   */
-  HealthCheckProtocol?: HealthCheckProtocol | string;
 
   /**
    * <p>The port that Global Accelerator uses to perform health checks on endpoints that are part of this endpoint group. </p>
@@ -817,10 +826,10 @@ export interface EndpointGroup {
   HealthCheckPort?: number;
 
   /**
-   * <p>The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an
-   * 			unhealthy endpoint to healthy. The default value is 3.</p>
+   * <p>The protocol that Global Accelerator uses to perform health checks on endpoints that are part of this endpoint group. The default
+   * 			value is TCP.</p>
    */
-  ThresholdCount?: number;
+  HealthCheckProtocol?: HealthCheckProtocol | string;
 
   /**
    * <p>If the protocol is HTTP/S, then this value provides the ping path that Global Accelerator uses for the destination on the
@@ -834,27 +843,18 @@ export interface EndpointGroup {
   HealthCheckIntervalSeconds?: number;
 
   /**
+   * <p>The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an
+   * 			unhealthy endpoint to healthy. The default value is 3.</p>
+   */
+  ThresholdCount?: number;
+
+  /**
    * <p>Allows you to override the destination ports used to route traffic to an endpoint.
    * 			Using a port override lets you to map a list of external destination ports (that your
    * 			users send traffic to) to a list of internal destination ports that you want an application
    * 			endpoint to receive traffic on. </p>
    */
   PortOverrides?: PortOverride[];
-
-  /**
-   * <p>The AWS Region where the endpoint group is located.</p>
-   */
-  EndpointGroupRegion?: string;
-
-  /**
-   * <p>The list of endpoint objects.</p>
-   */
-  EndpointDescriptions?: EndpointDescription[];
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the endpoint group.</p>
-   */
-  EndpointGroupArn?: string;
 }
 
 export namespace EndpointGroup {
@@ -934,12 +934,6 @@ export enum Protocol {
 
 export interface CreateListenerRequest {
   /**
-   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the
-   * 			uniqueness—of the request.</p>
-   */
-  IdempotencyToken?: string;
-
-  /**
    * <p>The Amazon Resource Name (ARN) of your accelerator.</p>
    */
   AcceleratorArn: string | undefined;
@@ -948,6 +942,11 @@ export interface CreateListenerRequest {
    * <p>The list of port ranges to support for connections from clients to your accelerator.</p>
    */
   PortRanges: PortRange[] | undefined;
+
+  /**
+   * <p>The protocol for connections from clients to your accelerator.</p>
+   */
+  Protocol: Protocol | string | undefined;
 
   /**
    * <p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications,
@@ -966,9 +965,10 @@ export interface CreateListenerRequest {
   ClientAffinity?: ClientAffinity | string;
 
   /**
-   * <p>The protocol for connections from clients to your accelerator.</p>
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the
+   * 			uniqueness—of the request.</p>
    */
-  Protocol: Protocol | string | undefined;
+  IdempotencyToken?: string;
 }
 
 export namespace CreateListenerRequest {
@@ -987,14 +987,14 @@ export interface Listener {
   ListenerArn?: string;
 
   /**
-   * <p>The protocol for the connections from clients to the accelerator.</p>
-   */
-  Protocol?: Protocol | string;
-
-  /**
    * <p>The list of port ranges for the connections from clients to the accelerator.</p>
    */
   PortRanges?: PortRange[];
+
+  /**
+   * <p>The protocol for the connections from clients to the accelerator.</p>
+   */
+  Protocol?: Protocol | string;
 
   /**
    * <p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications,
@@ -1267,14 +1267,14 @@ export namespace ListAcceleratorsRequest {
 
 export interface ListAcceleratorsResponse {
   /**
-   * <p>The token for the next set of results. You receive this token from a previous call.</p>
-   */
-  NextToken?: string;
-
-  /**
    * <p>The list of accelerators for a customer account.</p>
    */
   Accelerators?: Accelerator[];
+
+  /**
+   * <p>The token for the next set of results. You receive this token from a previous call.</p>
+   */
+  NextToken?: string;
 }
 
 export namespace ListAcceleratorsResponse {
@@ -1285,15 +1285,15 @@ export namespace ListAcceleratorsResponse {
 
 export interface ListByoipCidrsRequest {
   /**
-   * <p>The token for the next page of results.</p>
-   */
-  NextToken?: string;
-
-  /**
    * <p>The maximum number of results to return with a single call. To retrieve the remaining results, make
    * 			another call with the returned <code>nextToken</code> value.</p>
    */
   MaxResults?: number;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   */
+  NextToken?: string;
 }
 
 export namespace ListByoipCidrsRequest {
@@ -1322,9 +1322,9 @@ export namespace ListByoipCidrsResponse {
 
 export interface ListEndpointGroupsRequest {
   /**
-   * <p>The token for the next set of results. You receive this token from a previous call.</p>
+   * <p>The Amazon Resource Name (ARN) of the listener.</p>
    */
-  NextToken?: string;
+  ListenerArn: string | undefined;
 
   /**
    * <p>The number of endpoint group objects that you want to return with this call. The default value is 10.</p>
@@ -1332,9 +1332,9 @@ export interface ListEndpointGroupsRequest {
   MaxResults?: number;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the listener.</p>
+   * <p>The token for the next set of results. You receive this token from a previous call.</p>
    */
-  ListenerArn: string | undefined;
+  NextToken?: string;
 }
 
 export namespace ListEndpointGroupsRequest {
@@ -1345,14 +1345,14 @@ export namespace ListEndpointGroupsRequest {
 
 export interface ListEndpointGroupsResponse {
   /**
-   * <p>The token for the next set of results. You receive this token from a previous call.</p>
-   */
-  NextToken?: string;
-
-  /**
    * <p>The list of the endpoint groups associated with a listener.</p>
    */
   EndpointGroups?: EndpointGroup[];
+
+  /**
+   * <p>The token for the next set of results. You receive this token from a previous call.</p>
+   */
+  NextToken?: string;
 }
 
 export namespace ListEndpointGroupsResponse {
@@ -1363,9 +1363,9 @@ export namespace ListEndpointGroupsResponse {
 
 export interface ListListenersRequest {
   /**
-   * <p>The token for the next set of results. You receive this token from a previous call.</p>
+   * <p>The Amazon Resource Name (ARN) of the accelerator for which you want to list listener objects.</p>
    */
-  NextToken?: string;
+  AcceleratorArn: string | undefined;
 
   /**
    * <p>The number of listener objects that you want to return with this call. The default value is 10.</p>
@@ -1373,9 +1373,9 @@ export interface ListListenersRequest {
   MaxResults?: number;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the accelerator for which you want to list listener objects.</p>
+   * <p>The token for the next set of results. You receive this token from a previous call.</p>
    */
-  AcceleratorArn: string | undefined;
+  NextToken?: string;
 }
 
 export namespace ListListenersRequest {
@@ -1465,14 +1465,14 @@ export namespace ProvisionByoipCidrResponse {
 
 export interface TagResourceRequest {
   /**
-   * <p>The tags to add to a resource. A tag consists of a key and a value that you define.</p>
-   */
-  Tags: Tag[] | undefined;
-
-  /**
    * <p>The Amazon Resource Name (ARN) of the Global Accelerator resource to add tags to. An ARN uniquely identifies a resource.</p>
    */
   ResourceArn: string | undefined;
+
+  /**
+   * <p>The tags to add to a resource. A tag consists of a key and a value that you define.</p>
+   */
+  Tags: Tag[] | undefined;
 }
 
 export namespace TagResourceRequest {
@@ -1517,27 +1517,27 @@ export namespace UntagResourceResponse {
 
 export interface UpdateAcceleratorRequest {
   /**
-   * <p>The value for the address type must be IPv4.
-   * 			</p>
-   */
-  IpAddressType?: IpAddressType | string;
-
-  /**
    * <p>The Amazon Resource Name (ARN) of the accelerator to update.</p>
    */
   AcceleratorArn: string | undefined;
-
-  /**
-   * <p>Indicates whether an accelerator is enabled. The value is true or false. The default value is true. </p>
-   * 		       <p>If the value is set to true, the accelerator cannot be deleted. If set to false, the accelerator can be deleted.</p>
-   */
-  Enabled?: boolean;
 
   /**
    * <p>The name of the accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or
    * 			hyphens (-), and must not begin or end with a hyphen.</p>
    */
   Name?: string;
+
+  /**
+   * <p>The value for the address type must be IPv4.
+   * 			</p>
+   */
+  IpAddressType?: IpAddressType | string;
+
+  /**
+   * <p>Indicates whether an accelerator is enabled. The value is true or false. The default value is true. </p>
+   * 		       <p>If the value is set to true, the accelerator cannot be deleted. If set to false, the accelerator can be deleted.</p>
+   */
+  Enabled?: boolean;
 }
 
 export namespace UpdateAcceleratorRequest {
@@ -1561,17 +1561,17 @@ export namespace UpdateAcceleratorResponse {
 
 export interface UpdateAcceleratorAttributesRequest {
   /**
+   * <p>The Amazon Resource Name (ARN) of the accelerator that you want to update.</p>
+   */
+  AcceleratorArn: string | undefined;
+
+  /**
    * <p>Update whether flow logs are enabled. The default value is false. If the value is true,
    * 				<code>FlowLogsS3Bucket</code> and <code>FlowLogsS3Prefix</code> must be specified.</p>
    * 		       <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html">Flow Logs</a> in
    * 			the <i>AWS Global Accelerator Developer Guide</i>.</p>
    */
   FlowLogsEnabled?: boolean;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the accelerator that you want to update.</p>
-   */
-  AcceleratorArn: string | undefined;
 
   /**
    * <p>The name of the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is
@@ -1611,15 +1611,14 @@ export namespace UpdateAcceleratorAttributesResponse {
 
 export interface UpdateEndpointGroupRequest {
   /**
-   * <p>If the protocol is HTTP/S, then this specifies the path that is the destination for health check targets. The
-   * 			default value is slash (/).</p>
-   */
-  HealthCheckPath?: string;
-
-  /**
    * <p>The Amazon Resource Name (ARN) of the endpoint group.</p>
    */
   EndpointGroupArn: string | undefined;
+
+  /**
+   * <p>The list of endpoint objects. A resource must be valid and active when you add it as an endpoint.</p>
+   */
+  EndpointConfigurations?: EndpointConfiguration[];
 
   /**
    * <p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for
@@ -1631,9 +1630,34 @@ export interface UpdateEndpointGroupRequest {
   TrafficDialPercentage?: number;
 
   /**
+   * <p>The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port
+   * 			is the listener port that this endpoint group is associated with. If the listener port is a list of ports, Global Accelerator uses
+   * 			the first port in the list.</p>
+   */
+  HealthCheckPort?: number;
+
+  /**
+   * <p>The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default
+   * 			value is TCP.</p>
+   */
+  HealthCheckProtocol?: HealthCheckProtocol | string;
+
+  /**
+   * <p>If the protocol is HTTP/S, then this specifies the path that is the destination for health check targets. The
+   * 			default value is slash (/).</p>
+   */
+  HealthCheckPath?: string;
+
+  /**
    * <p>The time—10 seconds or 30 seconds—between each health check for an endpoint. The default value is 30.</p>
    */
   HealthCheckIntervalSeconds?: number;
+
+  /**
+   * <p>The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an
+   * 			unhealthy endpoint to healthy. The default value is 3.</p>
+   */
+  ThresholdCount?: number;
 
   /**
    * <p>Override specific listener ports used to route traffic to endpoints that are part of this endpoint group.
@@ -1644,30 +1668,6 @@ export interface UpdateEndpointGroupRequest {
    * 			Port overrides</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>
    */
   PortOverrides?: PortOverride[];
-
-  /**
-   * <p>The list of endpoint objects. A resource must be valid and active when you add it as an endpoint.</p>
-   */
-  EndpointConfigurations?: EndpointConfiguration[];
-
-  /**
-   * <p>The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port
-   * 			is the listener port that this endpoint group is associated with. If the listener port is a list of ports, Global Accelerator uses
-   * 			the first port in the list.</p>
-   */
-  HealthCheckPort?: number;
-
-  /**
-   * <p>The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an
-   * 			unhealthy endpoint to healthy. The default value is 3.</p>
-   */
-  ThresholdCount?: number;
-
-  /**
-   * <p>The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default
-   * 			value is TCP.</p>
-   */
-  HealthCheckProtocol?: HealthCheckProtocol | string;
 }
 
 export namespace UpdateEndpointGroupRequest {
@@ -1691,14 +1691,19 @@ export namespace UpdateEndpointGroupResponse {
 
 export interface UpdateListenerRequest {
   /**
-   * <p>The updated protocol for the connections from clients to the accelerator.</p>
+   * <p>The Amazon Resource Name (ARN) of the listener to update.</p>
    */
-  Protocol?: Protocol | string;
+  ListenerArn: string | undefined;
 
   /**
    * <p>The updated list of port ranges for the connections from clients to the accelerator.</p>
    */
   PortRanges?: PortRange[];
+
+  /**
+   * <p>The updated protocol for the connections from clients to the accelerator.</p>
+   */
+  Protocol?: Protocol | string;
 
   /**
    * <p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications,
@@ -1715,11 +1720,6 @@ export interface UpdateListenerRequest {
    * 		       <p>The default value is <code>NONE</code>.</p>
    */
   ClientAffinity?: ClientAffinity | string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the listener to update.</p>
-   */
-  ListenerArn: string | undefined;
 }
 
 export namespace UpdateListenerRequest {

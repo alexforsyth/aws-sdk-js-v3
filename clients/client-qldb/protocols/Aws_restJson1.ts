@@ -439,8 +439,8 @@ export const serializeAws_restJson1ListJournalKinesisStreamsForLedgerCommand = a
     throw new Error("No value provided for input HTTP label: LedgerName.");
   }
   const query: any = {
-    ...(input.NextToken !== undefined && { next_token: input.NextToken }),
     ...(input.MaxResults !== undefined && { max_results: input.MaxResults.toString() }),
+    ...(input.NextToken !== undefined && { next_token: input.NextToken }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -500,8 +500,8 @@ export const serializeAws_restJson1ListJournalS3ExportsForLedgerCommand = async 
     throw new Error("No value provided for input HTTP label: Name.");
   }
   const query: any = {
-    ...(input.NextToken !== undefined && { next_token: input.NextToken }),
     ...(input.MaxResults !== undefined && { max_results: input.MaxResults.toString() }),
+    ...(input.NextToken !== undefined && { next_token: input.NextToken }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -526,8 +526,8 @@ export const serializeAws_restJson1ListLedgersCommand = async (
   };
   let resolvedPath = "/ledgers";
   const query: any = {
-    ...(input.NextToken !== undefined && { next_token: input.NextToken }),
     ...(input.MaxResults !== undefined && { max_results: input.MaxResults.toString() }),
+    ...(input.NextToken !== undefined && { next_token: input.NextToken }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();

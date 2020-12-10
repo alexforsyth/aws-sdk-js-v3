@@ -152,32 +152,89 @@ export namespace AdditionalResultAttribute {
  * <p>The value of a custom document attribute. You can only provide one value for a custom
  *             attribute.</p>
  */
-export interface DocumentAttributeValue {
+export type DocumentAttributeValue =
+  | DocumentAttributeValue.DateValueMember
+  | DocumentAttributeValue.LongValueMember
+  | DocumentAttributeValue.StringListValueMember
+  | DocumentAttributeValue.StringValueMember
+  | DocumentAttributeValue.$UnknownMember;
+
+export namespace DocumentAttributeValue {
   /**
    * <p>A string, such as "department".</p>
    */
-  StringValue?: string;
+  export interface StringValueMember {
+    StringValue: string;
+    StringListValue?: never;
+    LongValue?: never;
+    DateValue?: never;
+    $unknown?: never;
+  }
 
   /**
    * <p>A list of strings. </p>
    */
-  StringListValue?: string[];
+  export interface StringListValueMember {
+    StringValue?: never;
+    StringListValue: string[];
+    LongValue?: never;
+    DateValue?: never;
+    $unknown?: never;
+  }
 
   /**
    * <p>A long integer value.</p>
    */
-  LongValue?: number;
+  export interface LongValueMember {
+    StringValue?: never;
+    StringListValue?: never;
+    LongValue: number;
+    DateValue?: never;
+    $unknown?: never;
+  }
 
   /**
    * <p>A date expressed as an ISO 8601 string.</p>
    */
-  DateValue?: Date;
-}
+  export interface DateValueMember {
+    StringValue?: never;
+    StringListValue?: never;
+    LongValue?: never;
+    DateValue: Date;
+    $unknown?: never;
+  }
 
-export namespace DocumentAttributeValue {
-  export const filterSensitiveLog = (obj: DocumentAttributeValue): any => ({
-    ...obj,
-  });
+  export interface $UnknownMember {
+    StringValue?: never;
+    StringListValue?: never;
+    LongValue?: never;
+    DateValue?: never;
+    $unknown: [string, any];
+  }
+
+  export interface Visitor<T> {
+    StringValue: (value: string) => T;
+    StringListValue: (value: string[]) => T;
+    LongValue: (value: number) => T;
+    DateValue: (value: Date) => T;
+    _: (name: string, value: any) => T;
+  }
+
+  export const visit = <T>(value: DocumentAttributeValue, visitor: Visitor<T>): T => {
+    if (value.StringValue !== undefined) return visitor.StringValue(value.StringValue);
+    if (value.StringListValue !== undefined) return visitor.StringListValue(value.StringListValue);
+    if (value.LongValue !== undefined) return visitor.LongValue(value.LongValue);
+    if (value.DateValue !== undefined) return visitor.DateValue(value.DateValue);
+    return visitor._(value.$unknown[0], value.$unknown[1]);
+  };
+
+  export const filterSensitiveLog = (obj: DocumentAttributeValue): any => {
+    if (obj.StringValue !== undefined) return { StringValue: obj.StringValue };
+    if (obj.StringListValue !== undefined) return { StringListValue: obj.StringListValue };
+    if (obj.LongValue !== undefined) return { LongValue: obj.LongValue };
+    if (obj.DateValue !== undefined) return { DateValue: obj.DateValue };
+    if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
+  };
 }
 
 /**
@@ -198,6 +255,7 @@ export interface DocumentAttribute {
 export namespace DocumentAttribute {
   export const filterSensitiveLog = (obj: DocumentAttribute): any => ({
     ...obj,
+    ...(obj.Value && { Value: DocumentAttributeValue.filterSensitiveLog(obj.Value) }),
   });
 }
 
@@ -480,6 +538,7 @@ export interface Document {
 export namespace Document {
   export const filterSensitiveLog = (obj: Document): any => ({
     ...obj,
+    ...(obj.Attributes && { Attributes: obj.Attributes.map((item) => DocumentAttribute.filterSensitiveLog(item)) }),
   });
 }
 
@@ -3619,6 +3678,9 @@ export interface DocumentAttributeValueCountPair {
 export namespace DocumentAttributeValueCountPair {
   export const filterSensitiveLog = (obj: DocumentAttributeValueCountPair): any => ({
     ...obj,
+    ...(obj.DocumentAttributeValue && {
+      DocumentAttributeValue: DocumentAttributeValue.filterSensitiveLog(obj.DocumentAttributeValue),
+    }),
   });
 }
 
@@ -3648,6 +3710,11 @@ export interface FacetResult {
 export namespace FacetResult {
   export const filterSensitiveLog = (obj: FacetResult): any => ({
     ...obj,
+    ...(obj.DocumentAttributeValueCountPairs && {
+      DocumentAttributeValueCountPairs: obj.DocumentAttributeValueCountPairs.map((item) =>
+        DocumentAttributeValueCountPair.filterSensitiveLog(item)
+      ),
+    }),
   });
 }
 
@@ -3741,6 +3808,9 @@ export interface QueryResultItem {
 export namespace QueryResultItem {
   export const filterSensitiveLog = (obj: QueryResultItem): any => ({
     ...obj,
+    ...(obj.DocumentAttributes && {
+      DocumentAttributes: obj.DocumentAttributes.map((item) => DocumentAttribute.filterSensitiveLog(item)),
+    }),
   });
 }
 
@@ -4157,6 +4227,20 @@ export interface AttributeFilter {
 export namespace AttributeFilter {
   export const filterSensitiveLog = (obj: AttributeFilter): any => ({
     ...obj,
+    ...(obj.AndAllFilters && {
+      AndAllFilters: obj.AndAllFilters.map((item) => AttributeFilter.filterSensitiveLog(item)),
+    }),
+    ...(obj.OrAllFilters && { OrAllFilters: obj.OrAllFilters.map((item) => AttributeFilter.filterSensitiveLog(item)) }),
+    ...(obj.NotFilter && { NotFilter: AttributeFilter.filterSensitiveLog(obj.NotFilter) }),
+    ...(obj.EqualsTo && { EqualsTo: DocumentAttribute.filterSensitiveLog(obj.EqualsTo) }),
+    ...(obj.ContainsAll && { ContainsAll: DocumentAttribute.filterSensitiveLog(obj.ContainsAll) }),
+    ...(obj.ContainsAny && { ContainsAny: DocumentAttribute.filterSensitiveLog(obj.ContainsAny) }),
+    ...(obj.GreaterThan && { GreaterThan: DocumentAttribute.filterSensitiveLog(obj.GreaterThan) }),
+    ...(obj.GreaterThanOrEquals && {
+      GreaterThanOrEquals: DocumentAttribute.filterSensitiveLog(obj.GreaterThanOrEquals),
+    }),
+    ...(obj.LessThan && { LessThan: DocumentAttribute.filterSensitiveLog(obj.LessThan) }),
+    ...(obj.LessThanOrEquals && { LessThanOrEquals: DocumentAttribute.filterSensitiveLog(obj.LessThanOrEquals) }),
   });
 }
 
@@ -4232,5 +4316,6 @@ export interface QueryRequest {
 export namespace QueryRequest {
   export const filterSensitiveLog = (obj: QueryRequest): any => ({
     ...obj,
+    ...(obj.AttributeFilter && { AttributeFilter: AttributeFilter.filterSensitiveLog(obj.AttributeFilter) }),
   });
 }

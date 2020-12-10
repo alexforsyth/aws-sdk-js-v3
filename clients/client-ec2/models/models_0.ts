@@ -68,6 +68,107 @@ export namespace AcceptReservedInstancesExchangeQuoteResult {
   });
 }
 
+export interface AcceptTransitGatewayMulticastDomainAssociationsRequest {
+  TransitGatewayMulticastDomainId?: string;
+  TransitGatewayAttachmentId?: string;
+  SubnetIds?: string[];
+  DryRun?: boolean;
+}
+
+export namespace AcceptTransitGatewayMulticastDomainAssociationsRequest {
+  export const filterSensitiveLog = (obj: AcceptTransitGatewayMulticastDomainAssociationsRequest): any => ({
+    ...obj,
+  });
+}
+
+export type TransitGatewayAttachmentResourceType =
+  | "connect"
+  | "direct-connect-gateway"
+  | "peering"
+  | "tgw-peering"
+  | "vpc"
+  | "vpn";
+
+export type TransitGatewayMulitcastDomainAssociationState =
+  | "associated"
+  | "associating"
+  | "disassociated"
+  | "disassociating"
+  | "failed"
+  | "pendingAcceptance"
+  | "rejected";
+
+/**
+ * <p>Describes the subnet association with the transit gateway multicast domain.</p>
+ */
+export interface SubnetAssociation {
+  /**
+   * <p>The ID of the subnet.</p>
+   */
+  SubnetId?: string;
+
+  /**
+   * <p>The state of the subnet association.</p>
+   */
+  State?: TransitGatewayMulitcastDomainAssociationState | string;
+}
+
+export namespace SubnetAssociation {
+  export const filterSensitiveLog = (obj: SubnetAssociation): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Describes the multicast domain associations.</p>
+ */
+export interface TransitGatewayMulticastDomainAssociations {
+  /**
+   * <p>The ID of the transit gateway multicast domain.</p>
+   */
+  TransitGatewayMulticastDomainId?: string;
+
+  /**
+   * <p>The ID of the transit gateway attachment.</p>
+   */
+  TransitGatewayAttachmentId?: string;
+
+  /**
+   * <p>The ID of the resource.</p>
+   */
+  ResourceId?: string;
+
+  /**
+   * <p>The type of resource, for example a VPC attachment.</p>
+   */
+  ResourceType?: TransitGatewayAttachmentResourceType | string;
+
+  ResourceOwnerId?: string;
+  /**
+   * <p>The subnets associated with the multicast domain.</p>
+   */
+  Subnets?: SubnetAssociation[];
+}
+
+export namespace TransitGatewayMulticastDomainAssociations {
+  export const filterSensitiveLog = (obj: TransitGatewayMulticastDomainAssociations): any => ({
+    ...obj,
+  });
+}
+
+export interface AcceptTransitGatewayMulticastDomainAssociationsResult {
+  /**
+   * <p>Describes the multicast domain associations.</p>
+   */
+  Associations?: TransitGatewayMulticastDomainAssociations;
+}
+
+export namespace AcceptTransitGatewayMulticastDomainAssociationsResult {
+  export const filterSensitiveLog = (obj: AcceptTransitGatewayMulticastDomainAssociationsResult): any => ({
+    ...obj,
+  });
+}
+
 export interface AcceptTransitGatewayPeeringAttachmentRequest {
   /**
    * <p>The ID of the transit gateway attachment.</p>
@@ -838,6 +939,33 @@ export namespace Address {
   });
 }
 
+export interface PtrUpdateStatus {
+  Value?: string;
+  Status?: string;
+  Reason?: string;
+}
+
+export namespace PtrUpdateStatus {
+  export const filterSensitiveLog = (obj: PtrUpdateStatus): any => ({
+    ...obj,
+  });
+}
+
+export interface AddressAttribute {
+  PublicIp?: string;
+  AllocationId?: string;
+  PtrRecord?: string;
+  PtrRecordUpdate?: PtrUpdateStatus;
+}
+
+export namespace AddressAttribute {
+  export const filterSensitiveLog = (obj: AddressAttribute): any => ({
+    ...obj,
+  });
+}
+
+export type AddressAttributeName = "domain-name";
+
 export interface AdvertiseByoipCidrRequest {
   /**
    * <p>The address range, in CIDR notation. This must be the exact range that you provisioned.
@@ -1046,6 +1174,8 @@ export type ResourceType =
   | "local-gateway-route-table-vpc-association"
   | "natgateway"
   | "network-acl"
+  | "network-insights-analysis"
+  | "network-insights-path"
   | "network-interface"
   | "placement-group"
   | "reserved-instances"
@@ -1060,6 +1190,7 @@ export type ResourceType =
   | "traffic-mirror-target"
   | "transit-gateway"
   | "transit-gateway-attachment"
+  | "transit-gateway-connect-peer"
   | "transit-gateway-multicast-domain"
   | "transit-gateway-route-table"
   | "volume"
@@ -1079,12 +1210,12 @@ export interface TagSpecification {
    *             <code>client-vpn-endpoint</code> |  <code>customer-gateway</code> |
    *             <code>dedicated-host</code> | <code>dhcp-options</code> | <code>export-image-task</code>
    *          | <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> |
-   *             <code>host-reservation</code> | <code>import-image-task</code> |
+   *     	   <code>host-reservation</code> | <code>image</code>| <code>import-image-task</code> |
    *             <code>import-snapshot-task</code> | <code>instance</code> |
    *             <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> |
    *             <code>key-pair</code> | <code>launch-template</code> | <code>placement-group</code> |
    *             <code>prefix-list</code> | <code>natgateway</code> | <code>network-acl</code> |
-   *             <code>route-table</code> | <code>security-group</code> | <code>spot-fleet-request</code>
+   *     	   <code>route-table</code> | <code>security-group</code>| <code>snapshot</code> | <code>spot-fleet-request</code>
    *          | <code>spot-instances-request</code> | <code>snapshot</code> | <code>subnet</code> |
    *             <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> |
    *             <code>traffic-mirror-target</code> | <code>transit-gateway</code> |
@@ -1246,6 +1377,17 @@ export namespace AllowedPrincipal {
 }
 
 export type AllowsMultipleInstanceTypes = "off" | "on";
+
+export interface AlternatePathHint {
+  ComponentId?: string;
+  ComponentArn?: string;
+}
+
+export namespace AlternatePathHint {
+  export const filterSensitiveLog = (obj: AlternatePathHint): any => ({
+    ...obj,
+  });
+}
 
 export interface ApplySecurityGroupsToClientVpnTargetNetworkRequest {
   /**
@@ -1916,71 +2058,6 @@ export interface AssociateTransitGatewayMulticastDomainRequest {
 
 export namespace AssociateTransitGatewayMulticastDomainRequest {
   export const filterSensitiveLog = (obj: AssociateTransitGatewayMulticastDomainRequest): any => ({
-    ...obj,
-  });
-}
-
-export type TransitGatewayAttachmentResourceType = "direct-connect-gateway" | "peering" | "tgw-peering" | "vpc" | "vpn";
-
-export type TransitGatewayMulitcastDomainAssociationState =
-  | "associated"
-  | "associating"
-  | "disassociated"
-  | "disassociating";
-
-/**
- * <p>Describes the subnet association with the transit gateway multicast domain.</p>
- */
-export interface SubnetAssociation {
-  /**
-   * <p>The ID of the subnet.</p>
-   */
-  SubnetId?: string;
-
-  /**
-   * <p>The state of the subnet association.</p>
-   */
-  State?: TransitGatewayMulitcastDomainAssociationState | string;
-}
-
-export namespace SubnetAssociation {
-  export const filterSensitiveLog = (obj: SubnetAssociation): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Describes the multicast domain associations.</p>
- */
-export interface TransitGatewayMulticastDomainAssociations {
-  /**
-   * <p>The ID of the transit gateway multicast domain.</p>
-   */
-  TransitGatewayMulticastDomainId?: string;
-
-  /**
-   * <p>The ID of the transit gateway attachment.</p>
-   */
-  TransitGatewayAttachmentId?: string;
-
-  /**
-   * <p>The ID of the resource.</p>
-   */
-  ResourceId?: string;
-
-  /**
-   * <p>The type of resource, for example a VPC attachment.</p>
-   */
-  ResourceType?: TransitGatewayAttachmentResourceType | string;
-
-  /**
-   * <p>The subnets associated with the multicast domain.</p>
-   */
-  Subnets?: SubnetAssociation[];
-}
-
-export namespace TransitGatewayMulticastDomainAssociations {
-  export const filterSensitiveLog = (obj: TransitGatewayMulticastDomainAssociations): any => ({
     ...obj,
   });
 }
@@ -5416,6 +5493,7 @@ export type _InstanceType =
   | "c5n.4xlarge"
   | "c5n.9xlarge"
   | "c5n.large"
+  | "c5n.metal"
   | "c5n.xlarge"
   | "c6g.12xlarge"
   | "c6g.16xlarge"
@@ -5435,6 +5513,15 @@ export type _InstanceType =
   | "c6gd.medium"
   | "c6gd.metal"
   | "c6gd.xlarge"
+  | "c6gn.12xlarge"
+  | "c6gn.16xlarge"
+  | "c6gn.2xlarge"
+  | "c6gn.4xlarge"
+  | "c6gn.8xlarge"
+  | "c6gn.large"
+  | "c6gn.medium"
+  | "c6gn.metal"
+  | "c6gn.xlarge"
   | "cc1.4xlarge"
   | "cc2.8xlarge"
   | "cg1.4xlarge"
@@ -5446,12 +5533,15 @@ export type _InstanceType =
   | "d3.2xlarge"
   | "d3.4xlarge"
   | "d3.8xlarge"
+  | "d3.metal"
   | "d3.xlarge"
   | "d3en.12xlarge"
   | "d3en.2xlarge"
   | "d3en.4xlarge"
   | "d3en.6xlarge"
   | "d3en.8xlarge"
+  | "d3en.large"
+  | "d3en.metal"
   | "d3en.xlarge"
   | "f1.16xlarge"
   | "f1.2xlarge"
@@ -5462,6 +5552,11 @@ export type _InstanceType =
   | "g3.4xlarge"
   | "g3.8xlarge"
   | "g3s.xlarge"
+  | "g4ad.16xlarge"
+  | "g4ad.2xlarge"
+  | "g4ad.4xlarge"
+  | "g4ad.8xlarge"
+  | "g4ad.xlarge"
   | "g4dn.12xlarge"
   | "g4dn.16xlarge"
   | "g4dn.2xlarge"
@@ -5474,6 +5569,7 @@ export type _InstanceType =
   | "h1.4xlarge"
   | "h1.8xlarge"
   | "hi1.4xlarge"
+  | "hpc5a.48xlarge"
   | "hs1.8xlarge"
   | "i2.2xlarge"
   | "i2.4xlarge"
@@ -6888,9 +6984,29 @@ export interface CreateImageRequest {
   Name: string | undefined;
 
   /**
-   * <p>By default, Amazon EC2 attempts to shut down and reboot the instance before creating the image. If the 'No Reboot' option is set, Amazon EC2 doesn't shut down the instance before creating the image. When this option is used, file system integrity on the created image can't be guaranteed.</p>
+   * <p>By default, Amazon EC2 attempts to shut down and reboot the instance before creating the image. If the <code>No Reboot</code> option is set, Amazon EC2 doesn't shut down the instance before creating the image. When this option is used, file system integrity on the created image can't be guaranteed.</p>
    */
   NoReboot?: boolean;
+
+  /**
+   * <p>The tags to apply to the AMI and snapshots on creation. You can tag the AMI, the
+   *       snapshots, or both.</p>
+   *          <ul>
+   *             <li>
+   *                <p>To tag the AMI, the value for <code>ResourceType</code> must be
+   *           <code>image</code>.</p>
+   *             </li>
+   *             <li>
+   *                <p>To tag the snapshots that are created of the root volume and of other EBS volumes that
+   *           are attached to the instance, the value for <code>ResourceType</code> must be
+   *             <code>snapshot</code>. The same tag is applied to all of the snapshots that are
+   *           created.</p>
+   *             </li>
+   *          </ul>
+   *          <p>If you specify other values for <code>ResourceType</code>, the request fails.</p>
+   *          <p>To tag an AMI or snapshot after it has been created, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>. </p>
+   */
+  TagSpecifications?: TagSpecification[];
 }
 
 export namespace CreateImageRequest {
@@ -7572,121 +7688,3 @@ export type MarketType = "spot";
 export type InstanceInterruptionBehavior = "hibernate" | "stop" | "terminate";
 
 export type SpotInstanceType = "one-time" | "persistent";
-
-/**
- * <p>The options for Spot Instances.</p>
- */
-export interface LaunchTemplateSpotMarketOptionsRequest {
-  /**
-   * <p>The maximum hourly price you're willing to pay for the Spot Instances.</p>
-   */
-  MaxPrice?: string;
-
-  /**
-   * <p>The Spot Instance request type.</p>
-   */
-  SpotInstanceType?: SpotInstanceType | string;
-
-  /**
-   * <p>The required duration for the Spot Instances (also known as Spot blocks), in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).</p>
-   */
-  BlockDurationMinutes?: number;
-
-  /**
-   * <p>The end date of the request.
-   *             For a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached.
-   *             If the request is persistent, it remains active until it is canceled or this date and time is reached.
-   *             The default end date is 7 days from the current date.</p>
-   */
-  ValidUntil?: Date;
-
-  /**
-   * <p>The behavior when a Spot Instance is interrupted. The default is <code>terminate</code>.</p>
-   */
-  InstanceInterruptionBehavior?: InstanceInterruptionBehavior | string;
-}
-
-export namespace LaunchTemplateSpotMarketOptionsRequest {
-  export const filterSensitiveLog = (obj: LaunchTemplateSpotMarketOptionsRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The market (purchasing) option for the instances.</p>
- */
-export interface LaunchTemplateInstanceMarketOptionsRequest {
-  /**
-   * <p>The market type.</p>
-   */
-  MarketType?: MarketType | string;
-
-  /**
-   * <p>The options for Spot Instances.</p>
-   */
-  SpotOptions?: LaunchTemplateSpotMarketOptionsRequest;
-}
-
-export namespace LaunchTemplateInstanceMarketOptionsRequest {
-  export const filterSensitiveLog = (obj: LaunchTemplateInstanceMarketOptionsRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Describes a license configuration.</p>
- */
-export interface LaunchTemplateLicenseConfigurationRequest {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the license configuration.</p>
-   */
-  LicenseConfigurationArn?: string;
-}
-
-export namespace LaunchTemplateLicenseConfigurationRequest {
-  export const filterSensitiveLog = (obj: LaunchTemplateLicenseConfigurationRequest): any => ({
-    ...obj,
-  });
-}
-
-export type LaunchTemplateInstanceMetadataEndpointState = "disabled" | "enabled";
-
-export enum LaunchTemplateHttpTokensState {
-  optional = "optional",
-  required = "required",
-}
-
-/**
- * <p>The metadata options for the instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance Metadata and User Data</a> in the
- *             <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
- */
-export interface LaunchTemplateInstanceMetadataOptionsRequest {
-  /**
-   * <p>The state of token usage for your instance metadata requests. If the parameter is not specified in the request, the default state is <code>optional</code>.</p>
-   *         <p>If the state is <code>optional</code>, you can choose to retrieve instance metadata with or without a signed token header on your request. If you retrieve the IAM role credentials without a token, the version 1.0 role credentials are returned. If you retrieve the IAM role credentials using a valid signed token, the version 2.0 role credentials are returned.</p>
-   *             <p>If the state is <code>required</code>, you must send a signed token header with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns the version 2.0 credentials; the version 1.0 credentials are not available.</p>
-   */
-  HttpTokens?: LaunchTemplateHttpTokensState | string;
-
-  /**
-   * <p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.</p>
-   *         <p>Default: 1</p>
-   *         <p>Possible values: Integers from 1 to 64</p>
-   */
-  HttpPutResponseHopLimit?: number;
-
-  /**
-   * <p>This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is <code>enabled</code>.</p>
-   *          <note>
-   *             <p>If you specify a value of <code>disabled</code>, you will not be able to access your instance metadata.
-   * </p>
-   *          </note>
-   */
-  HttpEndpoint?: LaunchTemplateInstanceMetadataEndpointState | string;
-}
-
-export namespace LaunchTemplateInstanceMetadataOptionsRequest {
-  export const filterSensitiveLog = (obj: LaunchTemplateInstanceMetadataOptionsRequest): any => ({
-    ...obj,
-  });
-}

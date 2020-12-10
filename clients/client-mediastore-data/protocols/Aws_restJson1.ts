@@ -141,8 +141,8 @@ export const serializeAws_restJson1ListItemsCommand = async (
   let resolvedPath = "/";
   const query: any = {
     ...(input.Path !== undefined && { Path: input.Path }),
-    ...(input.NextToken !== undefined && { NextToken: input.NextToken }),
     ...(input.MaxResults !== undefined && { MaxResults: input.MaxResults.toString() }),
+    ...(input.NextToken !== undefined && { NextToken: input.NextToken }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -165,9 +165,9 @@ export const serializeAws_restJson1PutObjectCommand = async (
   const headers: any = {
     "Content-Type": "application/octet-stream",
     "x-amz-content-sha256": "UNSIGNED-PAYLOAD",
-    ...(isSerializableHeaderValue(input.StorageClass) && { "x-amz-storage-class": input.StorageClass! }),
     ...(isSerializableHeaderValue(input.ContentType) && { "Content-Type": input.ContentType! }),
     ...(isSerializableHeaderValue(input.CacheControl) && { "Cache-Control": input.CacheControl! }),
+    ...(isSerializableHeaderValue(input.StorageClass) && { "x-amz-storage-class": input.StorageClass! }),
   };
   let resolvedPath = "/{Path+}";
   if (input.Path !== undefined) {
@@ -283,20 +283,20 @@ export const deserializeAws_restJson1DescribeObjectCommand = async (
     ETag: undefined,
     LastModified: undefined,
   };
-  if (output.headers["last-modified"] !== undefined) {
-    contents.LastModified = new Date(output.headers["last-modified"]);
+  if (output.headers["etag"] !== undefined) {
+    contents.ETag = output.headers["etag"];
   }
   if (output.headers["content-type"] !== undefined) {
     contents.ContentType = output.headers["content-type"];
   }
+  if (output.headers["content-length"] !== undefined) {
+    contents.ContentLength = parseInt(output.headers["content-length"], 10);
+  }
   if (output.headers["cache-control"] !== undefined) {
     contents.CacheControl = output.headers["cache-control"];
   }
-  if (output.headers["etag"] !== undefined) {
-    contents.ETag = output.headers["etag"];
-  }
-  if (output.headers["content-length"] !== undefined) {
-    contents.ContentLength = parseInt(output.headers["content-length"], 10);
+  if (output.headers["last-modified"] !== undefined) {
+    contents.LastModified = new Date(output.headers["last-modified"]);
   }
   await collectBody(output.body, context);
   return Promise.resolve(contents);
@@ -376,20 +376,20 @@ export const deserializeAws_restJson1GetObjectCommand = async (
   if (output.headers["cache-control"] !== undefined) {
     contents.CacheControl = output.headers["cache-control"];
   }
+  if (output.headers["content-range"] !== undefined) {
+    contents.ContentRange = output.headers["content-range"];
+  }
   if (output.headers["content-length"] !== undefined) {
     contents.ContentLength = parseInt(output.headers["content-length"], 10);
   }
   if (output.headers["content-type"] !== undefined) {
     contents.ContentType = output.headers["content-type"];
   }
-  if (output.headers["content-range"] !== undefined) {
-    contents.ContentRange = output.headers["content-range"];
+  if (output.headers["etag"] !== undefined) {
+    contents.ETag = output.headers["etag"];
   }
   if (output.headers["last-modified"] !== undefined) {
     contents.LastModified = new Date(output.headers["last-modified"]);
-  }
-  if (output.headers["etag"] !== undefined) {
-    contents.ETag = output.headers["etag"];
   }
   const data: any = output.body;
   contents.Body = data;

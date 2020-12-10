@@ -114,8 +114,8 @@ export const serializeAws_restJson1ListPlaybackConfigurationsCommand = async (
   };
   let resolvedPath = "/playbackConfigurations";
   const query: any = {
-    ...(input.NextToken !== undefined && { NextToken: input.NextToken }),
     ...(input.MaxResults !== undefined && { MaxResults: input.MaxResults.toString() }),
+    ...(input.NextToken !== undefined && { NextToken: input.NextToken }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();

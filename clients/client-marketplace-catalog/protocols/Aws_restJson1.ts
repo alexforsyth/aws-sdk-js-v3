@@ -43,8 +43,8 @@ export const serializeAws_restJson1CancelChangeSetCommand = async (
   };
   let resolvedPath = "/CancelChangeSet";
   const query: any = {
-    ...(input.ChangeSetId !== undefined && { changeSetId: input.ChangeSetId }),
     ...(input.Catalog !== undefined && { catalog: input.Catalog }),
+    ...(input.ChangeSetId !== undefined && { changeSetId: input.ChangeSetId }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -69,8 +69,8 @@ export const serializeAws_restJson1DescribeChangeSetCommand = async (
   };
   let resolvedPath = "/DescribeChangeSet";
   const query: any = {
-    ...(input.ChangeSetId !== undefined && { changeSetId: input.ChangeSetId }),
     ...(input.Catalog !== undefined && { catalog: input.Catalog }),
+    ...(input.ChangeSetId !== undefined && { changeSetId: input.ChangeSetId }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();

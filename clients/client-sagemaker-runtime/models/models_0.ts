@@ -18,14 +18,10 @@ export namespace InternalFailure {
 
 export interface InvokeEndpointInput {
   /**
-   * <p>The MIME type of the input data in the request body.</p>
+   * <p>The name of the endpoint that you specified when you created the endpoint using the
+   *                 <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html">CreateEndpoint</a> API. </p>
    */
-  ContentType?: string;
-
-  /**
-   * <p>The model to request for inference when invoking a multi-model endpoint. </p>
-   */
-  TargetModel?: string;
+  EndpointName: string | undefined;
 
   /**
    * <p>Provides input data, in the format specified in the <code>ContentType</code>
@@ -34,6 +30,16 @@ export interface InvokeEndpointInput {
    *                 Formats-Inference</a>.</p>
    */
   Body: Uint8Array | undefined;
+
+  /**
+   * <p>The MIME type of the input data in the request body.</p>
+   */
+  ContentType?: string;
+
+  /**
+   * <p>The desired MIME type of the inference in the response.</p>
+   */
+  Accept?: string;
 
   /**
    * <p>Provides additional information about a request for an inference submitted to a model
@@ -48,10 +54,9 @@ export interface InvokeEndpointInput {
   CustomAttributes?: string;
 
   /**
-   * <p>The name of the endpoint that you specified when you created the endpoint using the
-   *                 <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html">CreateEndpoint</a> API. </p>
+   * <p>The model to request for inference when invoking a multi-model endpoint. </p>
    */
-  EndpointName: string | undefined;
+  TargetModel?: string;
 
   /**
    * <p>Specify the production variant to send the inference request to when
@@ -60,11 +65,6 @@ export interface InvokeEndpointInput {
    *             traffic based on the variant weights.</p>
    */
   TargetVariant?: string;
-
-  /**
-   * <p>The desired MIME type of the inference in the response.</p>
-   */
-  Accept?: string;
 }
 
 export namespace InvokeEndpointInput {
@@ -77,11 +77,6 @@ export namespace InvokeEndpointInput {
 
 export interface InvokeEndpointOutput {
   /**
-   * <p>Identifies the production variant that was invoked.</p>
-   */
-  InvokedProductionVariant?: string;
-
-  /**
    * <p>Includes the inference provided by the model.</p>
    *         <p>For information about the format of the response body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data
    *                 Formats-Inference</a>.</p>
@@ -92,6 +87,11 @@ export interface InvokeEndpointOutput {
    * <p>The MIME type of the inference returned in the response body.</p>
    */
   ContentType?: string;
+
+  /**
+   * <p>Identifies the production variant that was invoked.</p>
+   */
+  InvokedProductionVariant?: string;
 
   /**
    * <p>Provides additional information in the response about the inference returned by a
@@ -124,10 +124,11 @@ export namespace InvokeEndpointOutput {
 export interface ModelError extends __SmithyException, $MetadataBearer {
   name: "ModelError";
   $fault: "client";
+  Message?: string;
   /**
-   * <p> The Amazon Resource Name (ARN) of the log stream. </p>
+   * <p> Original status code. </p>
    */
-  LogStreamArn?: string;
+  OriginalStatusCode?: number;
 
   /**
    * <p> Original message. </p>
@@ -135,11 +136,9 @@ export interface ModelError extends __SmithyException, $MetadataBearer {
   OriginalMessage?: string;
 
   /**
-   * <p> Original status code. </p>
+   * <p> The Amazon Resource Name (ARN) of the log stream. </p>
    */
-  OriginalStatusCode?: number;
-
-  Message?: string;
+  LogStreamArn?: string;
 }
 
 export namespace ModelError {

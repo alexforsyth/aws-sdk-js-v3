@@ -3,6 +3,10 @@ import {
   AcceptReservedInstancesExchangeQuoteCommandOutput,
 } from "../commands/AcceptReservedInstancesExchangeQuoteCommand";
 import {
+  AcceptTransitGatewayMulticastDomainAssociationsCommandInput,
+  AcceptTransitGatewayMulticastDomainAssociationsCommandOutput,
+} from "../commands/AcceptTransitGatewayMulticastDomainAssociationsCommand";
+import {
   AcceptTransitGatewayPeeringAttachmentCommandInput,
   AcceptTransitGatewayPeeringAttachmentCommandOutput,
 } from "../commands/AcceptTransitGatewayPeeringAttachmentCommand";
@@ -197,6 +201,10 @@ import {
   CreateNetworkAclEntryCommandOutput,
 } from "../commands/CreateNetworkAclEntryCommand";
 import {
+  CreateNetworkInsightsPathCommandInput,
+  CreateNetworkInsightsPathCommandOutput,
+} from "../commands/CreateNetworkInsightsPathCommand";
+import {
   CreateNetworkInterfaceCommandInput,
   CreateNetworkInterfaceCommandOutput,
 } from "../commands/CreateNetworkInterfaceCommand";
@@ -246,6 +254,14 @@ import {
   CreateTransitGatewayCommandInput,
   CreateTransitGatewayCommandOutput,
 } from "../commands/CreateTransitGatewayCommand";
+import {
+  CreateTransitGatewayConnectCommandInput,
+  CreateTransitGatewayConnectCommandOutput,
+} from "../commands/CreateTransitGatewayConnectCommand";
+import {
+  CreateTransitGatewayConnectPeerCommandInput,
+  CreateTransitGatewayConnectPeerCommandOutput,
+} from "../commands/CreateTransitGatewayConnectPeerCommand";
 import {
   CreateTransitGatewayMulticastDomainCommandInput,
   CreateTransitGatewayMulticastDomainCommandOutput,
@@ -350,6 +366,14 @@ import {
   DeleteNetworkAclEntryCommandOutput,
 } from "../commands/DeleteNetworkAclEntryCommand";
 import {
+  DeleteNetworkInsightsAnalysisCommandInput,
+  DeleteNetworkInsightsAnalysisCommandOutput,
+} from "../commands/DeleteNetworkInsightsAnalysisCommand";
+import {
+  DeleteNetworkInsightsPathCommandInput,
+  DeleteNetworkInsightsPathCommandOutput,
+} from "../commands/DeleteNetworkInsightsPathCommand";
+import {
   DeleteNetworkInterfaceCommandInput,
   DeleteNetworkInterfaceCommandOutput,
 } from "../commands/DeleteNetworkInterfaceCommand";
@@ -398,6 +422,14 @@ import {
   DeleteTransitGatewayCommandInput,
   DeleteTransitGatewayCommandOutput,
 } from "../commands/DeleteTransitGatewayCommand";
+import {
+  DeleteTransitGatewayConnectCommandInput,
+  DeleteTransitGatewayConnectCommandOutput,
+} from "../commands/DeleteTransitGatewayConnectCommand";
+import {
+  DeleteTransitGatewayConnectPeerCommandInput,
+  DeleteTransitGatewayConnectPeerCommandOutput,
+} from "../commands/DeleteTransitGatewayConnectPeerCommand";
 import {
   DeleteTransitGatewayMulticastDomainCommandInput,
   DeleteTransitGatewayMulticastDomainCommandOutput,
@@ -467,6 +499,10 @@ import {
   DescribeAccountAttributesCommandInput,
   DescribeAccountAttributesCommandOutput,
 } from "../commands/DescribeAccountAttributesCommand";
+import {
+  DescribeAddressesAttributeCommandInput,
+  DescribeAddressesAttributeCommandOutput,
+} from "../commands/DescribeAddressesAttributeCommand";
 import { DescribeAddressesCommandInput, DescribeAddressesCommandOutput } from "../commands/DescribeAddressesCommand";
 import {
   DescribeAggregateIdFormatCommandInput,
@@ -672,6 +708,14 @@ import {
   DescribeNetworkAclsCommandOutput,
 } from "../commands/DescribeNetworkAclsCommand";
 import {
+  DescribeNetworkInsightsAnalysesCommandInput,
+  DescribeNetworkInsightsAnalysesCommandOutput,
+} from "../commands/DescribeNetworkInsightsAnalysesCommand";
+import {
+  DescribeNetworkInsightsPathsCommandInput,
+  DescribeNetworkInsightsPathsCommandOutput,
+} from "../commands/DescribeNetworkInsightsPathsCommand";
+import {
   DescribeNetworkInterfaceAttributeCommandInput,
   DescribeNetworkInterfaceAttributeCommandOutput,
 } from "../commands/DescribeNetworkInterfaceAttributeCommand";
@@ -787,6 +831,14 @@ import {
   DescribeTransitGatewayAttachmentsCommandInput,
   DescribeTransitGatewayAttachmentsCommandOutput,
 } from "../commands/DescribeTransitGatewayAttachmentsCommand";
+import {
+  DescribeTransitGatewayConnectPeersCommandInput,
+  DescribeTransitGatewayConnectPeersCommandOutput,
+} from "../commands/DescribeTransitGatewayConnectPeersCommand";
+import {
+  DescribeTransitGatewayConnectsCommandInput,
+  DescribeTransitGatewayConnectsCommandOutput,
+} from "../commands/DescribeTransitGatewayConnectsCommand";
 import {
   DescribeTransitGatewayMulticastDomainsCommandInput,
   DescribeTransitGatewayMulticastDomainsCommandOutput,
@@ -1066,6 +1118,10 @@ import { ImportKeyPairCommandInput, ImportKeyPairCommandOutput } from "../comman
 import { ImportSnapshotCommandInput, ImportSnapshotCommandOutput } from "../commands/ImportSnapshotCommand";
 import { ImportVolumeCommandInput, ImportVolumeCommandOutput } from "../commands/ImportVolumeCommand";
 import {
+  ModifyAddressAttributeCommandInput,
+  ModifyAddressAttributeCommandOutput,
+} from "../commands/ModifyAddressAttributeCommand";
+import {
   ModifyAvailabilityZoneGroupCommandInput,
   ModifyAvailabilityZoneGroupCommandOutput,
 } from "../commands/ModifyAvailabilityZoneGroupCommand";
@@ -1246,6 +1302,10 @@ import {
   RegisterTransitGatewayMulticastGroupSourcesCommandOutput,
 } from "../commands/RegisterTransitGatewayMulticastGroupSourcesCommand";
 import {
+  RejectTransitGatewayMulticastDomainAssociationsCommandInput,
+  RejectTransitGatewayMulticastDomainAssociationsCommandOutput,
+} from "../commands/RejectTransitGatewayMulticastDomainAssociationsCommand";
+import {
   RejectTransitGatewayPeeringAttachmentCommandInput,
   RejectTransitGatewayPeeringAttachmentCommandOutput,
 } from "../commands/RejectTransitGatewayPeeringAttachmentCommand";
@@ -1293,6 +1353,10 @@ import {
   RequestSpotInstancesCommandInput,
   RequestSpotInstancesCommandOutput,
 } from "../commands/RequestSpotInstancesCommand";
+import {
+  ResetAddressAttributeCommandInput,
+  ResetAddressAttributeCommandOutput,
+} from "../commands/ResetAddressAttributeCommand";
 import {
   ResetEbsDefaultKmsKeyIdCommandInput,
   ResetEbsDefaultKmsKeyIdCommandOutput,
@@ -1360,6 +1424,10 @@ import {
 } from "../commands/SendDiagnosticInterruptCommand";
 import { StartInstancesCommandInput, StartInstancesCommandOutput } from "../commands/StartInstancesCommand";
 import {
+  StartNetworkInsightsAnalysisCommandInput,
+  StartNetworkInsightsAnalysisCommandOutput,
+} from "../commands/StartNetworkInsightsAnalysisCommand";
+import {
   StartVpcEndpointServicePrivateDnsVerificationCommandInput,
   StartVpcEndpointServicePrivateDnsVerificationCommandOutput,
 } from "../commands/StartVpcEndpointServicePrivateDnsVerificationCommand";
@@ -1390,6 +1458,8 @@ import { WithdrawByoipCidrCommandInput, WithdrawByoipCidrCommandOutput } from ".
 import {
   AcceptReservedInstancesExchangeQuoteRequest,
   AcceptReservedInstancesExchangeQuoteResult,
+  AcceptTransitGatewayMulticastDomainAssociationsRequest,
+  AcceptTransitGatewayMulticastDomainAssociationsResult,
   AcceptTransitGatewayPeeringAttachmentRequest,
   AcceptTransitGatewayPeeringAttachmentResult,
   AcceptTransitGatewayVpcAttachmentRequest,
@@ -1404,6 +1474,7 @@ import {
   ActiveInstance,
   AddPrefixListEntry,
   Address,
+  AddressAttribute,
   AdvertiseByoipCidrRequest,
   AdvertiseByoipCidrResult,
   AllocateAddressRequest,
@@ -1411,6 +1482,7 @@ import {
   AllocateHostsRequest,
   AllocateHostsResult,
   AllowedPrincipal,
+  AlternatePathHint,
   ApplySecurityGroupsToClientVpnTargetNetworkRequest,
   ApplySecurityGroupsToClientVpnTargetNetworkResult,
   AssignIpv6AddressesRequest,
@@ -1568,10 +1640,6 @@ import {
   LaunchTemplateEnclaveOptionsRequest,
   LaunchTemplateHibernationOptionsRequest,
   LaunchTemplateIamInstanceProfileSpecificationRequest,
-  LaunchTemplateInstanceMarketOptionsRequest,
-  LaunchTemplateInstanceMetadataOptionsRequest,
-  LaunchTemplateLicenseConfigurationRequest,
-  LaunchTemplateSpotMarketOptionsRequest,
   NewDhcpConfiguration,
   OnDemandOptionsRequest,
   PeeringAttachmentStatus,
@@ -1580,6 +1648,7 @@ import {
   PlacementResponse,
   PrefixListId,
   PriceSchedule,
+  PtrUpdateStatus,
   ReservedInstancesListing,
   RouteTableAssociationState,
   S3Storage,
@@ -1632,6 +1701,8 @@ import {
   CreateNetworkAclEntryRequest,
   CreateNetworkAclRequest,
   CreateNetworkAclResult,
+  CreateNetworkInsightsPathRequest,
+  CreateNetworkInsightsPathResult,
   CreateNetworkInterfacePermissionRequest,
   CreateNetworkInterfacePermissionResult,
   CreateNetworkInterfaceRequest,
@@ -1662,7 +1733,13 @@ import {
   CreateTrafficMirrorSessionResult,
   CreateTrafficMirrorTargetRequest,
   CreateTrafficMirrorTargetResult,
+  CreateTransitGatewayConnectPeerRequest,
+  CreateTransitGatewayConnectPeerResult,
+  CreateTransitGatewayConnectRequest,
+  CreateTransitGatewayConnectRequestOptions,
+  CreateTransitGatewayConnectResult,
   CreateTransitGatewayMulticastDomainRequest,
+  CreateTransitGatewayMulticastDomainRequestOptions,
   CreateTransitGatewayMulticastDomainResult,
   CreateTransitGatewayPeeringAttachmentRequest,
   CreateTransitGatewayPeeringAttachmentResult,
@@ -1731,36 +1808,9 @@ import {
   DeleteNatGatewayResult,
   DeleteNetworkAclEntryRequest,
   DeleteNetworkAclRequest,
-  DeleteNetworkInterfacePermissionRequest,
-  DeleteNetworkInterfacePermissionResult,
-  DeleteNetworkInterfaceRequest,
-  DeletePlacementGroupRequest,
-  DeleteQueuedReservedInstancesError,
-  DeleteQueuedReservedInstancesRequest,
-  DeleteQueuedReservedInstancesResult,
-  DeleteRouteRequest,
-  DeleteRouteTableRequest,
-  DeleteSecurityGroupRequest,
-  DeleteSnapshotRequest,
-  DeleteSpotDatafeedSubscriptionRequest,
-  DeleteSubnetRequest,
-  DeleteTagsRequest,
-  DeleteTrafficMirrorFilterRequest,
-  DeleteTrafficMirrorFilterResult,
-  DeleteTrafficMirrorFilterRuleRequest,
-  DeleteTrafficMirrorFilterRuleResult,
-  DeleteTrafficMirrorSessionRequest,
-  DeleteTrafficMirrorSessionResult,
-  DeleteTrafficMirrorTargetRequest,
-  DeleteTrafficMirrorTargetResult,
-  DeleteTransitGatewayMulticastDomainRequest,
-  DeleteTransitGatewayMulticastDomainResult,
-  DeleteTransitGatewayPeeringAttachmentRequest,
-  DeleteTransitGatewayRequest,
-  DeleteTransitGatewayResult,
+  DeleteNetworkInsightsAnalysisRequest,
   DnsEntry,
   ElasticGpuSpecificationResponse,
-  FailedQueuedPurchaseDeletion,
   GroupIdentifier,
   IKEVersionsListValue,
   IKEVersionsRequestListValue,
@@ -1779,13 +1829,17 @@ import {
   LaunchTemplateHibernationOptions,
   LaunchTemplateIamInstanceProfileSpecification,
   LaunchTemplateInstanceMarketOptions,
+  LaunchTemplateInstanceMarketOptionsRequest,
   LaunchTemplateInstanceMetadataOptions,
+  LaunchTemplateInstanceMetadataOptionsRequest,
   LaunchTemplateInstanceNetworkInterfaceSpecification,
   LaunchTemplateInstanceNetworkInterfaceSpecificationRequest,
   LaunchTemplateLicenseConfiguration,
+  LaunchTemplateLicenseConfigurationRequest,
   LaunchTemplatePlacement,
   LaunchTemplatePlacementRequest,
   LaunchTemplateSpotMarketOptions,
+  LaunchTemplateSpotMarketOptionsRequest,
   LaunchTemplateTagSpecification,
   LaunchTemplateTagSpecificationRequest,
   LaunchTemplateVersion,
@@ -1799,6 +1853,7 @@ import {
   NetworkAcl,
   NetworkAclAssociation,
   NetworkAclEntry,
+  NetworkInsightsPath,
   NetworkInterface,
   NetworkInterfaceAssociation,
   NetworkInterfaceAttachment,
@@ -1838,7 +1893,6 @@ import {
   SnapshotInfo,
   SpotDatafeedSubscription,
   SpotInstanceStateFault,
-  SuccessfulQueuedPurchaseDeletion,
   TrafficMirrorFilter,
   TrafficMirrorFilterRule,
   TrafficMirrorNetworkService,
@@ -1847,7 +1901,14 @@ import {
   TrafficMirrorSession,
   TrafficMirrorTarget,
   TransitGateway,
+  TransitGatewayAttachmentBgpConfiguration,
+  TransitGatewayConnect,
+  TransitGatewayConnectOptions,
+  TransitGatewayConnectPeer,
+  TransitGatewayConnectPeerConfiguration,
+  TransitGatewayConnectRequestBgpOptions,
   TransitGatewayMulticastDomain,
+  TransitGatewayMulticastDomainOptions,
   TransitGatewayOptions,
   TransitGatewayPrefixListAttachment,
   TransitGatewayPrefixListReference,
@@ -1869,7 +1930,6 @@ import {
   VpnTunnelOptionsSpecification,
 } from "../models/models_1";
 import {
-  ArchitectureType,
   AssociatedTargetNetwork,
   AttributeBooleanValue,
   AuthorizationRule,
@@ -1891,9 +1951,43 @@ import {
   ConnectionLogResponseOptions,
   ConversionTask,
   CpuOptions,
+  DeleteNetworkInsightsAnalysisResult,
+  DeleteNetworkInsightsPathRequest,
+  DeleteNetworkInsightsPathResult,
+  DeleteNetworkInterfacePermissionRequest,
+  DeleteNetworkInterfacePermissionResult,
+  DeleteNetworkInterfaceRequest,
+  DeletePlacementGroupRequest,
+  DeleteQueuedReservedInstancesError,
+  DeleteQueuedReservedInstancesRequest,
+  DeleteQueuedReservedInstancesResult,
+  DeleteRouteRequest,
+  DeleteRouteTableRequest,
+  DeleteSecurityGroupRequest,
+  DeleteSnapshotRequest,
+  DeleteSpotDatafeedSubscriptionRequest,
+  DeleteSubnetRequest,
+  DeleteTagsRequest,
+  DeleteTrafficMirrorFilterRequest,
+  DeleteTrafficMirrorFilterResult,
+  DeleteTrafficMirrorFilterRuleRequest,
+  DeleteTrafficMirrorFilterRuleResult,
+  DeleteTrafficMirrorSessionRequest,
+  DeleteTrafficMirrorSessionResult,
+  DeleteTrafficMirrorTargetRequest,
+  DeleteTrafficMirrorTargetResult,
+  DeleteTransitGatewayConnectPeerRequest,
+  DeleteTransitGatewayConnectPeerResult,
+  DeleteTransitGatewayConnectRequest,
+  DeleteTransitGatewayConnectResult,
+  DeleteTransitGatewayMulticastDomainRequest,
+  DeleteTransitGatewayMulticastDomainResult,
+  DeleteTransitGatewayPeeringAttachmentRequest,
   DeleteTransitGatewayPeeringAttachmentResult,
   DeleteTransitGatewayPrefixListReferenceRequest,
   DeleteTransitGatewayPrefixListReferenceResult,
+  DeleteTransitGatewayRequest,
+  DeleteTransitGatewayResult,
   DeleteTransitGatewayRouteRequest,
   DeleteTransitGatewayRouteResult,
   DeleteTransitGatewayRouteTableRequest,
@@ -1925,6 +2019,8 @@ import {
   DeregisterTransitGatewayMulticastGroupSourcesResult,
   DescribeAccountAttributesRequest,
   DescribeAccountAttributesResult,
+  DescribeAddressesAttributeRequest,
+  DescribeAddressesAttributeResult,
   DescribeAddressesRequest,
   DescribeAddressesResult,
   DescribeAggregateIdFormatRequest,
@@ -2013,24 +2109,11 @@ import {
   DescribeInstanceTypeOfferingsRequest,
   DescribeInstanceTypeOfferingsResult,
   DescribeInstanceTypesRequest,
-  DescribeInstanceTypesResult,
   DescribeInstancesRequest,
   DescribeInstancesResult,
-  DescribeInternetGatewaysRequest,
-  DescribeInternetGatewaysResult,
-  DescribeIpv6PoolsRequest,
-  DescribeIpv6PoolsResult,
-  DescribeKeyPairsRequest,
-  DescribeKeyPairsResult,
-  DescribeLaunchTemplateVersionsRequest,
-  DescribeLaunchTemplateVersionsResult,
-  DescribeLaunchTemplatesRequest,
-  DescribeLaunchTemplatesResult,
-  DescribeLocalGatewayRouteTablesRequest,
   DirectoryServiceAuthentication,
   DiskImageDescription,
   DiskImageVolumeDescription,
-  DiskInfo,
   EbsInfo,
   EbsInstanceBlockDevice,
   EbsOptimizedInfo,
@@ -2042,6 +2125,7 @@ import {
   EventInformation,
   ExportImageTask,
   ExportTaskS3Location,
+  FailedQueuedPurchaseDeletion,
   FederatedAuthentication,
   Filter,
   FleetData,
@@ -2049,15 +2133,10 @@ import {
   FleetSpotCapacityRebalance,
   FleetSpotMaintenanceStrategies,
   FlowLog,
-  FpgaDeviceInfo,
   FpgaDeviceMemoryInfo,
   FpgaImage,
   FpgaImageAttribute,
   FpgaImageState,
-  FpgaInfo,
-  GpuDeviceInfo,
-  GpuDeviceMemoryInfo,
-  GpuInfo,
   HibernationOptions,
   HistoryRecordEntry,
   Host,
@@ -2074,8 +2153,6 @@ import {
   ImportInstanceVolumeDetailItem,
   ImportSnapshotTask,
   ImportVolumeTaskDetails,
-  InferenceAcceleratorInfo,
-  InferenceDeviceInfo,
   Instance,
   InstanceAttribute,
   InstanceBlockDeviceMapping,
@@ -2091,54 +2168,58 @@ import {
   InstanceStatusDetails,
   InstanceStatusEvent,
   InstanceStatusSummary,
-  InstanceStorageInfo,
   InstanceTagNotificationAttribute,
-  InstanceTypeInfo,
   InstanceTypeOffering,
-  Ipv6Pool,
-  KeyPairInfo,
   LaunchPermission,
   LicenseConfiguration,
   LoadPermission,
-  LocalGatewayRouteTable,
-  MemoryInfo,
   Monitoring,
-  NetworkCardInfo,
-  NetworkInfo,
   OnDemandOptions,
   PciId,
-  PlacementGroupInfo,
-  PlacementGroupStrategy,
-  PoolCidrBlock,
-  ProcessorInfo,
   ProductCode,
   Reservation,
-  RootDeviceType,
   SnapshotDetail,
   SnapshotTaskDetail,
   SpotOptions,
   StateReason,
+  SuccessfulQueuedPurchaseDeletion,
   TargetCapacitySpecification,
   TargetNetwork,
   TransitGatewayMulticastDeregisteredGroupMembers,
   TransitGatewayMulticastDeregisteredGroupSources,
-  UsageClassType,
   UserBucketDetails,
-  VCpuInfo,
   VirtualizationType,
 } from "../models/models_2";
 import {
-  AssociatedRole,
+  AnalysisAclRule,
+  AnalysisComponent,
+  AnalysisLoadBalancerListener,
+  AnalysisLoadBalancerTarget,
+  AnalysisPacketHeader,
+  AnalysisRouteTableRoute,
+  AnalysisSecurityGroupRule,
+  ArchitectureType,
+  BootModeType,
   ClassicLinkDnsSupport,
   ClassicLoadBalancer,
   ClassicLoadBalancersConfig,
-  ClientCertificateRevocationListStatus,
-  CoipAddressUsage,
   CreateVolumePermission,
+  DescribeInstanceTypesResult,
+  DescribeInternetGatewaysRequest,
+  DescribeInternetGatewaysResult,
+  DescribeIpv6PoolsRequest,
+  DescribeIpv6PoolsResult,
+  DescribeKeyPairsRequest,
+  DescribeKeyPairsResult,
+  DescribeLaunchTemplateVersionsRequest,
+  DescribeLaunchTemplateVersionsResult,
+  DescribeLaunchTemplatesRequest,
+  DescribeLaunchTemplatesResult,
   DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsRequest,
   DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResult,
   DescribeLocalGatewayRouteTableVpcAssociationsRequest,
   DescribeLocalGatewayRouteTableVpcAssociationsResult,
+  DescribeLocalGatewayRouteTablesRequest,
   DescribeLocalGatewayRouteTablesResult,
   DescribeLocalGatewayVirtualInterfaceGroupsRequest,
   DescribeLocalGatewayVirtualInterfaceGroupsResult,
@@ -2154,6 +2235,10 @@ import {
   DescribeNatGatewaysResult,
   DescribeNetworkAclsRequest,
   DescribeNetworkAclsResult,
+  DescribeNetworkInsightsAnalysesRequest,
+  DescribeNetworkInsightsAnalysesResult,
+  DescribeNetworkInsightsPathsRequest,
+  DescribeNetworkInsightsPathsResult,
   DescribeNetworkInterfaceAttributeRequest,
   DescribeNetworkInterfaceAttributeResult,
   DescribeNetworkInterfacePermissionsRequest,
@@ -2218,6 +2303,10 @@ import {
   DescribeTrafficMirrorTargetsResult,
   DescribeTransitGatewayAttachmentsRequest,
   DescribeTransitGatewayAttachmentsResult,
+  DescribeTransitGatewayConnectPeersRequest,
+  DescribeTransitGatewayConnectPeersResult,
+  DescribeTransitGatewayConnectsRequest,
+  DescribeTransitGatewayConnectsResult,
   DescribeTransitGatewayMulticastDomainsRequest,
   DescribeTransitGatewayMulticastDomainsResult,
   DescribeTransitGatewayPeeringAttachmentsRequest,
@@ -2288,6 +2377,106 @@ import {
   DisassociateClientVpnTargetNetworkResult,
   DisassociateEnclaveCertificateIamRoleRequest,
   DisassociateEnclaveCertificateIamRoleResult,
+  DiskInfo,
+  Explanation,
+  FpgaDeviceInfo,
+  FpgaInfo,
+  GpuDeviceInfo,
+  GpuDeviceMemoryInfo,
+  GpuInfo,
+  HistoryRecord,
+  InferenceAcceleratorInfo,
+  InferenceDeviceInfo,
+  InstanceNetworkInterfaceSpecification,
+  InstanceStorageInfo,
+  InstanceTypeInfo,
+  Ipv6Pool,
+  KeyPairInfo,
+  LaunchSpecification,
+  LaunchTemplateConfig,
+  LaunchTemplateOverrides,
+  LoadBalancersConfig,
+  LocalGateway,
+  LocalGatewayRouteTable,
+  LocalGatewayRouteTableVirtualInterfaceGroupAssociation,
+  LocalGatewayVirtualInterface,
+  LocalGatewayVirtualInterfaceGroup,
+  MemoryInfo,
+  MovingAddressStatus,
+  NetworkCardInfo,
+  NetworkInfo,
+  NetworkInsightsAnalysis,
+  PathComponent,
+  PlacementGroupInfo,
+  PlacementGroupStrategy,
+  PoolCidrBlock,
+  PrefixList,
+  PricingDetail,
+  PrincipalIdFormat,
+  PrivateDnsDetails,
+  ProcessorInfo,
+  PublicIpv4Pool,
+  PublicIpv4PoolRange,
+  RecurringCharge,
+  Region,
+  ReservedInstances,
+  ReservedInstancesConfiguration,
+  ReservedInstancesId,
+  ReservedInstancesModification,
+  ReservedInstancesModificationResult,
+  ReservedInstancesOffering,
+  RootDeviceType,
+  RunInstancesMonitoringEnabled,
+  ScheduledInstance,
+  ScheduledInstanceAvailability,
+  ScheduledInstanceRecurrence,
+  ScheduledInstanceRecurrenceRequest,
+  SecurityGroup,
+  SecurityGroupReference,
+  ServiceDetail,
+  SlotDateTimeRangeRequest,
+  SlotStartTimeRangeRequest,
+  SpotCapacityRebalance,
+  SpotFleetLaunchSpecification,
+  SpotFleetMonitoring,
+  SpotFleetRequestConfig,
+  SpotFleetRequestConfigData,
+  SpotFleetTagSpecification,
+  SpotInstanceRequest,
+  SpotInstanceStatus,
+  SpotMaintenanceStrategies,
+  SpotPlacement,
+  SpotPrice,
+  StaleIpPermission,
+  StaleSecurityGroup,
+  TagDescription,
+  TargetGroup,
+  TargetGroupsConfig,
+  TransitGatewayAttachment,
+  TransitGatewayAttachmentAssociation,
+  TransitGatewayPropagation,
+  UsageClassType,
+  VCpuInfo,
+  VolumeModification,
+  VolumeStatusAction,
+  VolumeStatusAttachmentStatus,
+  VolumeStatusDetails,
+  VolumeStatusEvent,
+  VolumeStatusInfo,
+  VolumeStatusItem,
+  VpcClassicLink,
+  VpcEndpointConnection,
+} from "../models/models_3";
+import {
+  AssociatedRole,
+  BlobAttributeValue,
+  CapacityReservationGroup,
+  CapacityReservationSpecification,
+  CidrAuthorizationContext,
+  ClientCertificateRevocationListStatus,
+  ClientData,
+  CoipAddressUsage,
+  CreateVolumePermissionModifications,
   DisassociateIamInstanceProfileRequest,
   DisassociateIamInstanceProfileResult,
   DisassociateRouteTableRequest,
@@ -2299,6 +2488,10 @@ import {
   DisassociateTransitGatewayRouteTableResult,
   DisassociateVpcCidrBlockRequest,
   DisassociateVpcCidrBlockResult,
+  DiskImage,
+  DiskImageDetail,
+  DnsServersOptionsModifyStructure,
+  EbsInstanceBlockDeviceSpecification,
   EnableEbsEncryptionByDefaultRequest,
   EnableEbsEncryptionByDefaultResult,
   EnableFastSnapshotRestoreErrorItem,
@@ -2340,87 +2533,6 @@ import {
   GetDefaultCreditSpecificationResult,
   GetEbsDefaultKmsKeyIdRequest,
   GetEbsDefaultKmsKeyIdResult,
-  HistoryRecord,
-  InstanceFamilyCreditSpecification,
-  InstanceNetworkInterfaceSpecification,
-  InstanceUsage,
-  Ipv6CidrAssociation,
-  LaunchSpecification,
-  LaunchTemplateConfig,
-  LaunchTemplateOverrides,
-  LoadBalancersConfig,
-  LocalGateway,
-  LocalGatewayRouteTableVirtualInterfaceGroupAssociation,
-  LocalGatewayVirtualInterface,
-  LocalGatewayVirtualInterfaceGroup,
-  MovingAddressStatus,
-  PrefixList,
-  PricingDetail,
-  PrincipalIdFormat,
-  PrivateDnsDetails,
-  PublicIpv4Pool,
-  PublicIpv4PoolRange,
-  RecurringCharge,
-  Region,
-  ReservedInstances,
-  ReservedInstancesConfiguration,
-  ReservedInstancesId,
-  ReservedInstancesModification,
-  ReservedInstancesModificationResult,
-  ReservedInstancesOffering,
-  RunInstancesMonitoringEnabled,
-  ScheduledInstance,
-  ScheduledInstanceAvailability,
-  ScheduledInstanceRecurrence,
-  ScheduledInstanceRecurrenceRequest,
-  SecurityGroup,
-  SecurityGroupReference,
-  ServiceDetail,
-  SlotDateTimeRangeRequest,
-  SlotStartTimeRangeRequest,
-  SpotCapacityRebalance,
-  SpotFleetLaunchSpecification,
-  SpotFleetMonitoring,
-  SpotFleetRequestConfig,
-  SpotFleetRequestConfigData,
-  SpotFleetTagSpecification,
-  SpotInstanceRequest,
-  SpotInstanceStatus,
-  SpotMaintenanceStrategies,
-  SpotPlacement,
-  SpotPrice,
-  StaleIpPermission,
-  StaleSecurityGroup,
-  TagDescription,
-  TargetGroup,
-  TargetGroupsConfig,
-  TransitGatewayAttachment,
-  TransitGatewayAttachmentAssociation,
-  TransitGatewayPropagation,
-  VolumeModification,
-  VolumeStatusAction,
-  VolumeStatusAttachmentStatus,
-  VolumeStatusDetails,
-  VolumeStatusEvent,
-  VolumeStatusInfo,
-  VolumeStatusItem,
-  VpcClassicLink,
-  VpcEndpointConnection,
-} from "../models/models_3";
-import {
-  BlobAttributeValue,
-  CapacityReservationGroup,
-  CapacityReservationSpecification,
-  CidrAuthorizationContext,
-  ClientData,
-  CpuOptionsRequest,
-  CreateVolumePermissionModifications,
-  DiskImage,
-  DiskImageDetail,
-  DnsServersOptionsModifyStructure,
-  EbsInstanceBlockDeviceSpecification,
-  ElasticInferenceAccelerator,
-  EnclaveOptionsRequest,
   GetEbsEncryptionByDefaultRequest,
   GetEbsEncryptionByDefaultResult,
   GetGroupsForCapacityReservationRequest,
@@ -2447,7 +2559,6 @@ import {
   GetTransitGatewayRouteTableAssociationsResult,
   GetTransitGatewayRouteTablePropagationsRequest,
   GetTransitGatewayRouteTablePropagationsResult,
-  HibernationOptionsRequest,
   ImageDiskContainer,
   ImportClientVpnClientCertificateRevocationListRequest,
   ImportClientVpnClientCertificateRevocationListResult,
@@ -2465,15 +2576,15 @@ import {
   ImportVolumeResult,
   InstanceBlockDeviceMappingSpecification,
   InstanceCreditSpecificationRequest,
-  InstanceMarketOptionsRequest,
-  InstanceMetadataOptionsRequest,
+  InstanceFamilyCreditSpecification,
   InstanceMonitoring,
-  InstanceStateChange,
+  InstanceUsage,
+  Ipv6CidrAssociation,
   LaunchPermissionModifications,
-  LaunchTemplateSpecification,
-  LicenseConfigurationRequest,
   LoadPermissionModifications,
   LoadPermissionRequest,
+  ModifyAddressAttributeRequest,
+  ModifyAddressAttributeResult,
   ModifyAvailabilityZoneGroupRequest,
   ModifyAvailabilityZoneGroupResult,
   ModifyCapacityReservationRequest,
@@ -2583,6 +2694,8 @@ import {
   RegisterTransitGatewayMulticastGroupMembersResult,
   RegisterTransitGatewayMulticastGroupSourcesRequest,
   RegisterTransitGatewayMulticastGroupSourcesResult,
+  RejectTransitGatewayMulticastDomainAssociationsRequest,
+  RejectTransitGatewayMulticastDomainAssociationsResult,
   RejectTransitGatewayPeeringAttachmentRequest,
   RejectTransitGatewayPeeringAttachmentResult,
   RejectTransitGatewayVpcAttachmentRequest,
@@ -2615,6 +2728,8 @@ import {
   ReservationValue,
   ReservedInstanceLimitPrice,
   ReservedInstanceReservationValue,
+  ResetAddressAttributeRequest,
+  ResetAddressAttributeResult,
   ResetEbsDefaultKmsKeyIdRequest,
   ResetEbsDefaultKmsKeyIdResult,
   ResetFpgaImageAttributeRequest,
@@ -2625,6 +2740,34 @@ import {
   ResetSnapshotAttributeRequest,
   RestoreAddressToClassicRequest,
   RestoreAddressToClassicResult,
+  SnapshotDiskContainer,
+  SuccessfulInstanceCreditSpecificationItem,
+  TargetConfiguration,
+  TargetReservationValue,
+  TrafficMirrorFilterRuleField,
+  TrafficMirrorSessionField,
+  TransitGatewayAttachmentPropagation,
+  TransitGatewayMulticastDomainAssociation,
+  TransitGatewayMulticastRegisteredGroupMembers,
+  TransitGatewayMulticastRegisteredGroupSources,
+  TransitGatewayRouteTableAssociation,
+  TransitGatewayRouteTablePropagation,
+  UnsuccessfulInstanceCreditSpecificationItem,
+  UnsuccessfulInstanceCreditSpecificationItemError,
+  UserBucket,
+  UserData,
+  VolumeDetail,
+} from "../models/models_4";
+import {
+  CpuOptionsRequest,
+  ElasticInferenceAccelerator,
+  EnclaveOptionsRequest,
+  HibernationOptionsRequest,
+  InstanceMarketOptionsRequest,
+  InstanceMetadataOptionsRequest,
+  InstanceStateChange,
+  LaunchTemplateSpecification,
+  LicenseConfigurationRequest,
   RestoreManagedPrefixListVersionRequest,
   RestoreManagedPrefixListVersionResult,
   RevokeClientVpnIngressRequest,
@@ -2652,48 +2795,33 @@ import {
   SearchTransitGatewayRoutesRequest,
   SearchTransitGatewayRoutesResult,
   SendDiagnosticInterruptRequest,
-  SnapshotDiskContainer,
   SpotMarketOptions,
   StartInstancesRequest,
   StartInstancesResult,
+  StartNetworkInsightsAnalysisRequest,
+  StartNetworkInsightsAnalysisResult,
   StartVpcEndpointServicePrivateDnsVerificationRequest,
   StartVpcEndpointServicePrivateDnsVerificationResult,
   StopInstancesRequest,
   StopInstancesResult,
-  SuccessfulInstanceCreditSpecificationItem,
-  TargetConfiguration,
-  TargetReservationValue,
   TerminateClientVpnConnectionsRequest,
   TerminateClientVpnConnectionsResult,
   TerminateConnectionStatus,
   TerminateInstancesRequest,
   TerminateInstancesResult,
-  TrafficMirrorFilterRuleField,
-  TrafficMirrorSessionField,
-  TransitGatewayAttachmentPropagation,
-  TransitGatewayMulticastDomainAssociation,
   TransitGatewayMulticastGroup,
-  TransitGatewayMulticastRegisteredGroupMembers,
-  TransitGatewayMulticastRegisteredGroupSources,
-  TransitGatewayRouteTableAssociation,
-  TransitGatewayRouteTablePropagation,
   UnassignIpv6AddressesRequest,
   UnassignIpv6AddressesResult,
   UnassignPrivateIpAddressesRequest,
   UnmonitorInstancesRequest,
   UnmonitorInstancesResult,
-  UnsuccessfulInstanceCreditSpecificationItem,
-  UnsuccessfulInstanceCreditSpecificationItemError,
   UpdateSecurityGroupRuleDescriptionsEgressRequest,
   UpdateSecurityGroupRuleDescriptionsEgressResult,
   UpdateSecurityGroupRuleDescriptionsIngressRequest,
   UpdateSecurityGroupRuleDescriptionsIngressResult,
-  UserBucket,
-  UserData,
-  VolumeDetail,
   WithdrawByoipCidrRequest,
   WithdrawByoipCidrResult,
-} from "../models/models_4";
+} from "../models/models_5";
 import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
 import {
   SmithyException as __SmithyException,
@@ -2722,6 +2850,22 @@ export const serializeAws_ec2AcceptReservedInstancesExchangeQuoteCommand = async
   body = buildFormUrlencodedString({
     ...serializeAws_ec2AcceptReservedInstancesExchangeQuoteRequest(input, context),
     Action: "AcceptReservedInstancesExchangeQuote",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_ec2AcceptTransitGatewayMulticastDomainAssociationsCommand = async (
+  input: AcceptTransitGatewayMulticastDomainAssociationsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2AcceptTransitGatewayMulticastDomainAssociationsRequest(input, context),
+    Action: "AcceptTransitGatewayMulticastDomainAssociations",
     Version: "2016-11-15",
   });
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
@@ -3767,6 +3911,22 @@ export const serializeAws_ec2CreateNetworkAclEntryCommand = async (
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
 };
 
+export const serializeAws_ec2CreateNetworkInsightsPathCommand = async (
+  input: CreateNetworkInsightsPathCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2CreateNetworkInsightsPathRequest(input, context),
+    Action: "CreateNetworkInsightsPath",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
 export const serializeAws_ec2CreateNetworkInterfaceCommand = async (
   input: CreateNetworkInterfaceCommandInput,
   context: __SerdeContext
@@ -4034,6 +4194,38 @@ export const serializeAws_ec2CreateTransitGatewayCommand = async (
   body = buildFormUrlencodedString({
     ...serializeAws_ec2CreateTransitGatewayRequest(input, context),
     Action: "CreateTransitGateway",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_ec2CreateTransitGatewayConnectCommand = async (
+  input: CreateTransitGatewayConnectCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2CreateTransitGatewayConnectRequest(input, context),
+    Action: "CreateTransitGatewayConnect",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_ec2CreateTransitGatewayConnectPeerCommand = async (
+  input: CreateTransitGatewayConnectPeerCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2CreateTransitGatewayConnectPeerRequest(input, context),
+    Action: "CreateTransitGatewayConnectPeer",
     Version: "2016-11-15",
   });
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
@@ -4583,6 +4775,38 @@ export const serializeAws_ec2DeleteNetworkAclEntryCommand = async (
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
 };
 
+export const serializeAws_ec2DeleteNetworkInsightsAnalysisCommand = async (
+  input: DeleteNetworkInsightsAnalysisCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2DeleteNetworkInsightsAnalysisRequest(input, context),
+    Action: "DeleteNetworkInsightsAnalysis",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_ec2DeleteNetworkInsightsPathCommand = async (
+  input: DeleteNetworkInsightsPathCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2DeleteNetworkInsightsPathRequest(input, context),
+    Action: "DeleteNetworkInsightsPath",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
 export const serializeAws_ec2DeleteNetworkInterfaceCommand = async (
   input: DeleteNetworkInterfaceCommandInput,
   context: __SerdeContext
@@ -4834,6 +5058,38 @@ export const serializeAws_ec2DeleteTransitGatewayCommand = async (
   body = buildFormUrlencodedString({
     ...serializeAws_ec2DeleteTransitGatewayRequest(input, context),
     Action: "DeleteTransitGateway",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_ec2DeleteTransitGatewayConnectCommand = async (
+  input: DeleteTransitGatewayConnectCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2DeleteTransitGatewayConnectRequest(input, context),
+    Action: "DeleteTransitGatewayConnect",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_ec2DeleteTransitGatewayConnectPeerCommand = async (
+  input: DeleteTransitGatewayConnectPeerCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2DeleteTransitGatewayConnectPeerRequest(input, context),
+    Action: "DeleteTransitGatewayConnectPeer",
     Version: "2016-11-15",
   });
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
@@ -5186,6 +5442,22 @@ export const serializeAws_ec2DescribeAddressesCommand = async (
   body = buildFormUrlencodedString({
     ...serializeAws_ec2DescribeAddressesRequest(input, context),
     Action: "DescribeAddresses",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_ec2DescribeAddressesAttributeCommand = async (
+  input: DescribeAddressesAttributeCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2DescribeAddressesAttributeRequest(input, context),
+    Action: "DescribeAddressesAttribute",
     Version: "2016-11-15",
   });
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
@@ -6135,6 +6407,38 @@ export const serializeAws_ec2DescribeNetworkAclsCommand = async (
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
 };
 
+export const serializeAws_ec2DescribeNetworkInsightsAnalysesCommand = async (
+  input: DescribeNetworkInsightsAnalysesCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2DescribeNetworkInsightsAnalysesRequest(input, context),
+    Action: "DescribeNetworkInsightsAnalyses",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_ec2DescribeNetworkInsightsPathsCommand = async (
+  input: DescribeNetworkInsightsPathsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2DescribeNetworkInsightsPathsRequest(input, context),
+    Action: "DescribeNetworkInsightsPaths",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
 export const serializeAws_ec2DescribeNetworkInterfaceAttributeCommand = async (
   input: DescribeNetworkInterfaceAttributeCommandInput,
   context: __SerdeContext
@@ -6642,6 +6946,38 @@ export const serializeAws_ec2DescribeTransitGatewayAttachmentsCommand = async (
   body = buildFormUrlencodedString({
     ...serializeAws_ec2DescribeTransitGatewayAttachmentsRequest(input, context),
     Action: "DescribeTransitGatewayAttachments",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_ec2DescribeTransitGatewayConnectPeersCommand = async (
+  input: DescribeTransitGatewayConnectPeersCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2DescribeTransitGatewayConnectPeersRequest(input, context),
+    Action: "DescribeTransitGatewayConnectPeers",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_ec2DescribeTransitGatewayConnectsCommand = async (
+  input: DescribeTransitGatewayConnectsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2DescribeTransitGatewayConnectsRequest(input, context),
+    Action: "DescribeTransitGatewayConnects",
     Version: "2016-11-15",
   });
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
@@ -7927,6 +8263,22 @@ export const serializeAws_ec2ImportVolumeCommand = async (
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
 };
 
+export const serializeAws_ec2ModifyAddressAttributeCommand = async (
+  input: ModifyAddressAttributeCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2ModifyAddressAttributeRequest(input, context),
+    Action: "ModifyAddressAttribute",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
 export const serializeAws_ec2ModifyAvailabilityZoneGroupCommand = async (
   input: ModifyAvailabilityZoneGroupCommandInput,
   context: __SerdeContext
@@ -8791,6 +9143,22 @@ export const serializeAws_ec2RegisterTransitGatewayMulticastGroupSourcesCommand 
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
 };
 
+export const serializeAws_ec2RejectTransitGatewayMulticastDomainAssociationsCommand = async (
+  input: RejectTransitGatewayMulticastDomainAssociationsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2RejectTransitGatewayMulticastDomainAssociationsRequest(input, context),
+    Action: "RejectTransitGatewayMulticastDomainAssociations",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
 export const serializeAws_ec2RejectTransitGatewayPeeringAttachmentCommand = async (
   input: RejectTransitGatewayPeeringAttachmentCommandInput,
   context: __SerdeContext
@@ -9026,6 +9394,22 @@ export const serializeAws_ec2RequestSpotInstancesCommand = async (
   body = buildFormUrlencodedString({
     ...serializeAws_ec2RequestSpotInstancesRequest(input, context),
     Action: "RequestSpotInstances",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_ec2ResetAddressAttributeCommand = async (
+  input: ResetAddressAttributeCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2ResetAddressAttributeRequest(input, context),
+    Action: "ResetAddressAttribute",
     Version: "2016-11-15",
   });
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
@@ -9319,6 +9703,22 @@ export const serializeAws_ec2StartInstancesCommand = async (
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
 };
 
+export const serializeAws_ec2StartNetworkInsightsAnalysisCommand = async (
+  input: StartNetworkInsightsAnalysisCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_ec2StartNetworkInsightsAnalysisRequest(input, context),
+    Action: "StartNetworkInsightsAnalysis",
+    Version: "2016-11-15",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
 export const serializeAws_ec2StartVpcEndpointServicePrivateDnsVerificationCommand = async (
   input: StartVpcEndpointServicePrivateDnsVerificationCommandInput,
   context: __SerdeContext
@@ -9500,6 +9900,52 @@ const deserializeAws_ec2AcceptReservedInstancesExchangeQuoteCommandError = async
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<AcceptReservedInstancesExchangeQuoteCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
+export const deserializeAws_ec2AcceptTransitGatewayMulticastDomainAssociationsCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<AcceptTransitGatewayMulticastDomainAssociationsCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2AcceptTransitGatewayMulticastDomainAssociationsCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2AcceptTransitGatewayMulticastDomainAssociationsResult(data, context);
+  const response: AcceptTransitGatewayMulticastDomainAssociationsCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2AcceptTransitGatewayMulticastDomainAssociationsCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<AcceptTransitGatewayMulticastDomainAssociationsCommandOutput> => {
   const parsedOutput: any = {
     ...output,
     body: await parseBody(output.body, context),
@@ -12494,6 +12940,52 @@ const deserializeAws_ec2CreateNetworkAclEntryCommandError = async (
   return Promise.reject(Object.assign(new Error(message), response));
 };
 
+export const deserializeAws_ec2CreateNetworkInsightsPathCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<CreateNetworkInsightsPathCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2CreateNetworkInsightsPathCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2CreateNetworkInsightsPathResult(data, context);
+  const response: CreateNetworkInsightsPathCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2CreateNetworkInsightsPathCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<CreateNetworkInsightsPathCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
 export const deserializeAws_ec2CreateNetworkInterfaceCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
@@ -13248,6 +13740,98 @@ const deserializeAws_ec2CreateTransitGatewayCommandError = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<CreateTransitGatewayCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
+export const deserializeAws_ec2CreateTransitGatewayConnectCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<CreateTransitGatewayConnectCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2CreateTransitGatewayConnectCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2CreateTransitGatewayConnectResult(data, context);
+  const response: CreateTransitGatewayConnectCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2CreateTransitGatewayConnectCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<CreateTransitGatewayConnectCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
+export const deserializeAws_ec2CreateTransitGatewayConnectPeerCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<CreateTransitGatewayConnectPeerCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2CreateTransitGatewayConnectPeerCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2CreateTransitGatewayConnectPeerResult(data, context);
+  const response: CreateTransitGatewayConnectPeerCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2CreateTransitGatewayConnectPeerCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<CreateTransitGatewayConnectPeerCommandOutput> => {
   const parsedOutput: any = {
     ...output,
     body: await parseBody(output.body, context),
@@ -14816,6 +15400,98 @@ const deserializeAws_ec2DeleteNetworkAclEntryCommandError = async (
   return Promise.reject(Object.assign(new Error(message), response));
 };
 
+export const deserializeAws_ec2DeleteNetworkInsightsAnalysisCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DeleteNetworkInsightsAnalysisCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2DeleteNetworkInsightsAnalysisCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2DeleteNetworkInsightsAnalysisResult(data, context);
+  const response: DeleteNetworkInsightsAnalysisCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2DeleteNetworkInsightsAnalysisCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DeleteNetworkInsightsAnalysisCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
+export const deserializeAws_ec2DeleteNetworkInsightsPathCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DeleteNetworkInsightsPathCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2DeleteNetworkInsightsPathCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2DeleteNetworkInsightsPathResult(data, context);
+  const response: DeleteNetworkInsightsPathCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2DeleteNetworkInsightsPathCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DeleteNetworkInsightsPathCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
 export const deserializeAws_ec2DeleteNetworkInterfaceCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
@@ -15500,6 +16176,98 @@ const deserializeAws_ec2DeleteTransitGatewayCommandError = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<DeleteTransitGatewayCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
+export const deserializeAws_ec2DeleteTransitGatewayConnectCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DeleteTransitGatewayConnectCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2DeleteTransitGatewayConnectCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2DeleteTransitGatewayConnectResult(data, context);
+  const response: DeleteTransitGatewayConnectCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2DeleteTransitGatewayConnectCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DeleteTransitGatewayConnectCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
+export const deserializeAws_ec2DeleteTransitGatewayConnectPeerCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DeleteTransitGatewayConnectPeerCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2DeleteTransitGatewayConnectPeerCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2DeleteTransitGatewayConnectPeerResult(data, context);
+  const response: DeleteTransitGatewayConnectPeerCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2DeleteTransitGatewayConnectPeerCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DeleteTransitGatewayConnectPeerCommandOutput> => {
   const parsedOutput: any = {
     ...output,
     body: await parseBody(output.body, context),
@@ -16494,6 +17262,52 @@ const deserializeAws_ec2DescribeAddressesCommandError = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<DescribeAddressesCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
+export const deserializeAws_ec2DescribeAddressesAttributeCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DescribeAddressesAttributeCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2DescribeAddressesAttributeCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2DescribeAddressesAttributeResult(data, context);
+  const response: DescribeAddressesAttributeCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2DescribeAddressesAttributeCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DescribeAddressesAttributeCommandOutput> => {
   const parsedOutput: any = {
     ...output,
     body: await parseBody(output.body, context),
@@ -19236,6 +20050,98 @@ const deserializeAws_ec2DescribeNetworkAclsCommandError = async (
   return Promise.reject(Object.assign(new Error(message), response));
 };
 
+export const deserializeAws_ec2DescribeNetworkInsightsAnalysesCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DescribeNetworkInsightsAnalysesCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2DescribeNetworkInsightsAnalysesCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2DescribeNetworkInsightsAnalysesResult(data, context);
+  const response: DescribeNetworkInsightsAnalysesCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2DescribeNetworkInsightsAnalysesCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DescribeNetworkInsightsAnalysesCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
+export const deserializeAws_ec2DescribeNetworkInsightsPathsCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DescribeNetworkInsightsPathsCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2DescribeNetworkInsightsPathsCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2DescribeNetworkInsightsPathsResult(data, context);
+  const response: DescribeNetworkInsightsPathsCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2DescribeNetworkInsightsPathsCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DescribeNetworkInsightsPathsCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
 export const deserializeAws_ec2DescribeNetworkInterfaceAttributeCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
@@ -20683,6 +21589,98 @@ const deserializeAws_ec2DescribeTransitGatewayAttachmentsCommandError = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<DescribeTransitGatewayAttachmentsCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
+export const deserializeAws_ec2DescribeTransitGatewayConnectPeersCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DescribeTransitGatewayConnectPeersCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2DescribeTransitGatewayConnectPeersCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2DescribeTransitGatewayConnectPeersResult(data, context);
+  const response: DescribeTransitGatewayConnectPeersCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2DescribeTransitGatewayConnectPeersCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DescribeTransitGatewayConnectPeersCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
+export const deserializeAws_ec2DescribeTransitGatewayConnectsCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DescribeTransitGatewayConnectsCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2DescribeTransitGatewayConnectsCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2DescribeTransitGatewayConnectsResult(data, context);
+  const response: DescribeTransitGatewayConnectsCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2DescribeTransitGatewayConnectsCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<DescribeTransitGatewayConnectsCommandOutput> => {
   const parsedOutput: any = {
     ...output,
     body: await parseBody(output.body, context),
@@ -24364,6 +25362,52 @@ const deserializeAws_ec2ImportVolumeCommandError = async (
   return Promise.reject(Object.assign(new Error(message), response));
 };
 
+export const deserializeAws_ec2ModifyAddressAttributeCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<ModifyAddressAttributeCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2ModifyAddressAttributeCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2ModifyAddressAttributeResult(data, context);
+  const response: ModifyAddressAttributeCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2ModifyAddressAttributeCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<ModifyAddressAttributeCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
 export const deserializeAws_ec2ModifyAvailabilityZoneGroupCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
@@ -26818,6 +27862,52 @@ const deserializeAws_ec2RegisterTransitGatewayMulticastGroupSourcesCommandError 
   return Promise.reject(Object.assign(new Error(message), response));
 };
 
+export const deserializeAws_ec2RejectTransitGatewayMulticastDomainAssociationsCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<RejectTransitGatewayMulticastDomainAssociationsCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2RejectTransitGatewayMulticastDomainAssociationsCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2RejectTransitGatewayMulticastDomainAssociationsResult(data, context);
+  const response: RejectTransitGatewayMulticastDomainAssociationsCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2RejectTransitGatewayMulticastDomainAssociationsCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<RejectTransitGatewayMulticastDomainAssociationsCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
 export const deserializeAws_ec2RejectTransitGatewayPeeringAttachmentCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
@@ -27471,6 +28561,52 @@ const deserializeAws_ec2RequestSpotInstancesCommandError = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<RequestSpotInstancesCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
+export const deserializeAws_ec2ResetAddressAttributeCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<ResetAddressAttributeCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2ResetAddressAttributeCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2ResetAddressAttributeResult(data, context);
+  const response: ResetAddressAttributeCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2ResetAddressAttributeCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<ResetAddressAttributeCommandOutput> => {
   const parsedOutput: any = {
     ...output,
     body: await parseBody(output.body, context),
@@ -28309,6 +29445,52 @@ const deserializeAws_ec2StartInstancesCommandError = async (
   return Promise.reject(Object.assign(new Error(message), response));
 };
 
+export const deserializeAws_ec2StartNetworkInsightsAnalysisCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<StartNetworkInsightsAnalysisCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_ec2StartNetworkInsightsAnalysisCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_ec2StartNetworkInsightsAnalysisResult(data, context);
+  const response: StartNetworkInsightsAnalysisCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_ec2StartNetworkInsightsAnalysisCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<StartNetworkInsightsAnalysisCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadEc2ErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Errors.Error.code || parsedBody.Errors.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Errors.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Errors.Error.message || parsedBody.Errors.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
 export const deserializeAws_ec2StartVpcEndpointServicePrivateDnsVerificationCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
@@ -28791,6 +29973,30 @@ const serializeAws_ec2AcceptReservedInstancesExchangeQuoteRequest = (
   return entries;
 };
 
+const serializeAws_ec2AcceptTransitGatewayMulticastDomainAssociationsRequest = (
+  input: AcceptTransitGatewayMulticastDomainAssociationsRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.TransitGatewayMulticastDomainId !== undefined) {
+    entries["TransitGatewayMulticastDomainId"] = input.TransitGatewayMulticastDomainId;
+  }
+  if (input.TransitGatewayAttachmentId !== undefined) {
+    entries["TransitGatewayAttachmentId"] = input.TransitGatewayAttachmentId;
+  }
+  if (input.SubnetIds !== undefined) {
+    const memberEntries = serializeAws_ec2ValueStringList(input.SubnetIds, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `SubnetIds.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  return entries;
+};
+
 const serializeAws_ec2AcceptTransitGatewayPeeringAttachmentRequest = (
   input: AcceptTransitGatewayPeeringAttachmentRequest,
   context: __SerdeContext
@@ -28968,6 +30174,16 @@ const serializeAws_ec2AllocationIdList = (input: string[], context: __SerdeConte
   return entries;
 };
 
+const serializeAws_ec2AllocationIds = (input: string[], context: __SerdeContext): any => {
+  const entries: any = {};
+  let counter = 1;
+  for (let entry of input) {
+    entries[`Item.${counter}`] = entry;
+    counter++;
+  }
+  return entries;
+};
+
 const serializeAws_ec2ApplySecurityGroupsToClientVpnTargetNetworkRequest = (
   input: ApplySecurityGroupsToClientVpnTargetNetworkRequest,
   context: __SerdeContext
@@ -28988,6 +30204,16 @@ const serializeAws_ec2ApplySecurityGroupsToClientVpnTargetNetworkRequest = (
   }
   if (input.DryRun !== undefined) {
     entries["DryRun"] = input.DryRun;
+  }
+  return entries;
+};
+
+const serializeAws_ec2ArnList = (input: string[], context: __SerdeContext): any => {
+  const entries: any = {};
+  let counter = 1;
+  for (let entry of input) {
+    entries[`Item.${counter}`] = entry;
+    counter++;
   }
   return entries;
 };
@@ -29184,7 +30410,7 @@ const serializeAws_ec2AssociateTransitGatewayMulticastDomainRequest = (
     entries["TransitGatewayAttachmentId"] = input.TransitGatewayAttachmentId;
   }
   if (input.SubnetIds !== undefined) {
-    const memberEntries = serializeAws_ec2ValueStringList(input.SubnetIds, context);
+    const memberEntries = serializeAws_ec2TransitGatewaySubnetIdList(input.SubnetIds, context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `SubnetIds.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
@@ -30533,6 +31759,13 @@ const serializeAws_ec2CreateImageRequest = (input: CreateImageRequest, context: 
   if (input.NoReboot !== undefined) {
     entries["NoReboot"] = input.NoReboot;
   }
+  if (input.TagSpecifications !== undefined) {
+    const memberEntries = serializeAws_ec2TagSpecificationList(input.TagSpecifications, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
   return entries;
 };
 
@@ -30841,6 +32074,48 @@ const serializeAws_ec2CreateNetworkAclRequest = (input: CreateNetworkAclRequest,
       const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
+  }
+  return entries;
+};
+
+const serializeAws_ec2CreateNetworkInsightsPathRequest = (
+  input: CreateNetworkInsightsPathRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.SourceIp !== undefined) {
+    entries["SourceIp"] = input.SourceIp;
+  }
+  if (input.DestinationIp !== undefined) {
+    entries["DestinationIp"] = input.DestinationIp;
+  }
+  if (input.Source !== undefined) {
+    entries["Source"] = input.Source;
+  }
+  if (input.Destination !== undefined) {
+    entries["Destination"] = input.Destination;
+  }
+  if (input.Protocol !== undefined) {
+    entries["Protocol"] = input.Protocol;
+  }
+  if (input.DestinationPort !== undefined) {
+    entries["DestinationPort"] = input.DestinationPort;
+  }
+  if (input.TagSpecifications !== undefined) {
+    const memberEntries = serializeAws_ec2TagSpecificationList(input.TagSpecifications, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  if (input.ClientToken === undefined) {
+    input.ClientToken = generateIdempotencyToken();
+  }
+  if (input.ClientToken !== undefined) {
+    entries["ClientToken"] = input.ClientToken;
   }
   return entries;
 };
@@ -31352,13 +32627,33 @@ const serializeAws_ec2CreateTrafficMirrorTargetRequest = (
   return entries;
 };
 
-const serializeAws_ec2CreateTransitGatewayMulticastDomainRequest = (
-  input: CreateTransitGatewayMulticastDomainRequest,
+const serializeAws_ec2CreateTransitGatewayConnectPeerRequest = (
+  input: CreateTransitGatewayConnectPeerRequest,
   context: __SerdeContext
 ): any => {
   const entries: any = {};
-  if (input.TransitGatewayId !== undefined) {
-    entries["TransitGatewayId"] = input.TransitGatewayId;
+  if (input.TransitGatewayAttachmentId !== undefined) {
+    entries["TransitGatewayAttachmentId"] = input.TransitGatewayAttachmentId;
+  }
+  if (input.TransitGatewayAddress !== undefined) {
+    entries["TransitGatewayAddress"] = input.TransitGatewayAddress;
+  }
+  if (input.PeerAddress !== undefined) {
+    entries["PeerAddress"] = input.PeerAddress;
+  }
+  if (input.BgpOptions !== undefined) {
+    const memberEntries = serializeAws_ec2TransitGatewayConnectRequestBgpOptions(input.BgpOptions, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `BgpOptions.${key}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.InsideCidrBlocks !== undefined) {
+    const memberEntries = serializeAws_ec2InsideCidrBlocksStringList(input.InsideCidrBlocks, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `InsideCidrBlocks.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   if (input.TagSpecifications !== undefined) {
     const memberEntries = serializeAws_ec2TagSpecificationList(input.TagSpecifications, context);
@@ -31369,6 +32664,90 @@ const serializeAws_ec2CreateTransitGatewayMulticastDomainRequest = (
   }
   if (input.DryRun !== undefined) {
     entries["DryRun"] = input.DryRun;
+  }
+  return entries;
+};
+
+const serializeAws_ec2CreateTransitGatewayConnectRequest = (
+  input: CreateTransitGatewayConnectRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.TransportTransitGatewayAttachmentId !== undefined) {
+    entries["TransportTransitGatewayAttachmentId"] = input.TransportTransitGatewayAttachmentId;
+  }
+  if (input.Options !== undefined) {
+    const memberEntries = serializeAws_ec2CreateTransitGatewayConnectRequestOptions(input.Options, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Options.${key}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.TagSpecifications !== undefined) {
+    const memberEntries = serializeAws_ec2TagSpecificationList(input.TagSpecifications, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  return entries;
+};
+
+const serializeAws_ec2CreateTransitGatewayConnectRequestOptions = (
+  input: CreateTransitGatewayConnectRequestOptions,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.Protocol !== undefined) {
+    entries["Protocol"] = input.Protocol;
+  }
+  return entries;
+};
+
+const serializeAws_ec2CreateTransitGatewayMulticastDomainRequest = (
+  input: CreateTransitGatewayMulticastDomainRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.TransitGatewayId !== undefined) {
+    entries["TransitGatewayId"] = input.TransitGatewayId;
+  }
+  if (input.Options !== undefined) {
+    const memberEntries = serializeAws_ec2CreateTransitGatewayMulticastDomainRequestOptions(input.Options, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Options.${key}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.TagSpecifications !== undefined) {
+    const memberEntries = serializeAws_ec2TagSpecificationList(input.TagSpecifications, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  return entries;
+};
+
+const serializeAws_ec2CreateTransitGatewayMulticastDomainRequestOptions = (
+  input: CreateTransitGatewayMulticastDomainRequestOptions,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.Igmpv2Support !== undefined) {
+    entries["Igmpv2Support"] = input.Igmpv2Support;
+  }
+  if (input.StaticSourcesSupport !== undefined) {
+    entries["StaticSourcesSupport"] = input.StaticSourcesSupport;
+  }
+  if (input.AutoAcceptSharedAssociations !== undefined) {
+    entries["AutoAcceptSharedAssociations"] = input.AutoAcceptSharedAssociations;
   }
   return entries;
 };
@@ -32215,6 +33594,34 @@ const serializeAws_ec2DeleteNetworkAclRequest = (input: DeleteNetworkAclRequest,
   return entries;
 };
 
+const serializeAws_ec2DeleteNetworkInsightsAnalysisRequest = (
+  input: DeleteNetworkInsightsAnalysisRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  if (input.NetworkInsightsAnalysisId !== undefined) {
+    entries["NetworkInsightsAnalysisId"] = input.NetworkInsightsAnalysisId;
+  }
+  return entries;
+};
+
+const serializeAws_ec2DeleteNetworkInsightsPathRequest = (
+  input: DeleteNetworkInsightsPathRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  if (input.NetworkInsightsPathId !== undefined) {
+    entries["NetworkInsightsPathId"] = input.NetworkInsightsPathId;
+  }
+  return entries;
+};
+
 const serializeAws_ec2DeleteNetworkInterfacePermissionRequest = (
   input: DeleteNetworkInterfacePermissionRequest,
   context: __SerdeContext
@@ -32440,6 +33847,34 @@ const serializeAws_ec2DeleteTrafficMirrorTargetRequest = (
   const entries: any = {};
   if (input.TrafficMirrorTargetId !== undefined) {
     entries["TrafficMirrorTargetId"] = input.TrafficMirrorTargetId;
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  return entries;
+};
+
+const serializeAws_ec2DeleteTransitGatewayConnectPeerRequest = (
+  input: DeleteTransitGatewayConnectPeerRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.TransitGatewayConnectPeerId !== undefined) {
+    entries["TransitGatewayConnectPeerId"] = input.TransitGatewayConnectPeerId;
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  return entries;
+};
+
+const serializeAws_ec2DeleteTransitGatewayConnectRequest = (
+  input: DeleteTransitGatewayConnectRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.TransitGatewayAttachmentId !== undefined) {
+    entries["TransitGatewayAttachmentId"] = input.TransitGatewayAttachmentId;
   }
   if (input.DryRun !== undefined) {
     entries["DryRun"] = input.DryRun;
@@ -32797,6 +34232,33 @@ const serializeAws_ec2DescribeAccountAttributesRequest = (
       const loc = `AttributeName.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  return entries;
+};
+
+const serializeAws_ec2DescribeAddressesAttributeRequest = (
+  input: DescribeAddressesAttributeRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.AllocationIds !== undefined) {
+    const memberEntries = serializeAws_ec2AllocationIds(input.AllocationIds, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `AllocationId.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.Attribute !== undefined) {
+    entries["Attribute"] = input.Attribute;
+  }
+  if (input.NextToken !== undefined) {
+    entries["NextToken"] = input.NextToken;
+  }
+  if (input.MaxResults !== undefined) {
+    entries["MaxResults"] = input.MaxResults;
   }
   if (input.DryRun !== undefined) {
     entries["DryRun"] = input.DryRun;
@@ -34477,6 +35939,77 @@ const serializeAws_ec2DescribeNetworkAclsRequest = (
   return entries;
 };
 
+const serializeAws_ec2DescribeNetworkInsightsAnalysesRequest = (
+  input: DescribeNetworkInsightsAnalysesRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.NetworkInsightsAnalysisIds !== undefined) {
+    const memberEntries = serializeAws_ec2NetworkInsightsAnalysisIdList(input.NetworkInsightsAnalysisIds, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `NetworkInsightsAnalysisId.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.NetworkInsightsPathId !== undefined) {
+    entries["NetworkInsightsPathId"] = input.NetworkInsightsPathId;
+  }
+  if (input.AnalysisStartTime !== undefined) {
+    entries["AnalysisStartTime"] = input.AnalysisStartTime.toISOString().split(".")[0] + "Z";
+  }
+  if (input.AnalysisEndTime !== undefined) {
+    entries["AnalysisEndTime"] = input.AnalysisEndTime.toISOString().split(".")[0] + "Z";
+  }
+  if (input.Filters !== undefined) {
+    const memberEntries = serializeAws_ec2FilterList(input.Filters, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.MaxResults !== undefined) {
+    entries["MaxResults"] = input.MaxResults;
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  if (input.NextToken !== undefined) {
+    entries["NextToken"] = input.NextToken;
+  }
+  return entries;
+};
+
+const serializeAws_ec2DescribeNetworkInsightsPathsRequest = (
+  input: DescribeNetworkInsightsPathsRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.NetworkInsightsPathIds !== undefined) {
+    const memberEntries = serializeAws_ec2NetworkInsightsPathIdList(input.NetworkInsightsPathIds, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `NetworkInsightsPathId.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.Filters !== undefined) {
+    const memberEntries = serializeAws_ec2FilterList(input.Filters, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.MaxResults !== undefined) {
+    entries["MaxResults"] = input.MaxResults;
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  if (input.NextToken !== undefined) {
+    entries["NextToken"] = input.NextToken;
+  }
+  return entries;
+};
+
 const serializeAws_ec2DescribeNetworkInterfaceAttributeRequest = (
   input: DescribeNetworkInterfaceAttributeRequest,
   context: __SerdeContext
@@ -35391,6 +36924,74 @@ const serializeAws_ec2DescribeTrafficMirrorTargetsRequest = (
 
 const serializeAws_ec2DescribeTransitGatewayAttachmentsRequest = (
   input: DescribeTransitGatewayAttachmentsRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.TransitGatewayAttachmentIds !== undefined) {
+    const memberEntries = serializeAws_ec2TransitGatewayAttachmentIdStringList(
+      input.TransitGatewayAttachmentIds,
+      context
+    );
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `TransitGatewayAttachmentIds.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.Filters !== undefined) {
+    const memberEntries = serializeAws_ec2FilterList(input.Filters, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.MaxResults !== undefined) {
+    entries["MaxResults"] = input.MaxResults;
+  }
+  if (input.NextToken !== undefined) {
+    entries["NextToken"] = input.NextToken;
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  return entries;
+};
+
+const serializeAws_ec2DescribeTransitGatewayConnectPeersRequest = (
+  input: DescribeTransitGatewayConnectPeersRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.TransitGatewayConnectPeerIds !== undefined) {
+    const memberEntries = serializeAws_ec2TransitGatewayConnectPeerIdStringList(
+      input.TransitGatewayConnectPeerIds,
+      context
+    );
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `TransitGatewayConnectPeerIds.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.Filters !== undefined) {
+    const memberEntries = serializeAws_ec2FilterList(input.Filters, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `Filter.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.MaxResults !== undefined) {
+    entries["MaxResults"] = input.MaxResults;
+  }
+  if (input.NextToken !== undefined) {
+    entries["NextToken"] = input.NextToken;
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  return entries;
+};
+
+const serializeAws_ec2DescribeTransitGatewayConnectsRequest = (
+  input: DescribeTransitGatewayConnectsRequest,
   context: __SerdeContext
 ): any => {
   const entries: any = {};
@@ -36340,7 +37941,7 @@ const serializeAws_ec2DisassociateTransitGatewayMulticastDomainRequest = (
     entries["TransitGatewayAttachmentId"] = input.TransitGatewayAttachmentId;
   }
   if (input.SubnetIds !== undefined) {
-    const memberEntries = serializeAws_ec2ValueStringList(input.SubnetIds, context);
+    const memberEntries = serializeAws_ec2TransitGatewaySubnetIdList(input.SubnetIds, context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `SubnetIds.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
@@ -37969,6 +39570,16 @@ const serializeAws_ec2ImportVolumeRequest = (input: ImportVolumeRequest, context
   return entries;
 };
 
+const serializeAws_ec2InsideCidrBlocksStringList = (input: string[], context: __SerdeContext): any => {
+  const entries: any = {};
+  let counter = 1;
+  for (let entry of input) {
+    entries[`Item.${counter}`] = entry;
+    counter++;
+  }
+  return entries;
+};
+
 const serializeAws_ec2InstanceBlockDeviceMappingSpecification = (
   input: InstanceBlockDeviceMappingSpecification,
   context: __SerdeContext
@@ -39132,6 +40743,23 @@ const serializeAws_ec2LocalGatewayVirtualInterfaceIdSet = (input: string[], cont
   return entries;
 };
 
+const serializeAws_ec2ModifyAddressAttributeRequest = (
+  input: ModifyAddressAttributeRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.AllocationId !== undefined) {
+    entries["AllocationId"] = input.AllocationId;
+  }
+  if (input.DomainName !== undefined) {
+    entries["DomainName"] = input.DomainName;
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  return entries;
+};
+
 const serializeAws_ec2ModifyAvailabilityZoneGroupRequest = (
   input: ModifyAvailabilityZoneGroupRequest,
   context: __SerdeContext
@@ -40040,6 +41668,23 @@ const serializeAws_ec2ModifyTransitGatewayOptions = (
   context: __SerdeContext
 ): any => {
   const entries: any = {};
+  if (input.AddTransitGatewayCidrBlocks !== undefined) {
+    const memberEntries = serializeAws_ec2TransitGatewayCidrBlockStringList(input.AddTransitGatewayCidrBlocks, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `AddTransitGatewayCidrBlocks.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.RemoveTransitGatewayCidrBlocks !== undefined) {
+    const memberEntries = serializeAws_ec2TransitGatewayCidrBlockStringList(
+      input.RemoveTransitGatewayCidrBlocks,
+      context
+    );
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `RemoveTransitGatewayCidrBlocks.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
   if (input.VpnEcmpSupport !== undefined) {
     entries["VpnEcmpSupport"] = input.VpnEcmpSupport;
   }
@@ -40203,6 +41848,9 @@ const serializeAws_ec2ModifyVolumeRequest = (input: ModifyVolumeRequest, context
   }
   if (input.Throughput !== undefined) {
     entries["Throughput"] = input.Throughput;
+  }
+  if (input.MultiAttachEnabled !== undefined) {
+    entries["MultiAttachEnabled"] = input.MultiAttachEnabled;
   }
   return entries;
 };
@@ -40671,6 +42319,26 @@ const serializeAws_ec2NatGatewayIdStringList = (input: string[], context: __Serd
 };
 
 const serializeAws_ec2NetworkAclIdStringList = (input: string[], context: __SerdeContext): any => {
+  const entries: any = {};
+  let counter = 1;
+  for (let entry of input) {
+    entries[`Item.${counter}`] = entry;
+    counter++;
+  }
+  return entries;
+};
+
+const serializeAws_ec2NetworkInsightsAnalysisIdList = (input: string[], context: __SerdeContext): any => {
+  const entries: any = {};
+  let counter = 1;
+  for (let entry of input) {
+    entries[`Item.${counter}`] = entry;
+    counter++;
+  }
+  return entries;
+};
+
+const serializeAws_ec2NetworkInsightsPathIdList = (input: string[], context: __SerdeContext): any => {
   const entries: any = {};
   let counter = 1;
   for (let entry of input) {
@@ -41418,6 +43086,9 @@ const serializeAws_ec2RegisterImageRequest = (input: RegisterImageRequest, conte
   if (input.VirtualizationType !== undefined) {
     entries["VirtualizationType"] = input.VirtualizationType;
   }
+  if (input.BootMode !== undefined) {
+    entries["BootMode"] = input.BootMode;
+  }
   return entries;
 };
 
@@ -41496,6 +43167,30 @@ const serializeAws_ec2RegisterTransitGatewayMulticastGroupSourcesRequest = (
     const memberEntries = serializeAws_ec2TransitGatewayNetworkInterfaceIdList(input.NetworkInterfaceIds, context);
     Object.entries(memberEntries).forEach(([key, value]) => {
       const loc = `NetworkInterfaceIds.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  return entries;
+};
+
+const serializeAws_ec2RejectTransitGatewayMulticastDomainAssociationsRequest = (
+  input: RejectTransitGatewayMulticastDomainAssociationsRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.TransitGatewayMulticastDomainId !== undefined) {
+    entries["TransitGatewayMulticastDomainId"] = input.TransitGatewayMulticastDomainId;
+  }
+  if (input.TransitGatewayAttachmentId !== undefined) {
+    entries["TransitGatewayAttachmentId"] = input.TransitGatewayAttachmentId;
+  }
+  if (input.SubnetIds !== undefined) {
+    const memberEntries = serializeAws_ec2ValueStringList(input.SubnetIds, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `SubnetIds.${key.substring(key.indexOf(".") + 1)}`;
       entries[loc] = value;
     });
   }
@@ -42313,6 +44008,23 @@ const serializeAws_ec2ReservedInstancesOfferingIdStringList = (input: string[], 
   for (let entry of input) {
     entries[`Member.${counter}`] = entry;
     counter++;
+  }
+  return entries;
+};
+
+const serializeAws_ec2ResetAddressAttributeRequest = (
+  input: ResetAddressAttributeRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.AllocationId !== undefined) {
+    entries["AllocationId"] = input.AllocationId;
+  }
+  if (input.Attribute !== undefined) {
+    entries["Attribute"] = input.Attribute;
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
   }
   return entries;
 };
@@ -43709,6 +45421,40 @@ const serializeAws_ec2StartInstancesRequest = (input: StartInstancesRequest, con
   return entries;
 };
 
+const serializeAws_ec2StartNetworkInsightsAnalysisRequest = (
+  input: StartNetworkInsightsAnalysisRequest,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.NetworkInsightsPathId !== undefined) {
+    entries["NetworkInsightsPathId"] = input.NetworkInsightsPathId;
+  }
+  if (input.FilterInArns !== undefined) {
+    const memberEntries = serializeAws_ec2ArnList(input.FilterInArns, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `FilterInArn.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.DryRun !== undefined) {
+    entries["DryRun"] = input.DryRun;
+  }
+  if (input.TagSpecifications !== undefined) {
+    const memberEntries = serializeAws_ec2TagSpecificationList(input.TagSpecifications, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `TagSpecification.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
+  }
+  if (input.ClientToken === undefined) {
+    input.ClientToken = generateIdempotencyToken();
+  }
+  if (input.ClientToken !== undefined) {
+    entries["ClientToken"] = input.ClientToken;
+  }
+  return entries;
+};
+
 const serializeAws_ec2StartVpcEndpointServicePrivateDnsVerificationRequest = (
   input: StartVpcEndpointServicePrivateDnsVerificationRequest,
   context: __SerdeContext
@@ -44040,6 +45786,37 @@ const serializeAws_ec2TransitGatewayAttachmentIdStringList = (input: string[], c
   return entries;
 };
 
+const serializeAws_ec2TransitGatewayCidrBlockStringList = (input: string[], context: __SerdeContext): any => {
+  const entries: any = {};
+  let counter = 1;
+  for (let entry of input) {
+    entries[`Item.${counter}`] = entry;
+    counter++;
+  }
+  return entries;
+};
+
+const serializeAws_ec2TransitGatewayConnectPeerIdStringList = (input: string[], context: __SerdeContext): any => {
+  const entries: any = {};
+  let counter = 1;
+  for (let entry of input) {
+    entries[`Item.${counter}`] = entry;
+    counter++;
+  }
+  return entries;
+};
+
+const serializeAws_ec2TransitGatewayConnectRequestBgpOptions = (
+  input: TransitGatewayConnectRequestBgpOptions,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.PeerAsn !== undefined) {
+    entries["PeerAsn"] = input.PeerAsn;
+  }
+  return entries;
+};
+
 const serializeAws_ec2TransitGatewayIdStringList = (input: string[], context: __SerdeContext): any => {
   const entries: any = {};
   let counter = 1;
@@ -44095,6 +45872,13 @@ const serializeAws_ec2TransitGatewayRequestOptions = (
   }
   if (input.MulticastSupport !== undefined) {
     entries["MulticastSupport"] = input.MulticastSupport;
+  }
+  if (input.TransitGatewayCidrBlocks !== undefined) {
+    const memberEntries = serializeAws_ec2TransitGatewayCidrBlockStringList(input.TransitGatewayCidrBlocks, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `TransitGatewayCidrBlocks.${key.substring(key.indexOf(".") + 1)}`;
+      entries[loc] = value;
+    });
   }
   return entries;
 };
@@ -44632,6 +46416,22 @@ const deserializeAws_ec2AcceptReservedInstancesExchangeQuoteResult = (
   return contents;
 };
 
+const deserializeAws_ec2AcceptTransitGatewayMulticastDomainAssociationsResult = (
+  output: any,
+  context: __SerdeContext
+): AcceptTransitGatewayMulticastDomainAssociationsResult => {
+  let contents: any = {
+    Associations: undefined,
+  };
+  if (output["associations"] !== undefined) {
+    contents.Associations = deserializeAws_ec2TransitGatewayMulticastDomainAssociations(
+      output["associations"],
+      context
+    );
+  }
+  return contents;
+};
+
 const deserializeAws_ec2AcceptTransitGatewayPeeringAttachmentResult = (
   output: any,
   context: __SerdeContext
@@ -44825,8 +46625,34 @@ const deserializeAws_ec2Address = (output: any, context: __SerdeContext): Addres
   return contents;
 };
 
+const deserializeAws_ec2AddressAttribute = (output: any, context: __SerdeContext): AddressAttribute => {
+  let contents: any = {
+    PublicIp: undefined,
+    AllocationId: undefined,
+    PtrRecord: undefined,
+    PtrRecordUpdate: undefined,
+  };
+  if (output["publicIp"] !== undefined) {
+    contents.PublicIp = output["publicIp"];
+  }
+  if (output["allocationId"] !== undefined) {
+    contents.AllocationId = output["allocationId"];
+  }
+  if (output["ptrRecord"] !== undefined) {
+    contents.PtrRecord = output["ptrRecord"];
+  }
+  if (output["ptrRecordUpdate"] !== undefined) {
+    contents.PtrRecordUpdate = deserializeAws_ec2PtrUpdateStatus(output["ptrRecordUpdate"], context);
+  }
+  return contents;
+};
+
 const deserializeAws_ec2AddressList = (output: any, context: __SerdeContext): Address[] => {
   return (output || []).map((entry: any) => deserializeAws_ec2Address(entry, context));
+};
+
+const deserializeAws_ec2AddressSet = (output: any, context: __SerdeContext): AddressAttribute[] => {
+  return (output || []).map((entry: any) => deserializeAws_ec2AddressAttribute(entry, context));
 };
 
 const deserializeAws_ec2AdvertiseByoipCidrResult = (output: any, context: __SerdeContext): AdvertiseByoipCidrResult => {
@@ -44911,6 +46737,243 @@ const deserializeAws_ec2AllowedPrincipalSet = (output: any, context: __SerdeCont
   return (output || []).map((entry: any) => deserializeAws_ec2AllowedPrincipal(entry, context));
 };
 
+const deserializeAws_ec2AlternatePathHint = (output: any, context: __SerdeContext): AlternatePathHint => {
+  let contents: any = {
+    ComponentId: undefined,
+    ComponentArn: undefined,
+  };
+  if (output["componentId"] !== undefined) {
+    contents.ComponentId = output["componentId"];
+  }
+  if (output["componentArn"] !== undefined) {
+    contents.ComponentArn = output["componentArn"];
+  }
+  return contents;
+};
+
+const deserializeAws_ec2AlternatePathHintList = (output: any, context: __SerdeContext): AlternatePathHint[] => {
+  return (output || []).map((entry: any) => deserializeAws_ec2AlternatePathHint(entry, context));
+};
+
+const deserializeAws_ec2AnalysisAclRule = (output: any, context: __SerdeContext): AnalysisAclRule => {
+  let contents: any = {
+    Cidr: undefined,
+    Egress: undefined,
+    PortRange: undefined,
+    Protocol: undefined,
+    RuleAction: undefined,
+    RuleNumber: undefined,
+  };
+  if (output["cidr"] !== undefined) {
+    contents.Cidr = output["cidr"];
+  }
+  if (output["egress"] !== undefined) {
+    contents.Egress = output["egress"] == "true";
+  }
+  if (output["portRange"] !== undefined) {
+    contents.PortRange = deserializeAws_ec2PortRange(output["portRange"], context);
+  }
+  if (output["protocol"] !== undefined) {
+    contents.Protocol = output["protocol"];
+  }
+  if (output["ruleAction"] !== undefined) {
+    contents.RuleAction = output["ruleAction"];
+  }
+  if (output["ruleNumber"] !== undefined) {
+    contents.RuleNumber = parseInt(output["ruleNumber"]);
+  }
+  return contents;
+};
+
+const deserializeAws_ec2AnalysisComponent = (output: any, context: __SerdeContext): AnalysisComponent => {
+  let contents: any = {
+    Id: undefined,
+    Arn: undefined,
+  };
+  if (output["id"] !== undefined) {
+    contents.Id = output["id"];
+  }
+  if (output["arn"] !== undefined) {
+    contents.Arn = output["arn"];
+  }
+  return contents;
+};
+
+const deserializeAws_ec2AnalysisComponentList = (output: any, context: __SerdeContext): AnalysisComponent[] => {
+  return (output || []).map((entry: any) => deserializeAws_ec2AnalysisComponent(entry, context));
+};
+
+const deserializeAws_ec2AnalysisLoadBalancerListener = (
+  output: any,
+  context: __SerdeContext
+): AnalysisLoadBalancerListener => {
+  let contents: any = {
+    LoadBalancerPort: undefined,
+    InstancePort: undefined,
+  };
+  if (output["loadBalancerPort"] !== undefined) {
+    contents.LoadBalancerPort = parseInt(output["loadBalancerPort"]);
+  }
+  if (output["instancePort"] !== undefined) {
+    contents.InstancePort = parseInt(output["instancePort"]);
+  }
+  return contents;
+};
+
+const deserializeAws_ec2AnalysisLoadBalancerTarget = (
+  output: any,
+  context: __SerdeContext
+): AnalysisLoadBalancerTarget => {
+  let contents: any = {
+    Address: undefined,
+    AvailabilityZone: undefined,
+    Instance: undefined,
+    Port: undefined,
+  };
+  if (output["address"] !== undefined) {
+    contents.Address = output["address"];
+  }
+  if (output["availabilityZone"] !== undefined) {
+    contents.AvailabilityZone = output["availabilityZone"];
+  }
+  if (output["instance"] !== undefined) {
+    contents.Instance = deserializeAws_ec2AnalysisComponent(output["instance"], context);
+  }
+  if (output["port"] !== undefined) {
+    contents.Port = parseInt(output["port"]);
+  }
+  return contents;
+};
+
+const deserializeAws_ec2AnalysisPacketHeader = (output: any, context: __SerdeContext): AnalysisPacketHeader => {
+  let contents: any = {
+    DestinationAddresses: undefined,
+    DestinationPortRanges: undefined,
+    Protocol: undefined,
+    SourceAddresses: undefined,
+    SourcePortRanges: undefined,
+  };
+  if (output.destinationAddressSet === "") {
+    contents.DestinationAddresses = [];
+  }
+  if (output["destinationAddressSet"] !== undefined && output["destinationAddressSet"]["item"] !== undefined) {
+    contents.DestinationAddresses = deserializeAws_ec2IpAddressList(
+      __getArrayIfSingleItem(output["destinationAddressSet"]["item"]),
+      context
+    );
+  }
+  if (output.destinationPortRangeSet === "") {
+    contents.DestinationPortRanges = [];
+  }
+  if (output["destinationPortRangeSet"] !== undefined && output["destinationPortRangeSet"]["item"] !== undefined) {
+    contents.DestinationPortRanges = deserializeAws_ec2PortRangeList(
+      __getArrayIfSingleItem(output["destinationPortRangeSet"]["item"]),
+      context
+    );
+  }
+  if (output["protocol"] !== undefined) {
+    contents.Protocol = output["protocol"];
+  }
+  if (output.sourceAddressSet === "") {
+    contents.SourceAddresses = [];
+  }
+  if (output["sourceAddressSet"] !== undefined && output["sourceAddressSet"]["item"] !== undefined) {
+    contents.SourceAddresses = deserializeAws_ec2IpAddressList(
+      __getArrayIfSingleItem(output["sourceAddressSet"]["item"]),
+      context
+    );
+  }
+  if (output.sourcePortRangeSet === "") {
+    contents.SourcePortRanges = [];
+  }
+  if (output["sourcePortRangeSet"] !== undefined && output["sourcePortRangeSet"]["item"] !== undefined) {
+    contents.SourcePortRanges = deserializeAws_ec2PortRangeList(
+      __getArrayIfSingleItem(output["sourcePortRangeSet"]["item"]),
+      context
+    );
+  }
+  return contents;
+};
+
+const deserializeAws_ec2AnalysisRouteTableRoute = (output: any, context: __SerdeContext): AnalysisRouteTableRoute => {
+  let contents: any = {
+    DestinationCidr: undefined,
+    DestinationPrefixListId: undefined,
+    EgressOnlyInternetGatewayId: undefined,
+    GatewayId: undefined,
+    InstanceId: undefined,
+    NatGatewayId: undefined,
+    NetworkInterfaceId: undefined,
+    Origin: undefined,
+    TransitGatewayId: undefined,
+    VpcPeeringConnectionId: undefined,
+  };
+  if (output["destinationCidr"] !== undefined) {
+    contents.DestinationCidr = output["destinationCidr"];
+  }
+  if (output["destinationPrefixListId"] !== undefined) {
+    contents.DestinationPrefixListId = output["destinationPrefixListId"];
+  }
+  if (output["egressOnlyInternetGatewayId"] !== undefined) {
+    contents.EgressOnlyInternetGatewayId = output["egressOnlyInternetGatewayId"];
+  }
+  if (output["gatewayId"] !== undefined) {
+    contents.GatewayId = output["gatewayId"];
+  }
+  if (output["instanceId"] !== undefined) {
+    contents.InstanceId = output["instanceId"];
+  }
+  if (output["natGatewayId"] !== undefined) {
+    contents.NatGatewayId = output["natGatewayId"];
+  }
+  if (output["networkInterfaceId"] !== undefined) {
+    contents.NetworkInterfaceId = output["networkInterfaceId"];
+  }
+  if (output["origin"] !== undefined) {
+    contents.Origin = output["origin"];
+  }
+  if (output["transitGatewayId"] !== undefined) {
+    contents.TransitGatewayId = output["transitGatewayId"];
+  }
+  if (output["vpcPeeringConnectionId"] !== undefined) {
+    contents.VpcPeeringConnectionId = output["vpcPeeringConnectionId"];
+  }
+  return contents;
+};
+
+const deserializeAws_ec2AnalysisSecurityGroupRule = (
+  output: any,
+  context: __SerdeContext
+): AnalysisSecurityGroupRule => {
+  let contents: any = {
+    Cidr: undefined,
+    Direction: undefined,
+    SecurityGroupId: undefined,
+    PortRange: undefined,
+    PrefixListId: undefined,
+    Protocol: undefined,
+  };
+  if (output["cidr"] !== undefined) {
+    contents.Cidr = output["cidr"];
+  }
+  if (output["direction"] !== undefined) {
+    contents.Direction = output["direction"];
+  }
+  if (output["securityGroupId"] !== undefined) {
+    contents.SecurityGroupId = output["securityGroupId"];
+  }
+  if (output["portRange"] !== undefined) {
+    contents.PortRange = deserializeAws_ec2PortRange(output["portRange"], context);
+  }
+  if (output["prefixListId"] !== undefined) {
+    contents.PrefixListId = output["prefixListId"];
+  }
+  if (output["protocol"] !== undefined) {
+    contents.Protocol = output["protocol"];
+  }
+  return contents;
+};
+
 const deserializeAws_ec2ApplySecurityGroupsToClientVpnTargetNetworkResult = (
   output: any,
   context: __SerdeContext
@@ -44934,6 +46997,10 @@ const deserializeAws_ec2ArchitectureTypeList = (
   output: any,
   context: __SerdeContext
 ): (ArchitectureType | string)[] => {
+  return (output || []).map((entry: any) => entry);
+};
+
+const deserializeAws_ec2ArnList = (output: any, context: __SerdeContext): string[] => {
   return (output || []).map((entry: any) => entry);
 };
 
@@ -45450,6 +47517,10 @@ const deserializeAws_ec2BlockDeviceMapping = (output: any, context: __SerdeConte
 
 const deserializeAws_ec2BlockDeviceMappingList = (output: any, context: __SerdeContext): BlockDeviceMapping[] => {
   return (output || []).map((entry: any) => deserializeAws_ec2BlockDeviceMapping(entry, context));
+};
+
+const deserializeAws_ec2BootModeTypeList = (output: any, context: __SerdeContext): (BootModeType | string)[] => {
+  return (output || []).map((entry: any) => entry);
 };
 
 const deserializeAws_ec2BundleInstanceResult = (output: any, context: __SerdeContext): BundleInstanceResult => {
@@ -47091,6 +49162,19 @@ const deserializeAws_ec2CreateNetworkAclResult = (output: any, context: __SerdeC
   return contents;
 };
 
+const deserializeAws_ec2CreateNetworkInsightsPathResult = (
+  output: any,
+  context: __SerdeContext
+): CreateNetworkInsightsPathResult => {
+  let contents: any = {
+    NetworkInsightsPath: undefined,
+  };
+  if (output["networkInsightsPath"] !== undefined) {
+    contents.NetworkInsightsPath = deserializeAws_ec2NetworkInsightsPath(output["networkInsightsPath"], context);
+  }
+  return contents;
+};
+
 const deserializeAws_ec2CreateNetworkInterfacePermissionResult = (
   output: any,
   context: __SerdeContext
@@ -47298,6 +49382,35 @@ const deserializeAws_ec2CreateTrafficMirrorTargetResult = (
   }
   if (output["clientToken"] !== undefined) {
     contents.ClientToken = output["clientToken"];
+  }
+  return contents;
+};
+
+const deserializeAws_ec2CreateTransitGatewayConnectPeerResult = (
+  output: any,
+  context: __SerdeContext
+): CreateTransitGatewayConnectPeerResult => {
+  let contents: any = {
+    TransitGatewayConnectPeer: undefined,
+  };
+  if (output["transitGatewayConnectPeer"] !== undefined) {
+    contents.TransitGatewayConnectPeer = deserializeAws_ec2TransitGatewayConnectPeer(
+      output["transitGatewayConnectPeer"],
+      context
+    );
+  }
+  return contents;
+};
+
+const deserializeAws_ec2CreateTransitGatewayConnectResult = (
+  output: any,
+  context: __SerdeContext
+): CreateTransitGatewayConnectResult => {
+  let contents: any = {
+    TransitGatewayConnect: undefined,
+  };
+  if (output["transitGatewayConnect"] !== undefined) {
+    contents.TransitGatewayConnect = deserializeAws_ec2TransitGatewayConnect(output["transitGatewayConnect"], context);
   }
   return contents;
 };
@@ -47909,6 +50022,32 @@ const deserializeAws_ec2DeleteNatGatewayResult = (output: any, context: __SerdeC
   return contents;
 };
 
+const deserializeAws_ec2DeleteNetworkInsightsAnalysisResult = (
+  output: any,
+  context: __SerdeContext
+): DeleteNetworkInsightsAnalysisResult => {
+  let contents: any = {
+    NetworkInsightsAnalysisId: undefined,
+  };
+  if (output["networkInsightsAnalysisId"] !== undefined) {
+    contents.NetworkInsightsAnalysisId = output["networkInsightsAnalysisId"];
+  }
+  return contents;
+};
+
+const deserializeAws_ec2DeleteNetworkInsightsPathResult = (
+  output: any,
+  context: __SerdeContext
+): DeleteNetworkInsightsPathResult => {
+  let contents: any = {
+    NetworkInsightsPathId: undefined,
+  };
+  if (output["networkInsightsPathId"] !== undefined) {
+    contents.NetworkInsightsPathId = output["networkInsightsPathId"];
+  }
+  return contents;
+};
+
 const deserializeAws_ec2DeleteNetworkInterfacePermissionResult = (
   output: any,
   context: __SerdeContext
@@ -48022,6 +50161,35 @@ const deserializeAws_ec2DeleteTrafficMirrorTargetResult = (
   };
   if (output["trafficMirrorTargetId"] !== undefined) {
     contents.TrafficMirrorTargetId = output["trafficMirrorTargetId"];
+  }
+  return contents;
+};
+
+const deserializeAws_ec2DeleteTransitGatewayConnectPeerResult = (
+  output: any,
+  context: __SerdeContext
+): DeleteTransitGatewayConnectPeerResult => {
+  let contents: any = {
+    TransitGatewayConnectPeer: undefined,
+  };
+  if (output["transitGatewayConnectPeer"] !== undefined) {
+    contents.TransitGatewayConnectPeer = deserializeAws_ec2TransitGatewayConnectPeer(
+      output["transitGatewayConnectPeer"],
+      context
+    );
+  }
+  return contents;
+};
+
+const deserializeAws_ec2DeleteTransitGatewayConnectResult = (
+  output: any,
+  context: __SerdeContext
+): DeleteTransitGatewayConnectResult => {
+  let contents: any = {
+    TransitGatewayConnect: undefined,
+  };
+  if (output["transitGatewayConnect"] !== undefined) {
+    contents.TransitGatewayConnect = deserializeAws_ec2TransitGatewayConnect(output["transitGatewayConnect"], context);
   }
   return contents;
 };
@@ -48275,6 +50443,26 @@ const deserializeAws_ec2DescribeAccountAttributesResult = (
       __getArrayIfSingleItem(output["accountAttributeSet"]["item"]),
       context
     );
+  }
+  return contents;
+};
+
+const deserializeAws_ec2DescribeAddressesAttributeResult = (
+  output: any,
+  context: __SerdeContext
+): DescribeAddressesAttributeResult => {
+  let contents: any = {
+    Addresses: undefined,
+    NextToken: undefined,
+  };
+  if (output.addressSet === "") {
+    contents.Addresses = [];
+  }
+  if (output["addressSet"] !== undefined && output["addressSet"]["item"] !== undefined) {
+    contents.Addresses = deserializeAws_ec2AddressSet(__getArrayIfSingleItem(output["addressSet"]["item"]), context);
+  }
+  if (output["nextToken"] !== undefined) {
+    contents.NextToken = output["nextToken"];
   }
   return contents;
 };
@@ -49660,6 +51848,55 @@ const deserializeAws_ec2DescribeNetworkAclsResult = (
   return contents;
 };
 
+const deserializeAws_ec2DescribeNetworkInsightsAnalysesResult = (
+  output: any,
+  context: __SerdeContext
+): DescribeNetworkInsightsAnalysesResult => {
+  let contents: any = {
+    NetworkInsightsAnalyses: undefined,
+    NextToken: undefined,
+  };
+  if (output.networkInsightsAnalysisSet === "") {
+    contents.NetworkInsightsAnalyses = [];
+  }
+  if (
+    output["networkInsightsAnalysisSet"] !== undefined &&
+    output["networkInsightsAnalysisSet"]["item"] !== undefined
+  ) {
+    contents.NetworkInsightsAnalyses = deserializeAws_ec2NetworkInsightsAnalysisList(
+      __getArrayIfSingleItem(output["networkInsightsAnalysisSet"]["item"]),
+      context
+    );
+  }
+  if (output["nextToken"] !== undefined) {
+    contents.NextToken = output["nextToken"];
+  }
+  return contents;
+};
+
+const deserializeAws_ec2DescribeNetworkInsightsPathsResult = (
+  output: any,
+  context: __SerdeContext
+): DescribeNetworkInsightsPathsResult => {
+  let contents: any = {
+    NetworkInsightsPaths: undefined,
+    NextToken: undefined,
+  };
+  if (output.networkInsightsPathSet === "") {
+    contents.NetworkInsightsPaths = [];
+  }
+  if (output["networkInsightsPathSet"] !== undefined && output["networkInsightsPathSet"]["item"] !== undefined) {
+    contents.NetworkInsightsPaths = deserializeAws_ec2NetworkInsightsPathList(
+      __getArrayIfSingleItem(output["networkInsightsPathSet"]["item"]),
+      context
+    );
+  }
+  if (output["nextToken"] !== undefined) {
+    contents.NextToken = output["nextToken"];
+  }
+  return contents;
+};
+
 const deserializeAws_ec2DescribeNetworkInterfaceAttributeResult = (
   output: any,
   context: __SerdeContext
@@ -50389,6 +52626,55 @@ const deserializeAws_ec2DescribeTransitGatewayAttachmentsResult = (
   if (output["transitGatewayAttachments"] !== undefined && output["transitGatewayAttachments"]["item"] !== undefined) {
     contents.TransitGatewayAttachments = deserializeAws_ec2TransitGatewayAttachmentList(
       __getArrayIfSingleItem(output["transitGatewayAttachments"]["item"]),
+      context
+    );
+  }
+  if (output["nextToken"] !== undefined) {
+    contents.NextToken = output["nextToken"];
+  }
+  return contents;
+};
+
+const deserializeAws_ec2DescribeTransitGatewayConnectPeersResult = (
+  output: any,
+  context: __SerdeContext
+): DescribeTransitGatewayConnectPeersResult => {
+  let contents: any = {
+    TransitGatewayConnectPeers: undefined,
+    NextToken: undefined,
+  };
+  if (output.transitGatewayConnectPeerSet === "") {
+    contents.TransitGatewayConnectPeers = [];
+  }
+  if (
+    output["transitGatewayConnectPeerSet"] !== undefined &&
+    output["transitGatewayConnectPeerSet"]["item"] !== undefined
+  ) {
+    contents.TransitGatewayConnectPeers = deserializeAws_ec2TransitGatewayConnectPeerList(
+      __getArrayIfSingleItem(output["transitGatewayConnectPeerSet"]["item"]),
+      context
+    );
+  }
+  if (output["nextToken"] !== undefined) {
+    contents.NextToken = output["nextToken"];
+  }
+  return contents;
+};
+
+const deserializeAws_ec2DescribeTransitGatewayConnectsResult = (
+  output: any,
+  context: __SerdeContext
+): DescribeTransitGatewayConnectsResult => {
+  let contents: any = {
+    TransitGatewayConnects: undefined,
+    NextToken: undefined,
+  };
+  if (output.transitGatewayConnectSet === "") {
+    contents.TransitGatewayConnects = [];
+  }
+  if (output["transitGatewayConnectSet"] !== undefined && output["transitGatewayConnectSet"]["item"] !== undefined) {
+    contents.TransitGatewayConnects = deserializeAws_ec2TransitGatewayConnectList(
+      __getArrayIfSingleItem(output["transitGatewayConnectSet"]["item"]),
       context
     );
   }
@@ -51929,6 +54215,238 @@ const deserializeAws_ec2EventInformation = (output: any, context: __SerdeContext
     contents.InstanceId = output["instanceId"];
   }
   return contents;
+};
+
+const deserializeAws_ec2Explanation = (output: any, context: __SerdeContext): Explanation => {
+  let contents: any = {
+    Acl: undefined,
+    AclRule: undefined,
+    Address: undefined,
+    Addresses: undefined,
+    AttachedTo: undefined,
+    AvailabilityZones: undefined,
+    Cidrs: undefined,
+    Component: undefined,
+    CustomerGateway: undefined,
+    Destination: undefined,
+    DestinationVpc: undefined,
+    Direction: undefined,
+    ExplanationCode: undefined,
+    IngressRouteTable: undefined,
+    InternetGateway: undefined,
+    LoadBalancerArn: undefined,
+    ClassicLoadBalancerListener: undefined,
+    LoadBalancerListenerPort: undefined,
+    LoadBalancerTarget: undefined,
+    LoadBalancerTargetGroup: undefined,
+    LoadBalancerTargetGroups: undefined,
+    LoadBalancerTargetPort: undefined,
+    ElasticLoadBalancerListener: undefined,
+    MissingComponent: undefined,
+    NatGateway: undefined,
+    NetworkInterface: undefined,
+    PacketField: undefined,
+    VpcPeeringConnection: undefined,
+    Port: undefined,
+    PortRanges: undefined,
+    PrefixList: undefined,
+    Protocols: undefined,
+    RouteTableRoute: undefined,
+    RouteTable: undefined,
+    SecurityGroup: undefined,
+    SecurityGroupRule: undefined,
+    SecurityGroups: undefined,
+    SourceVpc: undefined,
+    State: undefined,
+    Subnet: undefined,
+    SubnetRouteTable: undefined,
+    Vpc: undefined,
+    VpcEndpoint: undefined,
+    VpnConnection: undefined,
+    VpnGateway: undefined,
+  };
+  if (output["acl"] !== undefined) {
+    contents.Acl = deserializeAws_ec2AnalysisComponent(output["acl"], context);
+  }
+  if (output["aclRule"] !== undefined) {
+    contents.AclRule = deserializeAws_ec2AnalysisAclRule(output["aclRule"], context);
+  }
+  if (output["address"] !== undefined) {
+    contents.Address = output["address"];
+  }
+  if (output.addressSet === "") {
+    contents.Addresses = [];
+  }
+  if (output["addressSet"] !== undefined && output["addressSet"]["item"] !== undefined) {
+    contents.Addresses = deserializeAws_ec2IpAddressList(__getArrayIfSingleItem(output["addressSet"]["item"]), context);
+  }
+  if (output["attachedTo"] !== undefined) {
+    contents.AttachedTo = deserializeAws_ec2AnalysisComponent(output["attachedTo"], context);
+  }
+  if (output.availabilityZoneSet === "") {
+    contents.AvailabilityZones = [];
+  }
+  if (output["availabilityZoneSet"] !== undefined && output["availabilityZoneSet"]["item"] !== undefined) {
+    contents.AvailabilityZones = deserializeAws_ec2ValueStringList(
+      __getArrayIfSingleItem(output["availabilityZoneSet"]["item"]),
+      context
+    );
+  }
+  if (output.cidrSet === "") {
+    contents.Cidrs = [];
+  }
+  if (output["cidrSet"] !== undefined && output["cidrSet"]["item"] !== undefined) {
+    contents.Cidrs = deserializeAws_ec2ValueStringList(__getArrayIfSingleItem(output["cidrSet"]["item"]), context);
+  }
+  if (output["component"] !== undefined) {
+    contents.Component = deserializeAws_ec2AnalysisComponent(output["component"], context);
+  }
+  if (output["customerGateway"] !== undefined) {
+    contents.CustomerGateway = deserializeAws_ec2AnalysisComponent(output["customerGateway"], context);
+  }
+  if (output["destination"] !== undefined) {
+    contents.Destination = deserializeAws_ec2AnalysisComponent(output["destination"], context);
+  }
+  if (output["destinationVpc"] !== undefined) {
+    contents.DestinationVpc = deserializeAws_ec2AnalysisComponent(output["destinationVpc"], context);
+  }
+  if (output["direction"] !== undefined) {
+    contents.Direction = output["direction"];
+  }
+  if (output["explanationCode"] !== undefined) {
+    contents.ExplanationCode = output["explanationCode"];
+  }
+  if (output["ingressRouteTable"] !== undefined) {
+    contents.IngressRouteTable = deserializeAws_ec2AnalysisComponent(output["ingressRouteTable"], context);
+  }
+  if (output["internetGateway"] !== undefined) {
+    contents.InternetGateway = deserializeAws_ec2AnalysisComponent(output["internetGateway"], context);
+  }
+  if (output["loadBalancerArn"] !== undefined) {
+    contents.LoadBalancerArn = output["loadBalancerArn"];
+  }
+  if (output["classicLoadBalancerListener"] !== undefined) {
+    contents.ClassicLoadBalancerListener = deserializeAws_ec2AnalysisLoadBalancerListener(
+      output["classicLoadBalancerListener"],
+      context
+    );
+  }
+  if (output["loadBalancerListenerPort"] !== undefined) {
+    contents.LoadBalancerListenerPort = parseInt(output["loadBalancerListenerPort"]);
+  }
+  if (output["loadBalancerTarget"] !== undefined) {
+    contents.LoadBalancerTarget = deserializeAws_ec2AnalysisLoadBalancerTarget(output["loadBalancerTarget"], context);
+  }
+  if (output["loadBalancerTargetGroup"] !== undefined) {
+    contents.LoadBalancerTargetGroup = deserializeAws_ec2AnalysisComponent(output["loadBalancerTargetGroup"], context);
+  }
+  if (output.loadBalancerTargetGroupSet === "") {
+    contents.LoadBalancerTargetGroups = [];
+  }
+  if (
+    output["loadBalancerTargetGroupSet"] !== undefined &&
+    output["loadBalancerTargetGroupSet"]["item"] !== undefined
+  ) {
+    contents.LoadBalancerTargetGroups = deserializeAws_ec2AnalysisComponentList(
+      __getArrayIfSingleItem(output["loadBalancerTargetGroupSet"]["item"]),
+      context
+    );
+  }
+  if (output["loadBalancerTargetPort"] !== undefined) {
+    contents.LoadBalancerTargetPort = parseInt(output["loadBalancerTargetPort"]);
+  }
+  if (output["elasticLoadBalancerListener"] !== undefined) {
+    contents.ElasticLoadBalancerListener = deserializeAws_ec2AnalysisComponent(
+      output["elasticLoadBalancerListener"],
+      context
+    );
+  }
+  if (output["missingComponent"] !== undefined) {
+    contents.MissingComponent = output["missingComponent"];
+  }
+  if (output["natGateway"] !== undefined) {
+    contents.NatGateway = deserializeAws_ec2AnalysisComponent(output["natGateway"], context);
+  }
+  if (output["networkInterface"] !== undefined) {
+    contents.NetworkInterface = deserializeAws_ec2AnalysisComponent(output["networkInterface"], context);
+  }
+  if (output["packetField"] !== undefined) {
+    contents.PacketField = output["packetField"];
+  }
+  if (output["vpcPeeringConnection"] !== undefined) {
+    contents.VpcPeeringConnection = deserializeAws_ec2AnalysisComponent(output["vpcPeeringConnection"], context);
+  }
+  if (output["port"] !== undefined) {
+    contents.Port = parseInt(output["port"]);
+  }
+  if (output.portRangeSet === "") {
+    contents.PortRanges = [];
+  }
+  if (output["portRangeSet"] !== undefined && output["portRangeSet"]["item"] !== undefined) {
+    contents.PortRanges = deserializeAws_ec2PortRangeList(
+      __getArrayIfSingleItem(output["portRangeSet"]["item"]),
+      context
+    );
+  }
+  if (output["prefixList"] !== undefined) {
+    contents.PrefixList = deserializeAws_ec2AnalysisComponent(output["prefixList"], context);
+  }
+  if (output.protocolSet === "") {
+    contents.Protocols = [];
+  }
+  if (output["protocolSet"] !== undefined && output["protocolSet"]["item"] !== undefined) {
+    contents.Protocols = deserializeAws_ec2StringList(__getArrayIfSingleItem(output["protocolSet"]["item"]), context);
+  }
+  if (output["routeTableRoute"] !== undefined) {
+    contents.RouteTableRoute = deserializeAws_ec2AnalysisRouteTableRoute(output["routeTableRoute"], context);
+  }
+  if (output["routeTable"] !== undefined) {
+    contents.RouteTable = deserializeAws_ec2AnalysisComponent(output["routeTable"], context);
+  }
+  if (output["securityGroup"] !== undefined) {
+    contents.SecurityGroup = deserializeAws_ec2AnalysisComponent(output["securityGroup"], context);
+  }
+  if (output["securityGroupRule"] !== undefined) {
+    contents.SecurityGroupRule = deserializeAws_ec2AnalysisSecurityGroupRule(output["securityGroupRule"], context);
+  }
+  if (output.securityGroupSet === "") {
+    contents.SecurityGroups = [];
+  }
+  if (output["securityGroupSet"] !== undefined && output["securityGroupSet"]["item"] !== undefined) {
+    contents.SecurityGroups = deserializeAws_ec2AnalysisComponentList(
+      __getArrayIfSingleItem(output["securityGroupSet"]["item"]),
+      context
+    );
+  }
+  if (output["sourceVpc"] !== undefined) {
+    contents.SourceVpc = deserializeAws_ec2AnalysisComponent(output["sourceVpc"], context);
+  }
+  if (output["state"] !== undefined) {
+    contents.State = output["state"];
+  }
+  if (output["subnet"] !== undefined) {
+    contents.Subnet = deserializeAws_ec2AnalysisComponent(output["subnet"], context);
+  }
+  if (output["subnetRouteTable"] !== undefined) {
+    contents.SubnetRouteTable = deserializeAws_ec2AnalysisComponent(output["subnetRouteTable"], context);
+  }
+  if (output["vpc"] !== undefined) {
+    contents.Vpc = deserializeAws_ec2AnalysisComponent(output["vpc"], context);
+  }
+  if (output["vpcEndpoint"] !== undefined) {
+    contents.VpcEndpoint = deserializeAws_ec2AnalysisComponent(output["vpcEndpoint"], context);
+  }
+  if (output["vpnConnection"] !== undefined) {
+    contents.VpnConnection = deserializeAws_ec2AnalysisComponent(output["vpnConnection"], context);
+  }
+  if (output["vpnGateway"] !== undefined) {
+    contents.VpnGateway = deserializeAws_ec2AnalysisComponent(output["vpnGateway"], context);
+  }
+  return contents;
+};
+
+const deserializeAws_ec2ExplanationList = (output: any, context: __SerdeContext): Explanation[] => {
+  return (output || []).map((entry: any) => deserializeAws_ec2Explanation(entry, context));
 };
 
 const deserializeAws_ec2ExportClientVpnClientCertificateRevocationListResult = (
@@ -53710,6 +56228,7 @@ const deserializeAws_ec2Image = (output: any, context: __SerdeContext): Image =>
     StateReason: undefined,
     Tags: undefined,
     VirtualizationType: undefined,
+    BootMode: undefined,
   };
   if (output["architecture"] !== undefined) {
     contents.Architecture = output["architecture"];
@@ -53804,6 +56323,9 @@ const deserializeAws_ec2Image = (output: any, context: __SerdeContext): Image =>
   if (output["virtualizationType"] !== undefined) {
     contents.VirtualizationType = output["virtualizationType"];
   }
+  if (output["bootMode"] !== undefined) {
+    contents.BootMode = output["bootMode"];
+  }
   return contents;
 };
 
@@ -53817,6 +56339,7 @@ const deserializeAws_ec2ImageAttribute = (output: any, context: __SerdeContext):
     KernelId: undefined,
     RamdiskId: undefined,
     SriovNetSupport: undefined,
+    BootMode: undefined,
   };
   if (output.blockDeviceMapping === "") {
     contents.BlockDeviceMappings = [];
@@ -53859,6 +56382,9 @@ const deserializeAws_ec2ImageAttribute = (output: any, context: __SerdeContext):
   }
   if (output["sriovNetSupport"] !== undefined) {
     contents.SriovNetSupport = deserializeAws_ec2AttributeValue(output["sriovNetSupport"], context);
+  }
+  if (output["bootMode"] !== undefined) {
+    contents.BootMode = deserializeAws_ec2AttributeValue(output["bootMode"], context);
   }
   return contents;
 };
@@ -54302,6 +56828,10 @@ const deserializeAws_ec2InferenceDeviceInfo = (output: any, context: __SerdeCont
 
 const deserializeAws_ec2InferenceDeviceInfoList = (output: any, context: __SerdeContext): InferenceDeviceInfo[] => {
   return (output || []).map((entry: any) => deserializeAws_ec2InferenceDeviceInfo(entry, context));
+};
+
+const deserializeAws_ec2InsideCidrBlocksStringList = (output: any, context: __SerdeContext): string[] => {
+  return (output || []).map((entry: any) => entry);
 };
 
 const deserializeAws_ec2Instance = (output: any, context: __SerdeContext): Instance => {
@@ -55330,6 +57860,7 @@ const deserializeAws_ec2InstanceTypeInfo = (output: any, context: __SerdeContext
     BurstablePerformanceSupported: undefined,
     DedicatedHostsSupported: undefined,
     AutoRecoverySupported: undefined,
+    SupportedBootModes: undefined,
   };
   if (output["instanceType"] !== undefined) {
     contents.InstanceType = output["instanceType"];
@@ -55423,6 +57954,15 @@ const deserializeAws_ec2InstanceTypeInfo = (output: any, context: __SerdeContext
   }
   if (output["autoRecoverySupported"] !== undefined) {
     contents.AutoRecoverySupported = output["autoRecoverySupported"] == "true";
+  }
+  if (output.supportedBootModes === "") {
+    contents.SupportedBootModes = [];
+  }
+  if (output["supportedBootModes"] !== undefined && output["supportedBootModes"]["item"] !== undefined) {
+    contents.SupportedBootModes = deserializeAws_ec2BootModeTypeList(
+      __getArrayIfSingleItem(output["supportedBootModes"]["item"]),
+      context
+    );
   }
   return contents;
 };
@@ -55528,6 +58068,10 @@ const deserializeAws_ec2InternetGatewayAttachmentList = (
 
 const deserializeAws_ec2InternetGatewayList = (output: any, context: __SerdeContext): InternetGateway[] => {
   return (output || []).map((entry: any) => deserializeAws_ec2InternetGateway(entry, context));
+};
+
+const deserializeAws_ec2IpAddressList = (output: any, context: __SerdeContext): string[] => {
+  return (output || []).map((entry: any) => entry);
 };
 
 const deserializeAws_ec2IpPermission = (output: any, context: __SerdeContext): IpPermission => {
@@ -56928,6 +59472,19 @@ const deserializeAws_ec2MemoryInfo = (output: any, context: __SerdeContext): Mem
   return contents;
 };
 
+const deserializeAws_ec2ModifyAddressAttributeResult = (
+  output: any,
+  context: __SerdeContext
+): ModifyAddressAttributeResult => {
+  let contents: any = {
+    Address: undefined,
+  };
+  if (output["address"] !== undefined) {
+    contents.Address = deserializeAws_ec2AddressAttribute(output["address"], context);
+  }
+  return contents;
+};
+
 const deserializeAws_ec2ModifyAvailabilityZoneGroupResult = (
   output: any,
   context: __SerdeContext
@@ -57760,6 +60317,157 @@ const deserializeAws_ec2NetworkInfo = (output: any, context: __SerdeContext): Ne
   return contents;
 };
 
+const deserializeAws_ec2NetworkInsightsAnalysis = (output: any, context: __SerdeContext): NetworkInsightsAnalysis => {
+  let contents: any = {
+    NetworkInsightsAnalysisId: undefined,
+    NetworkInsightsAnalysisArn: undefined,
+    NetworkInsightsPathId: undefined,
+    FilterInArns: undefined,
+    StartDate: undefined,
+    Status: undefined,
+    StatusMessage: undefined,
+    NetworkPathFound: undefined,
+    ForwardPathComponents: undefined,
+    ReturnPathComponents: undefined,
+    Explanations: undefined,
+    AlternatePathHints: undefined,
+    Tags: undefined,
+  };
+  if (output["networkInsightsAnalysisId"] !== undefined) {
+    contents.NetworkInsightsAnalysisId = output["networkInsightsAnalysisId"];
+  }
+  if (output["networkInsightsAnalysisArn"] !== undefined) {
+    contents.NetworkInsightsAnalysisArn = output["networkInsightsAnalysisArn"];
+  }
+  if (output["networkInsightsPathId"] !== undefined) {
+    contents.NetworkInsightsPathId = output["networkInsightsPathId"];
+  }
+  if (output.filterInArnSet === "") {
+    contents.FilterInArns = [];
+  }
+  if (output["filterInArnSet"] !== undefined && output["filterInArnSet"]["item"] !== undefined) {
+    contents.FilterInArns = deserializeAws_ec2ArnList(
+      __getArrayIfSingleItem(output["filterInArnSet"]["item"]),
+      context
+    );
+  }
+  if (output["startDate"] !== undefined) {
+    contents.StartDate = new Date(output["startDate"]);
+  }
+  if (output["status"] !== undefined) {
+    contents.Status = output["status"];
+  }
+  if (output["statusMessage"] !== undefined) {
+    contents.StatusMessage = output["statusMessage"];
+  }
+  if (output["networkPathFound"] !== undefined) {
+    contents.NetworkPathFound = output["networkPathFound"] == "true";
+  }
+  if (output.forwardPathComponentSet === "") {
+    contents.ForwardPathComponents = [];
+  }
+  if (output["forwardPathComponentSet"] !== undefined && output["forwardPathComponentSet"]["item"] !== undefined) {
+    contents.ForwardPathComponents = deserializeAws_ec2PathComponentList(
+      __getArrayIfSingleItem(output["forwardPathComponentSet"]["item"]),
+      context
+    );
+  }
+  if (output.returnPathComponentSet === "") {
+    contents.ReturnPathComponents = [];
+  }
+  if (output["returnPathComponentSet"] !== undefined && output["returnPathComponentSet"]["item"] !== undefined) {
+    contents.ReturnPathComponents = deserializeAws_ec2PathComponentList(
+      __getArrayIfSingleItem(output["returnPathComponentSet"]["item"]),
+      context
+    );
+  }
+  if (output.explanationSet === "") {
+    contents.Explanations = [];
+  }
+  if (output["explanationSet"] !== undefined && output["explanationSet"]["item"] !== undefined) {
+    contents.Explanations = deserializeAws_ec2ExplanationList(
+      __getArrayIfSingleItem(output["explanationSet"]["item"]),
+      context
+    );
+  }
+  if (output.alternatePathHintSet === "") {
+    contents.AlternatePathHints = [];
+  }
+  if (output["alternatePathHintSet"] !== undefined && output["alternatePathHintSet"]["item"] !== undefined) {
+    contents.AlternatePathHints = deserializeAws_ec2AlternatePathHintList(
+      __getArrayIfSingleItem(output["alternatePathHintSet"]["item"]),
+      context
+    );
+  }
+  if (output.tagSet === "") {
+    contents.Tags = [];
+  }
+  if (output["tagSet"] !== undefined && output["tagSet"]["item"] !== undefined) {
+    contents.Tags = deserializeAws_ec2TagList(__getArrayIfSingleItem(output["tagSet"]["item"]), context);
+  }
+  return contents;
+};
+
+const deserializeAws_ec2NetworkInsightsAnalysisList = (
+  output: any,
+  context: __SerdeContext
+): NetworkInsightsAnalysis[] => {
+  return (output || []).map((entry: any) => deserializeAws_ec2NetworkInsightsAnalysis(entry, context));
+};
+
+const deserializeAws_ec2NetworkInsightsPath = (output: any, context: __SerdeContext): NetworkInsightsPath => {
+  let contents: any = {
+    NetworkInsightsPathId: undefined,
+    NetworkInsightsPathArn: undefined,
+    CreatedDate: undefined,
+    Source: undefined,
+    Destination: undefined,
+    SourceIp: undefined,
+    DestinationIp: undefined,
+    Protocol: undefined,
+    DestinationPort: undefined,
+    Tags: undefined,
+  };
+  if (output["networkInsightsPathId"] !== undefined) {
+    contents.NetworkInsightsPathId = output["networkInsightsPathId"];
+  }
+  if (output["networkInsightsPathArn"] !== undefined) {
+    contents.NetworkInsightsPathArn = output["networkInsightsPathArn"];
+  }
+  if (output["createdDate"] !== undefined) {
+    contents.CreatedDate = new Date(output["createdDate"]);
+  }
+  if (output["source"] !== undefined) {
+    contents.Source = output["source"];
+  }
+  if (output["destination"] !== undefined) {
+    contents.Destination = output["destination"];
+  }
+  if (output["sourceIp"] !== undefined) {
+    contents.SourceIp = output["sourceIp"];
+  }
+  if (output["destinationIp"] !== undefined) {
+    contents.DestinationIp = output["destinationIp"];
+  }
+  if (output["protocol"] !== undefined) {
+    contents.Protocol = output["protocol"];
+  }
+  if (output["destinationPort"] !== undefined) {
+    contents.DestinationPort = parseInt(output["destinationPort"]);
+  }
+  if (output.tagSet === "") {
+    contents.Tags = [];
+  }
+  if (output["tagSet"] !== undefined && output["tagSet"]["item"] !== undefined) {
+    contents.Tags = deserializeAws_ec2TagList(__getArrayIfSingleItem(output["tagSet"]["item"]), context);
+  }
+  return contents;
+};
+
+const deserializeAws_ec2NetworkInsightsPathList = (output: any, context: __SerdeContext): NetworkInsightsPath[] => {
+  return (output || []).map((entry: any) => deserializeAws_ec2NetworkInsightsPath(entry, context));
+};
+
 const deserializeAws_ec2NetworkInterface = (output: any, context: __SerdeContext): NetworkInterface => {
   let contents: any = {
     Association: undefined,
@@ -58099,6 +60807,60 @@ const deserializeAws_ec2OnDemandOptions = (output: any, context: __SerdeContext)
   return contents;
 };
 
+const deserializeAws_ec2PathComponent = (output: any, context: __SerdeContext): PathComponent => {
+  let contents: any = {
+    SequenceNumber: undefined,
+    AclRule: undefined,
+    Component: undefined,
+    DestinationVpc: undefined,
+    OutboundHeader: undefined,
+    InboundHeader: undefined,
+    RouteTableRoute: undefined,
+    SecurityGroupRule: undefined,
+    SourceVpc: undefined,
+    Subnet: undefined,
+    Vpc: undefined,
+  };
+  if (output["sequenceNumber"] !== undefined) {
+    contents.SequenceNumber = parseInt(output["sequenceNumber"]);
+  }
+  if (output["aclRule"] !== undefined) {
+    contents.AclRule = deserializeAws_ec2AnalysisAclRule(output["aclRule"], context);
+  }
+  if (output["component"] !== undefined) {
+    contents.Component = deserializeAws_ec2AnalysisComponent(output["component"], context);
+  }
+  if (output["destinationVpc"] !== undefined) {
+    contents.DestinationVpc = deserializeAws_ec2AnalysisComponent(output["destinationVpc"], context);
+  }
+  if (output["outboundHeader"] !== undefined) {
+    contents.OutboundHeader = deserializeAws_ec2AnalysisPacketHeader(output["outboundHeader"], context);
+  }
+  if (output["inboundHeader"] !== undefined) {
+    contents.InboundHeader = deserializeAws_ec2AnalysisPacketHeader(output["inboundHeader"], context);
+  }
+  if (output["routeTableRoute"] !== undefined) {
+    contents.RouteTableRoute = deserializeAws_ec2AnalysisRouteTableRoute(output["routeTableRoute"], context);
+  }
+  if (output["securityGroupRule"] !== undefined) {
+    contents.SecurityGroupRule = deserializeAws_ec2AnalysisSecurityGroupRule(output["securityGroupRule"], context);
+  }
+  if (output["sourceVpc"] !== undefined) {
+    contents.SourceVpc = deserializeAws_ec2AnalysisComponent(output["sourceVpc"], context);
+  }
+  if (output["subnet"] !== undefined) {
+    contents.Subnet = deserializeAws_ec2AnalysisComponent(output["subnet"], context);
+  }
+  if (output["vpc"] !== undefined) {
+    contents.Vpc = deserializeAws_ec2AnalysisComponent(output["vpc"], context);
+  }
+  return contents;
+};
+
+const deserializeAws_ec2PathComponentList = (output: any, context: __SerdeContext): PathComponent[] => {
+  return (output || []).map((entry: any) => deserializeAws_ec2PathComponent(entry, context));
+};
+
 const deserializeAws_ec2PciId = (output: any, context: __SerdeContext): PciId => {
   let contents: any = {
     DeviceId: undefined,
@@ -58429,6 +61191,10 @@ const deserializeAws_ec2PortRange = (output: any, context: __SerdeContext): Port
   return contents;
 };
 
+const deserializeAws_ec2PortRangeList = (output: any, context: __SerdeContext): PortRange[] => {
+  return (output || []).map((entry: any) => deserializeAws_ec2PortRange(entry, context));
+};
+
 const deserializeAws_ec2PrefixList = (output: any, context: __SerdeContext): PrefixList => {
   let contents: any = {
     Cidrs: undefined,
@@ -58728,6 +61494,24 @@ const deserializeAws_ec2ProvisionedBandwidth = (output: any, context: __SerdeCon
   return contents;
 };
 
+const deserializeAws_ec2PtrUpdateStatus = (output: any, context: __SerdeContext): PtrUpdateStatus => {
+  let contents: any = {
+    Value: undefined,
+    Status: undefined,
+    Reason: undefined,
+  };
+  if (output["value"] !== undefined) {
+    contents.Value = output["value"];
+  }
+  if (output["status"] !== undefined) {
+    contents.Status = output["status"];
+  }
+  if (output["reason"] !== undefined) {
+    contents.Reason = output["reason"];
+  }
+  return contents;
+};
+
 const deserializeAws_ec2PublicIpv4Pool = (output: any, context: __SerdeContext): PublicIpv4Pool => {
   let contents: any = {
     PoolId: undefined,
@@ -59009,6 +61793,22 @@ const deserializeAws_ec2RegisterTransitGatewayMulticastGroupSourcesResult = (
   if (output["registeredMulticastGroupSources"] !== undefined) {
     contents.RegisteredMulticastGroupSources = deserializeAws_ec2TransitGatewayMulticastRegisteredGroupSources(
       output["registeredMulticastGroupSources"],
+      context
+    );
+  }
+  return contents;
+};
+
+const deserializeAws_ec2RejectTransitGatewayMulticastDomainAssociationsResult = (
+  output: any,
+  context: __SerdeContext
+): RejectTransitGatewayMulticastDomainAssociationsResult => {
+  let contents: any = {
+    Associations: undefined,
+  };
+  if (output["associations"] !== undefined) {
+    contents.Associations = deserializeAws_ec2TransitGatewayMulticastDomainAssociations(
+      output["associations"],
       context
     );
   }
@@ -59656,6 +62456,19 @@ const deserializeAws_ec2ReservedInstancesOfferingList = (
 
 const deserializeAws_ec2ReservedIntancesIds = (output: any, context: __SerdeContext): ReservedInstancesId[] => {
   return (output || []).map((entry: any) => deserializeAws_ec2ReservedInstancesId(entry, context));
+};
+
+const deserializeAws_ec2ResetAddressAttributeResult = (
+  output: any,
+  context: __SerdeContext
+): ResetAddressAttributeResult => {
+  let contents: any = {
+    Address: undefined,
+  };
+  if (output["address"] !== undefined) {
+    contents.Address = deserializeAws_ec2AddressAttribute(output["address"], context);
+  }
+  return contents;
 };
 
 const deserializeAws_ec2ResetEbsDefaultKmsKeyIdResult = (
@@ -61666,6 +64479,22 @@ const deserializeAws_ec2StartInstancesResult = (output: any, context: __SerdeCon
   return contents;
 };
 
+const deserializeAws_ec2StartNetworkInsightsAnalysisResult = (
+  output: any,
+  context: __SerdeContext
+): StartNetworkInsightsAnalysisResult => {
+  let contents: any = {
+    NetworkInsightsAnalysis: undefined,
+  };
+  if (output["networkInsightsAnalysis"] !== undefined) {
+    contents.NetworkInsightsAnalysis = deserializeAws_ec2NetworkInsightsAnalysis(
+      output["networkInsightsAnalysis"],
+      context
+    );
+  }
+  return contents;
+};
+
 const deserializeAws_ec2StartVpcEndpointServicePrivateDnsVerificationResult = (
   output: any,
   context: __SerdeContext
@@ -61717,6 +64546,10 @@ const deserializeAws_ec2Storage = (output: any, context: __SerdeContext): Storag
     contents.S3 = deserializeAws_ec2S3Storage(output["S3"], context);
   }
   return contents;
+};
+
+const deserializeAws_ec2StringList = (output: any, context: __SerdeContext): string[] => {
+  return (output || []).map((entry: any) => entry);
 };
 
 const deserializeAws_ec2Subnet = (output: any, context: __SerdeContext): Subnet => {
@@ -62544,6 +65377,42 @@ const deserializeAws_ec2TransitGatewayAttachmentAssociation = (
   return contents;
 };
 
+const deserializeAws_ec2TransitGatewayAttachmentBgpConfiguration = (
+  output: any,
+  context: __SerdeContext
+): TransitGatewayAttachmentBgpConfiguration => {
+  let contents: any = {
+    TransitGatewayAsn: undefined,
+    PeerAsn: undefined,
+    TransitGatewayAddress: undefined,
+    PeerAddress: undefined,
+    BgpStatus: undefined,
+  };
+  if (output["transitGatewayAsn"] !== undefined) {
+    contents.TransitGatewayAsn = parseInt(output["transitGatewayAsn"]);
+  }
+  if (output["peerAsn"] !== undefined) {
+    contents.PeerAsn = parseInt(output["peerAsn"]);
+  }
+  if (output["transitGatewayAddress"] !== undefined) {
+    contents.TransitGatewayAddress = output["transitGatewayAddress"];
+  }
+  if (output["peerAddress"] !== undefined) {
+    contents.PeerAddress = output["peerAddress"];
+  }
+  if (output["bgpStatus"] !== undefined) {
+    contents.BgpStatus = output["bgpStatus"];
+  }
+  return contents;
+};
+
+const deserializeAws_ec2TransitGatewayAttachmentBgpConfigurationList = (
+  output: any,
+  context: __SerdeContext
+): TransitGatewayAttachmentBgpConfiguration[] => {
+  return (output || []).map((entry: any) => deserializeAws_ec2TransitGatewayAttachmentBgpConfiguration(entry, context));
+};
+
 const deserializeAws_ec2TransitGatewayAttachmentList = (
   output: any,
   context: __SerdeContext
@@ -62573,6 +65442,147 @@ const deserializeAws_ec2TransitGatewayAttachmentPropagationList = (
   context: __SerdeContext
 ): TransitGatewayAttachmentPropagation[] => {
   return (output || []).map((entry: any) => deserializeAws_ec2TransitGatewayAttachmentPropagation(entry, context));
+};
+
+const deserializeAws_ec2TransitGatewayConnect = (output: any, context: __SerdeContext): TransitGatewayConnect => {
+  let contents: any = {
+    TransitGatewayAttachmentId: undefined,
+    TransportTransitGatewayAttachmentId: undefined,
+    TransitGatewayId: undefined,
+    State: undefined,
+    CreationTime: undefined,
+    Options: undefined,
+    Tags: undefined,
+  };
+  if (output["transitGatewayAttachmentId"] !== undefined) {
+    contents.TransitGatewayAttachmentId = output["transitGatewayAttachmentId"];
+  }
+  if (output["transportTransitGatewayAttachmentId"] !== undefined) {
+    contents.TransportTransitGatewayAttachmentId = output["transportTransitGatewayAttachmentId"];
+  }
+  if (output["transitGatewayId"] !== undefined) {
+    contents.TransitGatewayId = output["transitGatewayId"];
+  }
+  if (output["state"] !== undefined) {
+    contents.State = output["state"];
+  }
+  if (output["creationTime"] !== undefined) {
+    contents.CreationTime = new Date(output["creationTime"]);
+  }
+  if (output["options"] !== undefined) {
+    contents.Options = deserializeAws_ec2TransitGatewayConnectOptions(output["options"], context);
+  }
+  if (output.tagSet === "") {
+    contents.Tags = [];
+  }
+  if (output["tagSet"] !== undefined && output["tagSet"]["item"] !== undefined) {
+    contents.Tags = deserializeAws_ec2TagList(__getArrayIfSingleItem(output["tagSet"]["item"]), context);
+  }
+  return contents;
+};
+
+const deserializeAws_ec2TransitGatewayConnectList = (output: any, context: __SerdeContext): TransitGatewayConnect[] => {
+  return (output || []).map((entry: any) => deserializeAws_ec2TransitGatewayConnect(entry, context));
+};
+
+const deserializeAws_ec2TransitGatewayConnectOptions = (
+  output: any,
+  context: __SerdeContext
+): TransitGatewayConnectOptions => {
+  let contents: any = {
+    Protocol: undefined,
+  };
+  if (output["protocol"] !== undefined) {
+    contents.Protocol = output["protocol"];
+  }
+  return contents;
+};
+
+const deserializeAws_ec2TransitGatewayConnectPeer = (
+  output: any,
+  context: __SerdeContext
+): TransitGatewayConnectPeer => {
+  let contents: any = {
+    TransitGatewayAttachmentId: undefined,
+    TransitGatewayConnectPeerId: undefined,
+    State: undefined,
+    CreationTime: undefined,
+    ConnectPeerConfiguration: undefined,
+    Tags: undefined,
+  };
+  if (output["transitGatewayAttachmentId"] !== undefined) {
+    contents.TransitGatewayAttachmentId = output["transitGatewayAttachmentId"];
+  }
+  if (output["transitGatewayConnectPeerId"] !== undefined) {
+    contents.TransitGatewayConnectPeerId = output["transitGatewayConnectPeerId"];
+  }
+  if (output["state"] !== undefined) {
+    contents.State = output["state"];
+  }
+  if (output["creationTime"] !== undefined) {
+    contents.CreationTime = new Date(output["creationTime"]);
+  }
+  if (output["connectPeerConfiguration"] !== undefined) {
+    contents.ConnectPeerConfiguration = deserializeAws_ec2TransitGatewayConnectPeerConfiguration(
+      output["connectPeerConfiguration"],
+      context
+    );
+  }
+  if (output.tagSet === "") {
+    contents.Tags = [];
+  }
+  if (output["tagSet"] !== undefined && output["tagSet"]["item"] !== undefined) {
+    contents.Tags = deserializeAws_ec2TagList(__getArrayIfSingleItem(output["tagSet"]["item"]), context);
+  }
+  return contents;
+};
+
+const deserializeAws_ec2TransitGatewayConnectPeerConfiguration = (
+  output: any,
+  context: __SerdeContext
+): TransitGatewayConnectPeerConfiguration => {
+  let contents: any = {
+    TransitGatewayAddress: undefined,
+    PeerAddress: undefined,
+    InsideCidrBlocks: undefined,
+    Protocol: undefined,
+    BgpConfigurations: undefined,
+  };
+  if (output["transitGatewayAddress"] !== undefined) {
+    contents.TransitGatewayAddress = output["transitGatewayAddress"];
+  }
+  if (output["peerAddress"] !== undefined) {
+    contents.PeerAddress = output["peerAddress"];
+  }
+  if (output.insideCidrBlocks === "") {
+    contents.InsideCidrBlocks = [];
+  }
+  if (output["insideCidrBlocks"] !== undefined && output["insideCidrBlocks"]["item"] !== undefined) {
+    contents.InsideCidrBlocks = deserializeAws_ec2InsideCidrBlocksStringList(
+      __getArrayIfSingleItem(output["insideCidrBlocks"]["item"]),
+      context
+    );
+  }
+  if (output["protocol"] !== undefined) {
+    contents.Protocol = output["protocol"];
+  }
+  if (output.bgpConfigurations === "") {
+    contents.BgpConfigurations = [];
+  }
+  if (output["bgpConfigurations"] !== undefined && output["bgpConfigurations"]["item"] !== undefined) {
+    contents.BgpConfigurations = deserializeAws_ec2TransitGatewayAttachmentBgpConfigurationList(
+      __getArrayIfSingleItem(output["bgpConfigurations"]["item"]),
+      context
+    );
+  }
+  return contents;
+};
+
+const deserializeAws_ec2TransitGatewayConnectPeerList = (
+  output: any,
+  context: __SerdeContext
+): TransitGatewayConnectPeer[] => {
+  return (output || []).map((entry: any) => deserializeAws_ec2TransitGatewayConnectPeer(entry, context));
 };
 
 const deserializeAws_ec2TransitGatewayList = (output: any, context: __SerdeContext): TransitGateway[] => {
@@ -62646,6 +65656,9 @@ const deserializeAws_ec2TransitGatewayMulticastDomain = (
   let contents: any = {
     TransitGatewayMulticastDomainId: undefined,
     TransitGatewayId: undefined,
+    TransitGatewayMulticastDomainArn: undefined,
+    OwnerId: undefined,
+    Options: undefined,
     State: undefined,
     CreationTime: undefined,
     Tags: undefined,
@@ -62655,6 +65668,15 @@ const deserializeAws_ec2TransitGatewayMulticastDomain = (
   }
   if (output["transitGatewayId"] !== undefined) {
     contents.TransitGatewayId = output["transitGatewayId"];
+  }
+  if (output["transitGatewayMulticastDomainArn"] !== undefined) {
+    contents.TransitGatewayMulticastDomainArn = output["transitGatewayMulticastDomainArn"];
+  }
+  if (output["ownerId"] !== undefined) {
+    contents.OwnerId = output["ownerId"];
+  }
+  if (output["options"] !== undefined) {
+    contents.Options = deserializeAws_ec2TransitGatewayMulticastDomainOptions(output["options"], context);
   }
   if (output["state"] !== undefined) {
     contents.State = output["state"];
@@ -62679,6 +65701,7 @@ const deserializeAws_ec2TransitGatewayMulticastDomainAssociation = (
     TransitGatewayAttachmentId: undefined,
     ResourceId: undefined,
     ResourceType: undefined,
+    ResourceOwnerId: undefined,
     Subnet: undefined,
   };
   if (output["transitGatewayAttachmentId"] !== undefined) {
@@ -62689,6 +65712,9 @@ const deserializeAws_ec2TransitGatewayMulticastDomainAssociation = (
   }
   if (output["resourceType"] !== undefined) {
     contents.ResourceType = output["resourceType"];
+  }
+  if (output["resourceOwnerId"] !== undefined) {
+    contents.ResourceOwnerId = output["resourceOwnerId"];
   }
   if (output["subnet"] !== undefined) {
     contents.Subnet = deserializeAws_ec2SubnetAssociation(output["subnet"], context);
@@ -62712,6 +65738,7 @@ const deserializeAws_ec2TransitGatewayMulticastDomainAssociations = (
     TransitGatewayAttachmentId: undefined,
     ResourceId: undefined,
     ResourceType: undefined,
+    ResourceOwnerId: undefined,
     Subnets: undefined,
   };
   if (output["transitGatewayMulticastDomainId"] !== undefined) {
@@ -62725,6 +65752,9 @@ const deserializeAws_ec2TransitGatewayMulticastDomainAssociations = (
   }
   if (output["resourceType"] !== undefined) {
     contents.ResourceType = output["resourceType"];
+  }
+  if (output["resourceOwnerId"] !== undefined) {
+    contents.ResourceOwnerId = output["resourceOwnerId"];
   }
   if (output.subnets === "") {
     contents.Subnets = [];
@@ -62745,6 +65775,27 @@ const deserializeAws_ec2TransitGatewayMulticastDomainList = (
   return (output || []).map((entry: any) => deserializeAws_ec2TransitGatewayMulticastDomain(entry, context));
 };
 
+const deserializeAws_ec2TransitGatewayMulticastDomainOptions = (
+  output: any,
+  context: __SerdeContext
+): TransitGatewayMulticastDomainOptions => {
+  let contents: any = {
+    Igmpv2Support: undefined,
+    StaticSourcesSupport: undefined,
+    AutoAcceptSharedAssociations: undefined,
+  };
+  if (output["igmpv2Support"] !== undefined) {
+    contents.Igmpv2Support = output["igmpv2Support"];
+  }
+  if (output["staticSourcesSupport"] !== undefined) {
+    contents.StaticSourcesSupport = output["staticSourcesSupport"];
+  }
+  if (output["autoAcceptSharedAssociations"] !== undefined) {
+    contents.AutoAcceptSharedAssociations = output["autoAcceptSharedAssociations"];
+  }
+  return contents;
+};
+
 const deserializeAws_ec2TransitGatewayMulticastGroup = (
   output: any,
   context: __SerdeContext
@@ -62755,6 +65806,7 @@ const deserializeAws_ec2TransitGatewayMulticastGroup = (
     SubnetId: undefined,
     ResourceId: undefined,
     ResourceType: undefined,
+    ResourceOwnerId: undefined,
     NetworkInterfaceId: undefined,
     GroupMember: undefined,
     GroupSource: undefined,
@@ -62775,6 +65827,9 @@ const deserializeAws_ec2TransitGatewayMulticastGroup = (
   }
   if (output["resourceType"] !== undefined) {
     contents.ResourceType = output["resourceType"];
+  }
+  if (output["resourceOwnerId"] !== undefined) {
+    contents.ResourceOwnerId = output["resourceOwnerId"];
   }
   if (output["networkInterfaceId"] !== undefined) {
     contents.NetworkInterfaceId = output["networkInterfaceId"];
@@ -62864,6 +65919,7 @@ const deserializeAws_ec2TransitGatewayMulticastRegisteredGroupSources = (
 const deserializeAws_ec2TransitGatewayOptions = (output: any, context: __SerdeContext): TransitGatewayOptions => {
   let contents: any = {
     AmazonSideAsn: undefined,
+    TransitGatewayCidrBlocks: undefined,
     AutoAcceptSharedAttachments: undefined,
     DefaultRouteTableAssociation: undefined,
     AssociationDefaultRouteTableId: undefined,
@@ -62875,6 +65931,15 @@ const deserializeAws_ec2TransitGatewayOptions = (output: any, context: __SerdeCo
   };
   if (output["amazonSideAsn"] !== undefined) {
     contents.AmazonSideAsn = parseInt(output["amazonSideAsn"]);
+  }
+  if (output.transitGatewayCidrBlocks === "") {
+    contents.TransitGatewayCidrBlocks = [];
+  }
+  if (output["transitGatewayCidrBlocks"] !== undefined && output["transitGatewayCidrBlocks"]["item"] !== undefined) {
+    contents.TransitGatewayCidrBlocks = deserializeAws_ec2ValueStringList(
+      __getArrayIfSingleItem(output["transitGatewayCidrBlocks"]["item"]),
+      context
+    );
   }
   if (output["autoAcceptSharedAttachments"] !== undefined) {
     contents.AutoAcceptSharedAttachments = output["autoAcceptSharedAttachments"];
@@ -63877,10 +66942,12 @@ const deserializeAws_ec2VolumeModification = (output: any, context: __SerdeConte
     TargetIops: undefined,
     TargetVolumeType: undefined,
     TargetThroughput: undefined,
+    TargetMultiAttachEnabled: undefined,
     OriginalSize: undefined,
     OriginalIops: undefined,
     OriginalVolumeType: undefined,
     OriginalThroughput: undefined,
+    OriginalMultiAttachEnabled: undefined,
     Progress: undefined,
     StartTime: undefined,
     EndTime: undefined,
@@ -63906,6 +66973,9 @@ const deserializeAws_ec2VolumeModification = (output: any, context: __SerdeConte
   if (output["targetThroughput"] !== undefined) {
     contents.TargetThroughput = parseInt(output["targetThroughput"]);
   }
+  if (output["targetMultiAttachEnabled"] !== undefined) {
+    contents.TargetMultiAttachEnabled = output["targetMultiAttachEnabled"] == "true";
+  }
   if (output["originalSize"] !== undefined) {
     contents.OriginalSize = parseInt(output["originalSize"]);
   }
@@ -63917,6 +66987,9 @@ const deserializeAws_ec2VolumeModification = (output: any, context: __SerdeConte
   }
   if (output["originalThroughput"] !== undefined) {
     contents.OriginalThroughput = parseInt(output["originalThroughput"]);
+  }
+  if (output["originalMultiAttachEnabled"] !== undefined) {
+    contents.OriginalMultiAttachEnabled = output["originalMultiAttachEnabled"] == "true";
   }
   if (output["progress"] !== undefined) {
     contents.Progress = parseInt(output["progress"]);

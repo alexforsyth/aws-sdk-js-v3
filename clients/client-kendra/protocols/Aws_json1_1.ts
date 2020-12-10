@@ -3380,14 +3380,15 @@ const serializeAws_json1_1DocumentAttributeStringListValue = (input: string[], c
 };
 
 const serializeAws_json1_1DocumentAttributeValue = (input: DocumentAttributeValue, context: __SerdeContext): any => {
-  return {
-    ...(input.DateValue !== undefined && { DateValue: Math.round(input.DateValue.getTime() / 1000) }),
-    ...(input.LongValue !== undefined && { LongValue: input.LongValue }),
-    ...(input.StringListValue !== undefined && {
-      StringListValue: serializeAws_json1_1DocumentAttributeStringListValue(input.StringListValue, context),
+  return DocumentAttributeValue.visit(input, {
+    DateValue: (value) => ({ DateValue: Math.round(value.getTime() / 1000) }),
+    LongValue: (value) => ({ LongValue: value }),
+    StringListValue: (value) => ({
+      StringListValue: serializeAws_json1_1DocumentAttributeStringListValue(value, context),
     }),
-    ...(input.StringValue !== undefined && { StringValue: input.StringValue }),
-  };
+    StringValue: (value) => ({ StringValue: value }),
+    _: (name, value) => ({ name: value } as any),
+  });
 };
 
 const serializeAws_json1_1DocumentIdList = (input: string[], context: __SerdeContext): any => {
@@ -4803,18 +4804,27 @@ const deserializeAws_json1_1DocumentAttributeStringListValue = (output: any, con
 };
 
 const deserializeAws_json1_1DocumentAttributeValue = (output: any, context: __SerdeContext): DocumentAttributeValue => {
-  return {
-    DateValue:
-      output.DateValue !== undefined && output.DateValue !== null
-        ? new Date(Math.round(output.DateValue * 1000))
-        : undefined,
-    LongValue: output.LongValue !== undefined && output.LongValue !== null ? output.LongValue : undefined,
-    StringListValue:
-      output.StringListValue !== undefined && output.StringListValue !== null
-        ? deserializeAws_json1_1DocumentAttributeStringListValue(output.StringListValue, context)
-        : undefined,
-    StringValue: output.StringValue !== undefined && output.StringValue !== null ? output.StringValue : undefined,
-  } as any;
+  if (output.DateValue !== undefined && output.DateValue !== null) {
+    return {
+      DateValue: new Date(Math.round(output.DateValue * 1000)),
+    };
+  }
+  if (output.LongValue !== undefined && output.LongValue !== null) {
+    return {
+      LongValue: output.LongValue,
+    };
+  }
+  if (output.StringListValue !== undefined && output.StringListValue !== null) {
+    return {
+      StringListValue: deserializeAws_json1_1DocumentAttributeStringListValue(output.StringListValue, context),
+    };
+  }
+  if (output.StringValue !== undefined && output.StringValue !== null) {
+    return {
+      StringValue: output.StringValue,
+    };
+  }
+  return { $unknown: Object.entries(output)[0] };
 };
 
 const deserializeAws_json1_1DocumentAttributeValueCountPair = (

@@ -310,15 +310,6 @@ export const serializeAws_restJson1DeleteDeviceCommand = async (
     "Content-Type": "",
   };
   let resolvedPath = "/global-networks/{GlobalNetworkId}/devices/{DeviceId}";
-  if (input.DeviceId !== undefined) {
-    const labelValue: string = input.DeviceId;
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: DeviceId.");
-    }
-    resolvedPath = resolvedPath.replace("{DeviceId}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: DeviceId.");
-  }
   if (input.GlobalNetworkId !== undefined) {
     const labelValue: string = input.GlobalNetworkId;
     if (labelValue.length <= 0) {
@@ -327,6 +318,15 @@ export const serializeAws_restJson1DeleteDeviceCommand = async (
     resolvedPath = resolvedPath.replace("{GlobalNetworkId}", __extendedEncodeURIComponent(labelValue));
   } else {
     throw new Error("No value provided for input HTTP label: GlobalNetworkId.");
+  }
+  if (input.DeviceId !== undefined) {
+    const labelValue: string = input.DeviceId;
+    if (labelValue.length <= 0) {
+      throw new Error("Empty value provided for input HTTP label: DeviceId.");
+    }
+    resolvedPath = resolvedPath.replace("{DeviceId}", __extendedEncodeURIComponent(labelValue));
+  } else {
+    throw new Error("No value provided for input HTTP label: DeviceId.");
   }
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -457,15 +457,6 @@ export const serializeAws_restJson1DeregisterTransitGatewayCommand = async (
     "Content-Type": "",
   };
   let resolvedPath = "/global-networks/{GlobalNetworkId}/transit-gateway-registrations/{TransitGatewayArn}";
-  if (input.TransitGatewayArn !== undefined) {
-    const labelValue: string = input.TransitGatewayArn;
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: TransitGatewayArn.");
-    }
-    resolvedPath = resolvedPath.replace("{TransitGatewayArn}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: TransitGatewayArn.");
-  }
   if (input.GlobalNetworkId !== undefined) {
     const labelValue: string = input.GlobalNetworkId;
     if (labelValue.length <= 0) {
@@ -474,6 +465,15 @@ export const serializeAws_restJson1DeregisterTransitGatewayCommand = async (
     resolvedPath = resolvedPath.replace("{GlobalNetworkId}", __extendedEncodeURIComponent(labelValue));
   } else {
     throw new Error("No value provided for input HTTP label: GlobalNetworkId.");
+  }
+  if (input.TransitGatewayArn !== undefined) {
+    const labelValue: string = input.TransitGatewayArn;
+    if (labelValue.length <= 0) {
+      throw new Error("Empty value provided for input HTTP label: TransitGatewayArn.");
+    }
+    resolvedPath = resolvedPath.replace("{TransitGatewayArn}", __extendedEncodeURIComponent(labelValue));
+  } else {
+    throw new Error("No value provided for input HTTP label: TransitGatewayArn.");
   }
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -500,8 +500,8 @@ export const serializeAws_restJson1DescribeGlobalNetworksCommand = async (
     ...(input.GlobalNetworkIds !== undefined && {
       globalNetworkIds: (input.GlobalNetworkIds || []).map((_entry) => _entry),
     }),
-    ...(input.NextToken !== undefined && { nextToken: input.NextToken }),
     ...(input.MaxResults !== undefined && { maxResults: input.MaxResults.toString() }),
+    ...(input.NextToken !== undefined && { nextToken: input.NextToken }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -525,15 +525,6 @@ export const serializeAws_restJson1DisassociateCustomerGatewayCommand = async (
     "Content-Type": "",
   };
   let resolvedPath = "/global-networks/{GlobalNetworkId}/customer-gateway-associations/{CustomerGatewayArn}";
-  if (input.CustomerGatewayArn !== undefined) {
-    const labelValue: string = input.CustomerGatewayArn;
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: CustomerGatewayArn.");
-    }
-    resolvedPath = resolvedPath.replace("{CustomerGatewayArn}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: CustomerGatewayArn.");
-  }
   if (input.GlobalNetworkId !== undefined) {
     const labelValue: string = input.GlobalNetworkId;
     if (labelValue.length <= 0) {
@@ -542,6 +533,15 @@ export const serializeAws_restJson1DisassociateCustomerGatewayCommand = async (
     resolvedPath = resolvedPath.replace("{GlobalNetworkId}", __extendedEncodeURIComponent(labelValue));
   } else {
     throw new Error("No value provided for input HTTP label: GlobalNetworkId.");
+  }
+  if (input.CustomerGatewayArn !== undefined) {
+    const labelValue: string = input.CustomerGatewayArn;
+    if (labelValue.length <= 0) {
+      throw new Error("Empty value provided for input HTTP label: CustomerGatewayArn.");
+    }
+    resolvedPath = resolvedPath.replace("{CustomerGatewayArn}", __extendedEncodeURIComponent(labelValue));
+  } else {
+    throw new Error("No value provided for input HTTP label: CustomerGatewayArn.");
   }
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -574,8 +574,8 @@ export const serializeAws_restJson1DisassociateLinkCommand = async (
     throw new Error("No value provided for input HTTP label: GlobalNetworkId.");
   }
   const query: any = {
-    ...(input.LinkId !== undefined && { linkId: input.LinkId }),
     ...(input.DeviceId !== undefined && { deviceId: input.DeviceId }),
+    ...(input.LinkId !== undefined && { linkId: input.LinkId }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -609,11 +609,11 @@ export const serializeAws_restJson1GetCustomerGatewayAssociationsCommand = async
     throw new Error("No value provided for input HTTP label: GlobalNetworkId.");
   }
   const query: any = {
-    ...(input.NextToken !== undefined && { nextToken: input.NextToken }),
     ...(input.CustomerGatewayArns !== undefined && {
       customerGatewayArns: (input.CustomerGatewayArns || []).map((_entry) => _entry),
     }),
     ...(input.MaxResults !== undefined && { maxResults: input.MaxResults.toString() }),
+    ...(input.NextToken !== undefined && { nextToken: input.NextToken }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -647,10 +647,10 @@ export const serializeAws_restJson1GetDevicesCommand = async (
     throw new Error("No value provided for input HTTP label: GlobalNetworkId.");
   }
   const query: any = {
-    ...(input.NextToken !== undefined && { nextToken: input.NextToken }),
     ...(input.DeviceIds !== undefined && { deviceIds: (input.DeviceIds || []).map((_entry) => _entry) }),
     ...(input.SiteId !== undefined && { siteId: input.SiteId }),
     ...(input.MaxResults !== undefined && { maxResults: input.MaxResults.toString() }),
+    ...(input.NextToken !== undefined && { nextToken: input.NextToken }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -684,10 +684,10 @@ export const serializeAws_restJson1GetLinkAssociationsCommand = async (
     throw new Error("No value provided for input HTTP label: GlobalNetworkId.");
   }
   const query: any = {
-    ...(input.NextToken !== undefined && { nextToken: input.NextToken }),
     ...(input.DeviceId !== undefined && { deviceId: input.DeviceId }),
-    ...(input.MaxResults !== undefined && { maxResults: input.MaxResults.toString() }),
     ...(input.LinkId !== undefined && { linkId: input.LinkId }),
+    ...(input.MaxResults !== undefined && { maxResults: input.MaxResults.toString() }),
+    ...(input.NextToken !== undefined && { nextToken: input.NextToken }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -722,11 +722,11 @@ export const serializeAws_restJson1GetLinksCommand = async (
   }
   const query: any = {
     ...(input.LinkIds !== undefined && { linkIds: (input.LinkIds || []).map((_entry) => _entry) }),
-    ...(input.NextToken !== undefined && { nextToken: input.NextToken }),
-    ...(input.MaxResults !== undefined && { maxResults: input.MaxResults.toString() }),
     ...(input.SiteId !== undefined && { siteId: input.SiteId }),
     ...(input.Type !== undefined && { type: input.Type }),
     ...(input.Provider !== undefined && { provider: input.Provider }),
+    ...(input.MaxResults !== undefined && { maxResults: input.MaxResults.toString() }),
+    ...(input.NextToken !== undefined && { nextToken: input.NextToken }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -799,8 +799,8 @@ export const serializeAws_restJson1GetTransitGatewayRegistrationsCommand = async
     ...(input.TransitGatewayArns !== undefined && {
       transitGatewayArns: (input.TransitGatewayArns || []).map((_entry) => _entry),
     }),
-    ...(input.NextToken !== undefined && { nextToken: input.NextToken }),
     ...(input.MaxResults !== undefined && { maxResults: input.MaxResults.toString() }),
+    ...(input.NextToken !== undefined && { nextToken: input.NextToken }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -1035,15 +1035,6 @@ export const serializeAws_restJson1UpdateLinkCommand = async (
     "Content-Type": "application/json",
   };
   let resolvedPath = "/global-networks/{GlobalNetworkId}/links/{LinkId}";
-  if (input.LinkId !== undefined) {
-    const labelValue: string = input.LinkId;
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: LinkId.");
-    }
-    resolvedPath = resolvedPath.replace("{LinkId}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: LinkId.");
-  }
   if (input.GlobalNetworkId !== undefined) {
     const labelValue: string = input.GlobalNetworkId;
     if (labelValue.length <= 0) {
@@ -1052,6 +1043,15 @@ export const serializeAws_restJson1UpdateLinkCommand = async (
     resolvedPath = resolvedPath.replace("{GlobalNetworkId}", __extendedEncodeURIComponent(labelValue));
   } else {
     throw new Error("No value provided for input HTTP label: GlobalNetworkId.");
+  }
+  if (input.LinkId !== undefined) {
+    const labelValue: string = input.LinkId;
+    if (labelValue.length <= 0) {
+      throw new Error("Empty value provided for input HTTP label: LinkId.");
+    }
+    resolvedPath = resolvedPath.replace("{LinkId}", __extendedEncodeURIComponent(labelValue));
+  } else {
+    throw new Error("No value provided for input HTTP label: LinkId.");
   }
   let body: any;
   body = JSON.stringify({
@@ -1080,15 +1080,6 @@ export const serializeAws_restJson1UpdateSiteCommand = async (
     "Content-Type": "application/json",
   };
   let resolvedPath = "/global-networks/{GlobalNetworkId}/sites/{SiteId}";
-  if (input.SiteId !== undefined) {
-    const labelValue: string = input.SiteId;
-    if (labelValue.length <= 0) {
-      throw new Error("Empty value provided for input HTTP label: SiteId.");
-    }
-    resolvedPath = resolvedPath.replace("{SiteId}", __extendedEncodeURIComponent(labelValue));
-  } else {
-    throw new Error("No value provided for input HTTP label: SiteId.");
-  }
   if (input.GlobalNetworkId !== undefined) {
     const labelValue: string = input.GlobalNetworkId;
     if (labelValue.length <= 0) {
@@ -1097,6 +1088,15 @@ export const serializeAws_restJson1UpdateSiteCommand = async (
     resolvedPath = resolvedPath.replace("{GlobalNetworkId}", __extendedEncodeURIComponent(labelValue));
   } else {
     throw new Error("No value provided for input HTTP label: GlobalNetworkId.");
+  }
+  if (input.SiteId !== undefined) {
+    const labelValue: string = input.SiteId;
+    if (labelValue.length <= 0) {
+      throw new Error("Empty value provided for input HTTP label: SiteId.");
+    }
+    resolvedPath = resolvedPath.replace("{SiteId}", __extendedEncodeURIComponent(labelValue));
+  } else {
+    throw new Error("No value provided for input HTTP label: SiteId.");
   }
   let body: any;
   body = JSON.stringify({
