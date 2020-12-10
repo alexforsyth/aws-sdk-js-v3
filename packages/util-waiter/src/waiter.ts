@@ -1,6 +1,11 @@
 import { AbortController } from "@aws-sdk/types";
 
-export interface WaiterConfiguration {
+export interface WaiterConfiguration<T> {
+  /**
+   * Required Service Client.
+   */
+  client: T;
+
   /**
    * The amount of time in seconds a user is willing to wait for a waiter to complete.
    */
