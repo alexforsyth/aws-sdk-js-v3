@@ -268,7 +268,6 @@ import {
   DeleteMarkerReplication,
   DeletedObject,
   Destination,
-  Encryption,
   EncryptionConfiguration,
   ErrorDocument,
   Event,
@@ -306,6 +305,7 @@ import {
   NoSuchUpload,
   NoncurrentVersionExpiration,
   NoncurrentVersionTransition,
+  NotFound,
   NotificationConfiguration,
   NotificationConfigurationFilter,
   ObjectAlreadyInActiveTierError,
@@ -360,6 +360,7 @@ import {
   CSVOutput,
   ContinuationEvent,
   CopyPartResult,
+  Encryption,
   EndEvent,
   InputSerialization,
   JSONInput,
@@ -2239,7 +2240,7 @@ export const serializeAws_restXmlGetObjectCommand = async (
     ...(input.ResponseContentLanguage !== undefined && { "response-content-language": input.ResponseContentLanguage }),
     ...(input.ResponseContentType !== undefined && { "response-content-type": input.ResponseContentType }),
     ...(input.ResponseExpires !== undefined && {
-      "response-expires": (input.ResponseExpires.toISOString().split(".")[0] + "Z").toString(),
+      "response-expires": __dateToUtcString(input.ResponseExpires).toString(),
     }),
     ...(input.VersionId !== undefined && { versionId: input.VersionId }),
     ...(input.PartNumber !== undefined && { partNumber: input.PartNumber.toString() }),
@@ -7386,10 +7387,10 @@ const deserializeAws_restXmlHeadBucketCommandError = async (
   let errorCode: string = "UnknownError";
   errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
   switch (errorCode) {
-    case "NoSuchBucket":
-    case "com.amazonaws.s3#NoSuchBucket":
+    case "NotFound":
+    case "com.amazonaws.s3#NotFound":
       response = {
-        ...(await deserializeAws_restXmlNoSuchBucketResponse(parsedOutput, context)),
+        ...(await deserializeAws_restXmlNotFoundResponse(parsedOutput, context)),
         name: errorCode,
         $metadata: deserializeMetadata(output),
       };
@@ -7562,10 +7563,10 @@ const deserializeAws_restXmlHeadObjectCommandError = async (
   let errorCode: string = "UnknownError";
   errorCode = loadRestXmlErrorCode(output, parsedOutput.body);
   switch (errorCode) {
-    case "NoSuchKey":
-    case "com.amazonaws.s3#NoSuchKey":
+    case "NotFound":
+    case "com.amazonaws.s3#NotFound":
       response = {
-        ...(await deserializeAws_restXmlNoSuchKeyResponse(parsedOutput, context)),
+        ...(await deserializeAws_restXmlNotFoundResponse(parsedOutput, context)),
         name: errorCode,
         $metadata: deserializeMetadata(output),
       };
@@ -9965,6 +9966,19 @@ const deserializeAws_restXmlNoSuchUploadResponse = async (
 ): Promise<NoSuchUpload> => {
   const contents: NoSuchUpload = {
     name: "NoSuchUpload",
+    $fault: "client",
+    $metadata: deserializeMetadata(parsedOutput),
+  };
+  const data: any = parsedOutput.body;
+  return contents;
+};
+
+const deserializeAws_restXmlNotFoundResponse = async (
+  parsedOutput: any,
+  context: __SerdeContext
+): Promise<NotFound> => {
+  const contents: NotFound = {
+    name: "NotFound",
     $fault: "client",
     $metadata: deserializeMetadata(parsedOutput),
   };

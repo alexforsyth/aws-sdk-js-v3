@@ -7524,7 +7524,7 @@ export class S3 extends S3Client {
    *          <p>
    *             <b>Permissions</b>
    *          </p>
-   *          <p>You must have <code>s3:GetObject</code> permission for this operation. Amazon S3 Select does
+   *          <p>You must have <code>s3:GetObject</code> permission for this operation. Amazon S3 Select does
    *          not support anonymous access. For more information about permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html">Specifying Permissions in a Policy</a>
    *          in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          <p></p>

@@ -7421,15 +7421,15 @@ export namespace HeadBucketRequest {
 }
 
 /**
- * <p>The specified bucket does not exist.</p>
+ * <p>The specified content does not exist.</p>
  */
-export interface NoSuchBucket extends __SmithyException, $MetadataBearer {
-  name: "NoSuchBucket";
+export interface NotFound extends __SmithyException, $MetadataBearer {
+  name: "NotFound";
   $fault: "client";
 }
 
-export namespace NoSuchBucket {
-  export const filterSensitiveLog = (obj: NoSuchBucket): any => ({
+export namespace NotFound {
+  export const filterSensitiveLog = (obj: NotFound): any => ({
     ...obj,
   });
 }
@@ -8511,6 +8511,20 @@ export interface ListObjectsRequest {
 
 export namespace ListObjectsRequest {
   export const filterSensitiveLog = (obj: ListObjectsRequest): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>The specified bucket does not exist.</p>
+ */
+export interface NoSuchBucket extends __SmithyException, $MetadataBearer {
+  name: "NoSuchBucket";
+  $fault: "client";
+}
+
+export namespace NoSuchBucket {
+  export const filterSensitiveLog = (obj: NoSuchBucket): any => ({
     ...obj,
   });
 }
@@ -10602,38 +10616,5 @@ export interface GlacierJobParameters {
 export namespace GlacierJobParameters {
   export const filterSensitiveLog = (obj: GlacierJobParameters): any => ({
     ...obj,
-  });
-}
-
-/**
- * <p>Contains the type of server-side encryption used.</p>
- */
-export interface Encryption {
-  /**
-   * <p>The server-side encryption algorithm used when storing job results in Amazon S3 (for example,
-   *          AES256, aws:kms).</p>
-   */
-  EncryptionType: ServerSideEncryption | string | undefined;
-
-  /**
-   * <p>If the encryption type is <code>aws:kms</code>, this optional value specifies the ID of
-   *          the symmetric customer managed AWS KMS CMK to use for encryption of job results. Amazon S3 only
-   *          supports symmetric CMKs. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using Symmetric and
-   *             Asymmetric Keys</a> in the <i>AWS Key Management Service Developer
-   *             Guide</i>.</p>
-   */
-  KMSKeyId?: string;
-
-  /**
-   * <p>If the encryption type is <code>aws:kms</code>, this optional value can be used to
-   *          specify the encryption context for the restore results.</p>
-   */
-  KMSContext?: string;
-}
-
-export namespace Encryption {
-  export const filterSensitiveLog = (obj: Encryption): any => ({
-    ...obj,
-    ...(obj.KMSKeyId && { KMSKeyId: SENSITIVE_STRING }),
   });
 }

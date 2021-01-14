@@ -5,10 +5,9 @@ import { WaiterConfiguration, WaiterResult, WaiterState, createWaiter } from "@a
 const checkState = async (client: S3Client, input: HeadBucketCommandInput): Promise<WaiterResult> => {
   try {
     let result: any = await client.send(new HeadBucketCommand(input));
-    return { state: WaiterState.SUCCESS };
   } catch (exception) {
     if (exception.name && exception.name == "NotFound") {
-      return { state: WaiterState.RETRY };
+      return { state: WaiterState.SUCCESS };
     }
   }
   return { state: WaiterState.RETRY };
@@ -18,7 +17,7 @@ const checkState = async (client: S3Client, input: HeadBucketCommandInput): Prom
  *  @param params : Waiter configuration options.
  *  @param input : the input to HeadBucketCommand for polling.
  */
-export const waitForBucketExists = async (
+export const waitForBucketNotExists = async (
   params: WaiterConfiguration<S3Client>,
   input: HeadBucketCommandInput
 ): Promise<WaiterResult> => {

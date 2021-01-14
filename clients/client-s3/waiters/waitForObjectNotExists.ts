@@ -1,14 +1,13 @@
 import { S3Client } from "../S3Client";
-import { HeadBucketCommand, HeadBucketCommandInput } from "../commands/HeadBucketCommand";
+import { HeadObjectCommand, HeadObjectCommandInput } from "../commands/HeadObjectCommand";
 import { WaiterConfiguration, WaiterResult, WaiterState, createWaiter } from "@aws-sdk/util-waiter";
 
-const checkState = async (client: S3Client, input: HeadBucketCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: S3Client, input: HeadObjectCommandInput): Promise<WaiterResult> => {
   try {
-    let result: any = await client.send(new HeadBucketCommand(input));
-    return { state: WaiterState.SUCCESS };
+    let result: any = await client.send(new HeadObjectCommand(input));
   } catch (exception) {
     if (exception.name && exception.name == "NotFound") {
-      return { state: WaiterState.RETRY };
+      return { state: WaiterState.SUCCESS };
     }
   }
   return { state: WaiterState.RETRY };
@@ -16,11 +15,11 @@ const checkState = async (client: S3Client, input: HeadBucketCommandInput): Prom
 /**
  *
  *  @param params : Waiter configuration options.
- *  @param input : the input to HeadBucketCommand for polling.
+ *  @param input : the input to HeadObjectCommand for polling.
  */
-export const waitForBucketExists = async (
+export const waitForObjectNotExists = async (
   params: WaiterConfiguration<S3Client>,
-  input: HeadBucketCommandInput
+  input: HeadObjectCommandInput
 ): Promise<WaiterResult> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);

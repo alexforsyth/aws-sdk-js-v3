@@ -1,5 +1,4 @@
 import {
-  Encryption,
   GlacierJobParameters,
   Grant,
   ObjectCannedACL,
@@ -12,6 +11,39 @@ import {
 } from "./models_0";
 import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
 import { Readable } from "stream";
+
+/**
+ * <p>Contains the type of server-side encryption used.</p>
+ */
+export interface Encryption {
+  /**
+   * <p>The server-side encryption algorithm used when storing job results in Amazon S3 (for example,
+   *          AES256, aws:kms).</p>
+   */
+  EncryptionType: ServerSideEncryption | string | undefined;
+
+  /**
+   * <p>If the encryption type is <code>aws:kms</code>, this optional value specifies the ID of
+   *          the symmetric customer managed AWS KMS CMK to use for encryption of job results. Amazon S3 only
+   *          supports symmetric CMKs. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using Symmetric and
+   *             Asymmetric Keys</a> in the <i>AWS Key Management Service Developer
+   *             Guide</i>.</p>
+   */
+  KMSKeyId?: string;
+
+  /**
+   * <p>If the encryption type is <code>aws:kms</code>, this optional value can be used to
+   *          specify the encryption context for the restore results.</p>
+   */
+  KMSContext?: string;
+}
+
+export namespace Encryption {
+  export const filterSensitiveLog = (obj: Encryption): any => ({
+    ...obj,
+    ...(obj.KMSKeyId && { KMSKeyId: SENSITIVE_STRING }),
+  });
+}
 
 /**
  * <p>A metadata key-value pair to store with an object.</p>
