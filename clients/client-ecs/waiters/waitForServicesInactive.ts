@@ -3,8 +3,10 @@ import { DescribeServicesCommand, DescribeServicesCommandInput } from "../comman
 import { WaiterConfiguration, WaiterResult, WaiterState, createWaiter } from "@aws-sdk/util-waiter";
 
 const checkState = async (client: ECSClient, input: DescribeServicesCommandInput): Promise<WaiterResult> => {
+  let reason;
   try {
     let result: any = await client.send(new DescribeServicesCommand(input));
+    reason = result;
     try {
       let returnComparator = () => {
         let flat_1: any[] = [].concat(...result.failures);
@@ -15,7 +17,7 @@ const checkState = async (client: ECSClient, input: DescribeServicesCommandInput
       };
       for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "MISSING") {
-          return { state: WaiterState.FAILURE };
+          return { state: WaiterState.FAILURE, reason };
         }
       }
     } catch (e) {}
@@ -29,15 +31,18 @@ const checkState = async (client: ECSClient, input: DescribeServicesCommandInput
       };
       for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "INACTIVE") {
-          return { state: WaiterState.SUCCESS };
+          return { state: WaiterState.SUCCESS, reason };
         }
       }
     } catch (e) {}
-  } catch (exception) {}
-  return { state: WaiterState.RETRY };
+  } catch (exception) {
+    reason = exception;
+  }
+  return { state: WaiterState.RETRY, reason };
 };
 /**
  *
+ *  @deprecated in favor of waitUntilServicesInactive. This does not throw on failure.
  *  @param params : Waiter configuration options.
  *  @param input : the input to DescribeServicesCommand for polling.
  */
@@ -47,4 +52,20 @@ export const waitForServicesInactive = async (
 ): Promise<WaiterResult> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+};
+/**
+ *
+ *  @param params : Waiter configuration options.
+ *  @param input : the input to DescribeServicesCommand for polling.
+ */
+export const waitUntilServicesInactive = async (
+  params: WaiterConfiguration<ECSClient>,
+  input: DescribeServicesCommandInput
+): Promise<WaiterResult> => {
+  const serviceDefaults = { minDelay: 15, maxDelay: 120 };
+  const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+  if (result.state != WaiterState.SUCCESS) {
+    throw result;
+  }
+  return result;
 };

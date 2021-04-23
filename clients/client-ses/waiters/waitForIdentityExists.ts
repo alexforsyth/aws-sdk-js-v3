@@ -9,8 +9,10 @@ const checkState = async (
   client: SESClient,
   input: GetIdentityVerificationAttributesCommandInput
 ): Promise<WaiterResult> => {
+  let reason;
   try {
     let result: any = await client.send(new GetIdentityVerificationAttributesCommand(input));
+    reason = result;
     try {
       let returnComparator = () => {
         let objectProjection_2 = Object.values(result.VerificationAttributes).map((element_1: any) => {
@@ -23,14 +25,17 @@ const checkState = async (
         allStringEq_4 = allStringEq_4 && element_3 == "Success";
       }
       if (allStringEq_4) {
-        return { state: WaiterState.SUCCESS };
+        return { state: WaiterState.SUCCESS, reason };
       }
     } catch (e) {}
-  } catch (exception) {}
-  return { state: WaiterState.RETRY };
+  } catch (exception) {
+    reason = exception;
+  }
+  return { state: WaiterState.RETRY, reason };
 };
 /**
  *
+ *  @deprecated in favor of waitUntilIdentityExists. This does not throw on failure.
  *  @param params : Waiter configuration options.
  *  @param input : the input to GetIdentityVerificationAttributesCommand for polling.
  */
@@ -40,4 +45,20 @@ export const waitForIdentityExists = async (
 ): Promise<WaiterResult> => {
   const serviceDefaults = { minDelay: 3, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+};
+/**
+ *
+ *  @param params : Waiter configuration options.
+ *  @param input : the input to GetIdentityVerificationAttributesCommand for polling.
+ */
+export const waitUntilIdentityExists = async (
+  params: WaiterConfiguration<SESClient>,
+  input: GetIdentityVerificationAttributesCommandInput
+): Promise<WaiterResult> => {
+  const serviceDefaults = { minDelay: 3, maxDelay: 120 };
+  const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+  if (result.state != WaiterState.SUCCESS) {
+    throw result;
+  }
+  return result;
 };

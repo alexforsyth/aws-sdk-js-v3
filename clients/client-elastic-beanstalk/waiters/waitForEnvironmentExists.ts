@@ -6,8 +6,10 @@ const checkState = async (
   client: ElasticBeanstalkClient,
   input: DescribeEnvironmentsCommandInput
 ): Promise<WaiterResult> => {
+  let reason;
   try {
     let result: any = await client.send(new DescribeEnvironmentsCommand(input));
+    reason = result;
     try {
       let returnComparator = () => {
         let flat_1: any[] = [].concat(...result.Environments);
@@ -21,7 +23,7 @@ const checkState = async (
         allStringEq_5 = allStringEq_5 && element_4 == "Ready";
       }
       if (allStringEq_5) {
-        return { state: WaiterState.SUCCESS };
+        return { state: WaiterState.SUCCESS, reason };
       }
     } catch (e) {}
     try {
@@ -37,14 +39,17 @@ const checkState = async (
         allStringEq_5 = allStringEq_5 && element_4 == "Launching";
       }
       if (allStringEq_5) {
-        return { state: WaiterState.RETRY };
+        return { state: WaiterState.RETRY, reason };
       }
     } catch (e) {}
-  } catch (exception) {}
-  return { state: WaiterState.RETRY };
+  } catch (exception) {
+    reason = exception;
+  }
+  return { state: WaiterState.RETRY, reason };
 };
 /**
  *
+ *  @deprecated in favor of waitUntilEnvironmentExists. This does not throw on failure.
  *  @param params : Waiter configuration options.
  *  @param input : the input to DescribeEnvironmentsCommand for polling.
  */
@@ -54,4 +59,20 @@ export const waitForEnvironmentExists = async (
 ): Promise<WaiterResult> => {
   const serviceDefaults = { minDelay: 20, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+};
+/**
+ *
+ *  @param params : Waiter configuration options.
+ *  @param input : the input to DescribeEnvironmentsCommand for polling.
+ */
+export const waitUntilEnvironmentExists = async (
+  params: WaiterConfiguration<ElasticBeanstalkClient>,
+  input: DescribeEnvironmentsCommandInput
+): Promise<WaiterResult> => {
+  const serviceDefaults = { minDelay: 20, maxDelay: 120 };
+  const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
+  if (result.state != WaiterState.SUCCESS) {
+    throw result;
+  }
+  return result;
 };
