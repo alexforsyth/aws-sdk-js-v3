@@ -55,4 +55,9 @@ export enum WaiterState {
 
 export type WaiterResult = {
   state: WaiterState;
+
+  /**
+   * (optional) Indicates a reason for why a waiter has reached its state.
+   */
+  reason?: any;
 };
