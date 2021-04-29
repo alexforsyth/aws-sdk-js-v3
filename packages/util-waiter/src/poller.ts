@@ -12,6 +12,8 @@ const exponentialBackoffWithJitter = (minDelay: number, maxDelay: number, attemp
 
 const randomInRange = (min: number, max: number) => min + Math.random() * (max - min);
 
+export const handleExceptions = (result: WaiterResult) => {};
+
 /**
  * Function that runs polling as part of waiters. This will make one inital attempt and then
  * subsequent attempts with an increasing delay.

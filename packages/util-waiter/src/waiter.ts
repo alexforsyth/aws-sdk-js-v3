@@ -67,3 +67,22 @@ export type WaiterResult = {
    */
   reason?: any;
 };
+
+/**
+ * Handles and throws exceptions resulting from the waiterResult
+ * @param result WaiterResult
+ */
+export const checkExceptions = (result: WaiterResult): WaiterResult => {
+  if (result.state === WaiterState.ABORTED) {
+    throw new Error(
+      `${JSON.stringify({
+        ...result,
+        name: "AbortError",
+        reason: "Request was aborted",
+      })}`
+    );
+  } else if (result.state !== WaiterState.SUCCESS) {
+    throw new Error(`${JSON.stringify({ result })}`);
+  }
+  return result;
+};
