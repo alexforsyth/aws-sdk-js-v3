@@ -1,6 +1,6 @@
 import { KinesisClient } from "../KinesisClient";
 import { DescribeStreamCommand, DescribeStreamCommandInput } from "../commands/DescribeStreamCommand";
-import { WaiterConfiguration, WaiterResult, WaiterState, createWaiter } from "@aws-sdk/util-waiter";
+import { WaiterConfiguration, WaiterResult, WaiterState, checkExceptions, createWaiter } from "@aws-sdk/util-waiter";
 
 const checkState = async (client: KinesisClient, input: DescribeStreamCommandInput): Promise<WaiterResult> => {
   let reason;
@@ -39,8 +39,5 @@ export const waitUntilStreamNotExists = async (
 ): Promise<WaiterResult> => {
   const serviceDefaults = { minDelay: 10, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  if (result.state !== WaiterState.SUCCESS) {
-    throw Object.assign(new Error(result.state), result.reason);
-  }
-  return result;
+  return checkExceptions(result);
 };

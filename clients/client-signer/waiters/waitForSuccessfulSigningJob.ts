@@ -1,6 +1,6 @@
 import { SignerClient } from "../SignerClient";
 import { DescribeSigningJobCommand, DescribeSigningJobCommandInput } from "../commands/DescribeSigningJobCommand";
-import { WaiterConfiguration, WaiterResult, WaiterState, createWaiter } from "@aws-sdk/util-waiter";
+import { WaiterConfiguration, WaiterResult, WaiterState, checkExceptions, createWaiter } from "@aws-sdk/util-waiter";
 
 const checkState = async (client: SignerClient, input: DescribeSigningJobCommandInput): Promise<WaiterResult> => {
   let reason;
@@ -55,8 +55,5 @@ export const waitUntilSuccessfulSigningJob = async (
 ): Promise<WaiterResult> => {
   const serviceDefaults = { minDelay: 20, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  if (result.state !== WaiterState.SUCCESS) {
-    throw Object.assign(new Error(result.state), result.reason);
-  }
-  return result;
+  return checkExceptions(result);
 };

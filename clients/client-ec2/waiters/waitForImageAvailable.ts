@@ -1,6 +1,6 @@
 import { EC2Client } from "../EC2Client";
 import { DescribeImagesCommand, DescribeImagesCommandInput } from "../commands/DescribeImagesCommand";
-import { WaiterConfiguration, WaiterResult, WaiterState, createWaiter } from "@aws-sdk/util-waiter";
+import { WaiterConfiguration, WaiterResult, WaiterState, checkExceptions, createWaiter } from "@aws-sdk/util-waiter";
 
 const checkState = async (client: EC2Client, input: DescribeImagesCommandInput): Promise<WaiterResult> => {
   let reason;
@@ -66,8 +66,5 @@ export const waitUntilImageAvailable = async (
 ): Promise<WaiterResult> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  if (result.state !== WaiterState.SUCCESS) {
-    throw Object.assign(new Error(result.state), result.reason);
-  }
-  return result;
+  return checkExceptions(result);
 };

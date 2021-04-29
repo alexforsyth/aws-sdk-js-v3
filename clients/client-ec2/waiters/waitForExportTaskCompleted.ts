@@ -1,6 +1,6 @@
 import { EC2Client } from "../EC2Client";
 import { DescribeExportTasksCommand, DescribeExportTasksCommandInput } from "../commands/DescribeExportTasksCommand";
-import { WaiterConfiguration, WaiterResult, WaiterState, createWaiter } from "@aws-sdk/util-waiter";
+import { WaiterConfiguration, WaiterResult, WaiterState, checkExceptions, createWaiter } from "@aws-sdk/util-waiter";
 
 const checkState = async (client: EC2Client, input: DescribeExportTasksCommandInput): Promise<WaiterResult> => {
   let reason;
@@ -52,8 +52,5 @@ export const waitUntilExportTaskCompleted = async (
 ): Promise<WaiterResult> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  if (result.state !== WaiterState.SUCCESS) {
-    throw Object.assign(new Error(result.state), result.reason);
-  }
-  return result;
+  return checkExceptions(result);
 };

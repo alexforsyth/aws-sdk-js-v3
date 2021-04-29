@@ -1,6 +1,6 @@
 import { Route53Client } from "../Route53Client";
 import { GetChangeCommand, GetChangeCommandInput } from "../commands/GetChangeCommand";
-import { WaiterConfiguration, WaiterResult, WaiterState, createWaiter } from "@aws-sdk/util-waiter";
+import { WaiterConfiguration, WaiterResult, WaiterState, checkExceptions, createWaiter } from "@aws-sdk/util-waiter";
 
 const checkState = async (client: Route53Client, input: GetChangeCommandInput): Promise<WaiterResult> => {
   let reason;
@@ -44,8 +44,5 @@ export const waitUntilResourceRecordSetsChanged = async (
 ): Promise<WaiterResult> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  if (result.state !== WaiterState.SUCCESS) {
-    throw Object.assign(new Error(result.state), result.reason);
-  }
-  return result;
+  return checkExceptions(result);
 };

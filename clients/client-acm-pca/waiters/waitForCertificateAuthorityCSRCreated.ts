@@ -3,7 +3,7 @@ import {
   GetCertificateAuthorityCsrCommand,
   GetCertificateAuthorityCsrCommandInput,
 } from "../commands/GetCertificateAuthorityCsrCommand";
-import { WaiterConfiguration, WaiterResult, WaiterState, createWaiter } from "@aws-sdk/util-waiter";
+import { WaiterConfiguration, WaiterResult, WaiterState, checkExceptions, createWaiter } from "@aws-sdk/util-waiter";
 
 const checkState = async (
   client: ACMPCAClient,
@@ -46,8 +46,5 @@ export const waitUntilCertificateAuthorityCSRCreated = async (
 ): Promise<WaiterResult> => {
   const serviceDefaults = { minDelay: 3, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  if (result.state !== WaiterState.SUCCESS) {
-    throw Object.assign(new Error(result.state), result.reason);
-  }
-  return result;
+  return checkExceptions(result);
 };

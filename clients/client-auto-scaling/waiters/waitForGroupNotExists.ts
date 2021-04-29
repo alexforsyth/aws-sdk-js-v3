@@ -3,7 +3,7 @@ import {
   DescribeAutoScalingGroupsCommand,
   DescribeAutoScalingGroupsCommandInput,
 } from "../commands/DescribeAutoScalingGroupsCommand";
-import { WaiterConfiguration, WaiterResult, WaiterState, createWaiter } from "@aws-sdk/util-waiter";
+import { WaiterConfiguration, WaiterResult, WaiterState, checkExceptions, createWaiter } from "@aws-sdk/util-waiter";
 
 const checkState = async (
   client: AutoScalingClient,
@@ -58,8 +58,5 @@ export const waitUntilGroupNotExists = async (
 ): Promise<WaiterResult> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  if (result.state !== WaiterState.SUCCESS) {
-    throw Object.assign(new Error(result.state), result.reason);
-  }
-  return result;
+  return checkExceptions(result);
 };
