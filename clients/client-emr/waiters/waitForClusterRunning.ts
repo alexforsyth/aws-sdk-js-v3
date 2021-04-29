@@ -76,8 +76,8 @@ export const waitUntilClusterRunning = async (
 ): Promise<WaiterResult> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  if (result.state != WaiterState.SUCCESS) {
-    throw result;
+  if (result.state !== WaiterState.SUCCESS) {
+    throw Object.assign(new Error(result.state), result.reason);
   }
   return result;
 };
