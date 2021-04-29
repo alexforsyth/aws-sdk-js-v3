@@ -12,9 +12,15 @@ export interface WaiterConfiguration<Client> {
   maxWaitTime: number;
 
   /**
+   * @deprecated Use abortSignal
    * Abort controller. Used for ending the waiter early.
    */
   abortController?: AbortController;
+
+  /**
+   * Abort Signal. Used for ending the waiter early.
+   */
+  abortSignal?: AbortController["signal"];
 
   /**
    * The minimum amount of time to delay between retries in seconds. This is the
