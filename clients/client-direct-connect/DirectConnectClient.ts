@@ -222,6 +222,7 @@ import {
   Credentials as __Credentials,
   Decoder as __Decoder,
   Encoder as __Encoder,
+  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
@@ -360,7 +361,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   requestHandler?: __HttpHandler;
 
   /**
-   * A constructor for a class implementing the @aws-sdk/types.Hash interface
+   * A constructor for a class implementing the {@link __Hash} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
@@ -493,12 +494,12 @@ type DirectConnectClientResolvedConfigType = __SmithyResolvedConfiguration<__Htt
 export interface DirectConnectClientResolvedConfig extends DirectConnectClientResolvedConfigType {}
 
 /**
- * <p>AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard Ethernet fiber-optic cable.
- *       One end of the cable is connected to your router, the other to an AWS Direct Connect router. With this connection
- *       in place, you can create virtual interfaces directly to the AWS cloud (for example, to Amazon EC2
+ * <p>Direct Connect links your internal network to an Direct Connect location over a standard Ethernet fiber-optic cable.
+ *       One end of the cable is connected to your router, the other to an Direct Connect router. With this connection
+ *       in place, you can create virtual interfaces directly to the Cloud (for example, to Amazon EC2
  *       and Amazon S3) and to Amazon VPC, bypassing Internet service providers in your network path. A
- *       connection provides access to all AWS Regions except the China (Beijing) and (China) Ningxia Regions.
- *       AWS resources in the China Regions can only be accessed through locations associated with those Regions.</p>
+ *       connection provides access to all Regions except the China (Beijing) and (China) Ningxia Regions.
+ *       Amazon Web Services resources in the China Regions can only be accessed through locations associated with those Regions.</p>
  */
 export class DirectConnectClient extends __Client<
   __HttpHandlerOptions,

@@ -1,5 +1,5 @@
-import { LazyJsonString as __LazyJsonString, SmithyException as __SmithyException } from "@aws-sdk/smithy-client";
-import { MetadataBearer as $MetadataBearer } from "@aws-sdk/types";
+import { LazyJsonString as __LazyJsonString } from "@aws-sdk/smithy-client";
+import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
 
 /**
  * <p>A structure describing the source of an action.</p>
@@ -5227,8 +5227,9 @@ export enum RepositoryAccessMode {
 /**
  * <p>Specifies an authentication configuration for the private docker registry where your
  *             model image is hosted. Specify a value for this property only if you specified
- *                 <code>Vpc</code> as the value for the <code>RepositoryAccessMode</code> field of the
- *                 <code>ImageConfig</code> object that you passed to a call to <a>CreateModel</a> and the private Docker registry where the model image is
+ *             <code>Vpc</code> as the value for the <code>RepositoryAccessMode</code> field of the
+ *             <code>ImageConfig</code> object that you passed to a call to <code>CreateModel</code>
+ *             and the private Docker registry where the model image is
  *             hosted requires authentication.</p>
  */
 export interface RepositoryAuthConfig {

@@ -221,6 +221,7 @@ import {
   Credentials as __Credentials,
   Decoder as __Decoder,
   Encoder as __Encoder,
+  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
@@ -351,7 +352,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   requestHandler?: __HttpHandler;
 
   /**
-   * A constructor for a class implementing the @aws-sdk/types.Hash interface
+   * A constructor for a class implementing the {@link __Hash} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
@@ -485,15 +486,15 @@ export interface DatabaseMigrationServiceClientResolvedConfig
   extends DatabaseMigrationServiceClientResolvedConfigType {}
 
 /**
- * <fullname>AWS Database Migration Service</fullname>
- *          <p>AWS Database Migration Service (AWS DMS) can migrate your data to and from the most
+ * <fullname>Database Migration Service</fullname>
+ *          <p>Database Migration Service (DMS) can migrate your data to and from the most
  *          widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL
  *          Server, Amazon Redshift, MariaDB, Amazon Aurora, MySQL, and SAP Adaptive Server Enterprise
  *          (ASE). The service supports homogeneous migrations such as Oracle to Oracle, as well as
  *          heterogeneous migrations between different database platforms, such as Oracle to MySQL or
  *          SQL Server to PostgreSQL.</p>
- *          <p>For more information about AWS DMS, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html">What Is AWS Database Migration Service?</a>
- *          in the <i>AWS Database Migration User Guide.</i>
+ *          <p>For more information about DMS, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html">What Is Database Migration Service?</a>
+ *          in the <i>Database Migration Service User Guide.</i>
  *          </p>
  */
 export class DatabaseMigrationServiceClient extends __Client<

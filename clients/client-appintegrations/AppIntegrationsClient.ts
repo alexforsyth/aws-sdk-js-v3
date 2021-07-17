@@ -76,6 +76,7 @@ import {
   Credentials as __Credentials,
   Decoder as __Decoder,
   Encoder as __Encoder,
+  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
@@ -114,7 +115,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   requestHandler?: __HttpHandler;
 
   /**
-   * A constructor for a class implementing the @aws-sdk/types.Hash interface
+   * A constructor for a class implementing the {@link __Hash} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
@@ -247,9 +248,7 @@ type AppIntegrationsClientResolvedConfigType = __SmithyResolvedConfiguration<__H
 export interface AppIntegrationsClientResolvedConfig extends AppIntegrationsClientResolvedConfigType {}
 
 /**
- * <p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p>
- *
- *          <p>The Amazon AppIntegrations service enables you to configure and reuse connections to external applications.</p>
+ * <p>The Amazon AppIntegrations service enables you to configure and reuse connections to external applications.</p>
  *          <p>For information about how you can use external applications with Amazon Connect, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/crm.html">Set up pre-built integrations</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
  */
 export class AppIntegrationsClient extends __Client<

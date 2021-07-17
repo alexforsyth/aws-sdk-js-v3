@@ -1,5 +1,5 @@
-import { SENSITIVE_STRING, SmithyException as __SmithyException } from "@aws-sdk/smithy-client";
-import { MetadataBearer as $MetadataBearer } from "@aws-sdk/types";
+import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
+import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
 
 export enum ErrorCode {
   AccessDenied = "AccessDenied",
@@ -36,6 +36,11 @@ export namespace AccessDeniedException {
   export const filterSensitiveLog = (obj: AccessDeniedException): any => ({
     ...obj,
   });
+}
+
+export enum AccountStatus {
+  Active = "Active",
+  Suspended = "Suspended",
 }
 
 export enum AccountType {
@@ -111,6 +116,11 @@ export interface Account {
    * <p>Supported licenses for the Amazon Chime account.</p>
    */
   SupportedLicenses?: (License | string)[];
+
+  /**
+   * <p>The status of the account, <code>Suspended</code> or <code>Active</code>.</p>
+   */
+  AccountStatus?: AccountStatus | string;
 
   /**
    * <p>The sign-in delegate groups associated with the account.</p>
@@ -6879,22 +6889,6 @@ export namespace LoggingConfiguration {
    * @internal
    */
   export const filterSensitiveLog = (obj: LoggingConfiguration): any => ({
-    ...obj,
-  });
-}
-
-export interface GetVoiceConnectorLoggingConfigurationResponse {
-  /**
-   * <p>The logging configuration details.</p>
-   */
-  LoggingConfiguration?: LoggingConfiguration;
-}
-
-export namespace GetVoiceConnectorLoggingConfigurationResponse {
-  /**
-   * @internal
-   */
-  export const filterSensitiveLog = (obj: GetVoiceConnectorLoggingConfigurationResponse): any => ({
     ...obj,
   });
 }

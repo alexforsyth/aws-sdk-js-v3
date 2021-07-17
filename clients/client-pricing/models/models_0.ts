@@ -1,5 +1,5 @@
-import { LazyJsonString as __LazyJsonString, SmithyException as __SmithyException } from "@aws-sdk/smithy-client";
-import { MetadataBearer as $MetadataBearer } from "@aws-sdk/types";
+import { LazyJsonString as __LazyJsonString } from "@aws-sdk/smithy-client";
+import { MetadataBearer as $MetadataBearer, SmithyException as __SmithyException } from "@aws-sdk/types";
 
 /**
  * <p>The values of a given attribute, such as <code>Throughput Optimized HDD</code> or <code>Provisioned
@@ -63,7 +63,7 @@ export namespace DescribeServicesRequest {
  */
 export interface Service {
   /**
-   * <p>The code for the AWS service.</p>
+   * <p>The code for the Amazon Web Services service.</p>
    */
   ServiceCode?: string;
 

@@ -170,6 +170,7 @@ import {
   Credentials as __Credentials,
   Decoder as __Decoder,
   Encoder as __Encoder,
+  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
@@ -294,7 +295,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   requestHandler?: __HttpHandler;
 
   /**
-   * A constructor for a class implementing the @aws-sdk/types.Hash interface
+   * A constructor for a class implementing the {@link __Hash} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
@@ -431,7 +432,7 @@ export interface ECSClientResolvedConfig extends ECSClientResolvedConfigType {}
  * 		       <p>Amazon Elastic Container Service (Amazon ECS) is a highly scalable, fast, container management service that makes
  * 			it easy to run, stop, and manage Docker containers on a cluster. You can host your
  * 			cluster on a serverless infrastructure that is managed by Amazon ECS by launching your
- * 			services or tasks on AWS Fargate. For more control, you can host your tasks on a cluster
+ * 			services or tasks on Fargate. For more control, you can host your tasks on a cluster
  * 			of Amazon Elastic Compute Cloud (Amazon EC2) instances that you manage.</p>
  * 		       <p>Amazon ECS makes it easy to launch and stop container-based applications with simple API
  * 			calls, allows you to get the state of your cluster from a centralized service, and gives

@@ -117,6 +117,7 @@ import {
   Credentials as __Credentials,
   Decoder as __Decoder,
   Encoder as __Encoder,
+  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
@@ -201,7 +202,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   requestHandler?: __HttpHandler;
 
   /**
-   * A constructor for a class implementing the @aws-sdk/types.Hash interface
+   * A constructor for a class implementing the {@link __Hash} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
@@ -335,7 +336,7 @@ export interface EKSClientResolvedConfig extends EKSClientResolvedConfigType {}
 
 /**
  * <p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy for you to run Kubernetes on
- *             AWS without needing to stand up or maintain your own Kubernetes control plane.
+ *             Amazon Web Services without needing to stand up or maintain your own Kubernetes control plane.
  *             Kubernetes is an open-source system for automating the deployment, scaling, and
  *             management of containerized applications. </p>
  *         <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so you can use
