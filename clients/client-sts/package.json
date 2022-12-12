@@ -49,7 +49,7 @@
     "@aws-sdk/util-user-agent-node": "3.39.0",
     "@aws-sdk/util-utf8-browser": "3.37.0",
     "@aws-sdk/util-utf8-node": "3.37.0",
-    "entities": "2.2.0",
+    "entities": "4.4.0",
     "fast-xml-parser": "3.19.0",
     "tslib": "^2.3.0"
   },
